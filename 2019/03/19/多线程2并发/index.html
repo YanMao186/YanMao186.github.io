@@ -16,16 +16,16 @@
 <meta property="og:site_name" content="MrYan">
 <meta property="og:description" content="线程安全 定义:如果有多个线程在同时运行,而这些线程可能会同时运行同一段代码,如果程序运行结果和单线程运行结果一致,而且其他变量的值也和预期一样,就称之为线程安全. 我们接下来通过一个抢票的例子来说明一下问题.  1234567891011121314151617181920212223242526public class BuyTicket extends Thread &amp;#123;    pr">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/.com//%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png">
-<meta property="og:image" content="http://yoursite.com/.com//%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png">
-<meta property="og:image" content="http://yoursite.com/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png">
-<meta property="og:image" content="http://yoursite.com/.com//%E9%94%81%E9%98%BB%E5%A1%9E.png">
-<meta property="og:image" content="http://yoursite.com/.com//%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程2并发/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程2并发/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程2并发/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程2并发/%E9%94%81%E9%98%BB%E5%A1%9E.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程2并发/%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png">
 <meta property="og:updated_time" content="2019-03-22T10:02:17.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程(2)并发">
 <meta name="twitter:description" content="线程安全 定义:如果有多个线程在同时运行,而这些线程可能会同时运行同一段代码,如果程序运行结果和单线程运行结果一致,而且其他变量的值也和预期一样,就称之为线程安全. 我们接下来通过一个抢票的例子来说明一下问题.  1234567891011121314151617181920212223242526public class BuyTicket extends Thread &amp;#123;    pr">
-<meta name="twitter:image" content="http://yoursite.com/.com//%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/19/多线程2并发/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png">
   
     <link rel="alternative" href="/atom.xml" title="MrYan" type="application/atom+xml">
   
@@ -192,7 +192,7 @@
 <ul>
 <li><code>通过控制台输出我们可以看到票数出现了问题</code>,我们将其称之为线程不安全.</li>
 </ul>
-<p><img src="/.com//%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png" alt="1553179327672"></p>
+<p><img src="/2019/03/19/多线程2并发/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png" alt="1553179327672"></p>
 <h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><ul>
 <li>当我们使用多线程访问同一个资源的时候,且多个线程都对资源有写的操作,就会出现问题(比如,在十字路口没有红绿灯,没有人指挥就容易出现意外)</li>
 </ul>
@@ -218,7 +218,7 @@
 <ul>
 <li>通过查看控制台发现这个问题我们已经解决了.</li>
 </ul>
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png" alt="1553181542863"></p>
+<p><img src="/2019/03/19/多线程2并发/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png" alt="1553181542863"></p>
 </li>
 </ul>
 <h4 id="同步方法"><a href="#同步方法" class="headerlink" title="同步方法"></a>同步方法</h4><ul>
@@ -258,12 +258,12 @@
 <ul>
 <li>Timed Waiting线程状态图</li>
 </ul>
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<p><img src="/2019/03/19/多线程2并发/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="锁阻塞-Blocked"><a href="#锁阻塞-Blocked" class="headerlink" title="锁阻塞(Blocked)"></a>锁阻塞(Blocked)</h3><ul>
 <li>一个正在阻塞等待一个监视器锁(锁对象)的线程处于这一状态.</li>
 <li>线程A与线程B代码中使用同一把锁,如果线程A获取到锁,线程A进入到<strong>Runnable</strong>状态,那么线程B就进入到<strong>Blocked</strong>锁阻塞状态.</li>
 </ul>
-<p><img src="/.com//%E9%94%81%E9%98%BB%E5%A1%9E.png" alt></p>
+<p><img src="/2019/03/19/多线程2并发/%E9%94%81%E9%98%BB%E5%A1%9E.png" alt></p>
 <h3 id="无限等待-Waiting"><a href="#无限等待-Waiting" class="headerlink" title="无限等待(Waiting)"></a>无限等待(Waiting)</h3><ul>
 <li>一个正在无限期等待另一个线程执行一个特别的(唤醒)动作的线程处于这一状态.</li>
 </ul>
@@ -291,7 +291,7 @@
 <li>通知所有的等待在这个同步对象的线程,你们可以苏醒过来了,有机会重新占用当前对象了.</li>
 </ul>
 <p><code>注:以上三方法均为Object上的方法</code></p>
-<p><img src="/.com//%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png" alt></p>
+<p><img src="/2019/03/19/多线程2并发/%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png" alt></p>
 </li>
 </ul>
 <p><a href="https://github.com/YanMao186/Thread" target="_blank" rel="noopener">源码github链接</a></p>
@@ -594,19 +594,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,6 +627,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
               </li>
              
               <li class="article-tag-list-item">

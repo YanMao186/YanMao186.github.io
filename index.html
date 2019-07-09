@@ -154,6 +154,509 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-struts" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/09/struts/">struts</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/09/struts/" class="archive-article-date">
+  	<time datetime="2019-07-09T15:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Struts"><a href="#Struts" class="headerlink" title="Struts"></a>Struts</h2><h3 id="1-Struts2框架概述"><a href="#1-Struts2框架概述" class="headerlink" title="1. Struts2框架概述"></a>1. Struts2框架概述</h3><ul>
+<li><p>Struts2是一个基于MVC模式的轻量级web框架，本质上相当于servlet，在MVC设计模式中，Struts2作为控制器来控制与模型视图的数据交互。</p>
+</li>
+<li><p>前端控制器</p>
+<ul>
+<li>在传统方式开发中，有一次请求就会对应一个Servlet，这样会导致出现很多Servlet。而Struts2将所有的请求都先经过一个前端控制器，在前端控制器中实现框架的部分功能，剩下具体操作要提交到具体的Action中，那么所有的请求都会经过前端控制器（本质上就是一个过滤器）</li>
+</ul>
+<p><img src="/2019/07/09/struts/1558174458049.png" alt="1558174458049"></p>
+</li>
+</ul>
+<h3 id="2-Struts2入门"><a href="#2-Struts2入门" class="headerlink" title="2. Struts2入门"></a>2. Struts2入门</h3><ul>
+<li><p>项目目录结构</p>
+<p><img src="/2019/07/09/struts/1558229004769.png" alt="1558229004769"></p>
+</li>
+<li><p>项目需要的jar包</p>
+<p><img src="/2019/07/09/struts/1558229089988.png" alt="1558229089988"></p>
+</li>
+<li><p>目录内容详解</p>
+<ol>
+<li><p>在index.jsp中编写Action的访问路径</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: Mr Yan</span><br><span class="line">  Date: <span class="number">2019</span>/<span class="number">5</span>/<span class="number">18</span></span><br><span class="line">  Time: <span class="number">17</span>:<span class="number">30</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;Struts2入门&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line"> &lt;a href="$&#123;pageContext.request.contextPath&#125;/strutsDemo1.action"&gt;success入门&lt;/a&gt;</span><br><span class="line"> &lt;a href="$&#123;pageContext.request.contextPath&#125;/strutsDemo2.action"&gt;error入门&lt;/a&gt;</span><br><span class="line"> &lt;a href="$&#123;pageContext.request.contextPath&#125;/strutsDemo3.action"&gt;success入门&lt;/a&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在包下新建StrutsDemo1的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrutsDemo1</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供一个默认的执行方法：execute</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"StrutsDemo1中的execute执行了"</span>);</span><br><span class="line">        <span class="comment">//返回页面的名称</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"StrutsDemo1中的execute执行了"</span>);</span><br><span class="line">        <span class="comment">//返回页面的名称</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"error"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在src根目录下创建名为struts.xml文件，用于配置struts2信息</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE struts PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"</span></span><br><span class="line"><span class="meta">        "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"demo"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"strutsDemo1"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.action.StrutsDemo1"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"strutsDemo2"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.action.StrutsDemo1"</span> <span class="attr">method</span>=<span class="string">"execute1"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"error"</span>&gt;</span>page/error.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"strutsDemo3"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.action.ActionDemo2"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在web.xml中配置struts2的前端控制器(核心控制器)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">"3.1"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在web目录下创建页面</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%--</span></span></span><br><span class="line"><span class="tag">  <span class="attr">Created</span> <span class="attr">by</span> <span class="attr">IntelliJ</span> <span class="attr">IDEA.</span></span></span><br><span class="line"><span class="tag">  <span class="attr">User:</span> <span class="attr">Mr</span> <span class="attr">Yan</span></span></span><br><span class="line"><span class="tag">  <span class="attr">Date:</span> <span class="attr">2019</span>/<span class="attr">5</span>/<span class="attr">18</span></span></span><br><span class="line"><span class="tag">  <span class="attr">Time:</span> <span class="attr">17:30</span></span></span><br><span class="line"><span class="tag">  <span class="attr">To</span> <span class="attr">change</span> <span class="attr">this</span> <span class="attr">template</span> <span class="attr">use</span> <span class="attr">File</span> | <span class="attr">Settings</span> | <span class="attr">File</span> <span class="attr">Templates.</span></span></span><br><span class="line"><span class="tag"><span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>$Title$<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  入门成功</span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置Tomcat启动服务</p>
+<p><img src="/2019/07/09/struts/1558229740983.png" alt="1558229740983"></p>
+<p><img src="/2019/07/09/struts/1558229764278.png" alt="1558229764278"></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-Struts2工作流程"><a href="#3-Struts2工作流程" class="headerlink" title="3. Struts2工作流程"></a>3. Struts2工作流程</h3><pre><code>1. 客户端初始化一个指向**Servlet**容器的请求。
+2. 这个请求经过一系列的过滤器(**Filter**)(这些过滤器中有一个叫做**ActionContextCleanUp**的可选过滤器)。
+3. 接着**FilterDispatcher**被调用，**FilterDispatcher**询问**ActionMapper**来决定这个请求是否需要调用某个**Action**。
+4. 如果**ActionMapper**决定需要调用某个**Action**,**FilterDispatcher**把请求的处理交给**ActionProxy**。
+5. **ActionProxy**通过**Configuration Manager**询问框架的配置文件。
+6. **ActionProxy**创建一个**ActionInvocation**的实例。
+7. **ActionInvocation**实例使用命名模式来调用，在调用**Action**的过程前后，涉及到相关拦截器的调用。
+8. 一旦**Action**执行完毕，**ActionInvocation**负责根据**struts**。**xml**中的配置找到对应的返回结果，返回结果通常是一个需要被表示的**JSP**或者**FreeMarker**的模板，在表示的过程中可以使用**Struts2**框架中继承的标签，在这个过程中需要涉及到**ActionMapper**。
+9. 响应的返回是通过我们在**web.xml**中配置的过滤器。
+10. 如果**ActionContextCleanUp**是当前使用的，则**FilterDispatecher**将不会清理**sreadlocal ActionContext**,如果**ActionContextCleanUp**不使用，则将会去清理**sreadlocals**。</code></pre><p><img src="/2019/07/09/struts/1558233075767.png" alt="1558233075767"></p>
+<h3 id="4-Struts-xml相关配置讲解"><a href="#4-Struts-xml相关配置讲解" class="headerlink" title="4.Struts.xml相关配置讲解"></a>4.Struts.xml相关配置讲解</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">   package标签</span></span><br><span class="line"><span class="comment">           name属性：必须，指定该包的名称，此名称是该包被其他包应用的key,只要在项目中不重名即可</span></span><br><span class="line"><span class="comment">           extends属性：必须，指定该包继承自其他包，通常都设置为struts-default</span></span><br><span class="line"><span class="comment">           namespace属性：必须，与action标签的name属性共同决定了访问路径，有三种配置方式</span></span><br><span class="line"><span class="comment">               默认名称空间：namespace=""</span></span><br><span class="line"><span class="comment">               根名称空间：namespace="/"</span></span><br><span class="line"><span class="comment">               带名称的名称空间：namespace="/demo1"</span></span><br><span class="line"><span class="comment">           abstract属性：可选，指定该包是否是一个抽象包，抽象包中不能包含Action定义</span></span><br><span class="line"><span class="comment">   --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"demo"</span> <span class="attr">namespace</span>=<span class="string">"/"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">       action标签：</span></span><br><span class="line"><span class="comment">           name属性：与namespace共同决定了访问路径</span></span><br><span class="line"><span class="comment">           class属性：Action类的全路径</span></span><br><span class="line"><span class="comment">           method属性：执行Action中的那个方法的方法名，默认值execute</span></span><br><span class="line"><span class="comment">           converter属性：用于设置类型转换器</span></span><br><span class="line"><span class="comment">       --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"strutsDemo1.save"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.action.StrutsDemo1"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Struts2常量配置"><a href="#5-Struts2常量配置" class="headerlink" title="5.Struts2常量配置"></a>5.Struts2常量配置</h3><ul>
+<li><p>在struts2中，提供了非常多的常量位于struts2-core-xxx.jar下org.apacha.struts2的default.properties内经常使用的有<code>struts.i18n.encoding=UTF-8</code>,<code>struts.action.exension=action</code>等</p>
+</li>
+<li><p>我们对他进行使用有三种方式。</p>
+<ul>
+<li><p>在Struts.xml中进行修改(通常修改此文件)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.action.extension"</span> <span class="attr">value</span>=<span class="string">"action,,"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在struts.properties中进行修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">struts.action.extension=action</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在web.xml中进行修改</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>struts.action.extension<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>do<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-struts分模块开发配置"><a href="#6-struts分模块开发配置" class="headerlink" title="6.struts分模块开发配置"></a>6.struts分模块开发配置</h3><ul>
+<li><p>分模块开发的时候如果需要xml配置文件之间的相互引用使用include标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">file</span>=<span class="string">"com/ym/struts2/action/Struts-demo.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="7-Action的访问"><a href="#7-Action的访问" class="headerlink" title="7.Action的访问"></a>7.Action的访问</h3><ul>
+<li><p>Action访问的三种方式</p>
+<ul>
+<li><p>Action类是POJO的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrutsDemo1</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供一个默认的执行方法：execute</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"StrutsDemo1中的execute执行了"</span>);</span><br><span class="line">        <span class="comment">//返回页面的名称</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Action类实现一个Action的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Struts2</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-05-20 09:40</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActionDemo3</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回值类型</span></span><br><span class="line"><span class="comment">     * SUCCESS:成功</span></span><br><span class="line"><span class="comment">     * ERROR:失败</span></span><br><span class="line"><span class="comment">     * LOGIN:登录出错页面跳转</span></span><br><span class="line"><span class="comment">     * INPUT:表单校验的时候出错</span></span><br><span class="line"><span class="comment">     * NONE:不跳转</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ActionDemo3执行了"</span>);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Action类继承ActionSupper类</p>
+<ul>
+<li>推荐使用此方式，ActionSupport中提供了数据校验，国际化等一系列操作的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActionDemo2</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>通过method访问</p>
+<p><img src="/2019/07/09/struts/1558318236838.png" alt="1558318236838"></p>
+</li>
+<li><p>通过通配符的方式进行配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!--*号的取值是啥，&#123;1&#125;代表的就是啥--&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"action_*"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.action.ActionDemo3"</span> <span class="attr">method</span>=<span class="string">"&#123;1&#125;"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态方法访问</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启动态方法访问--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.enable.DynamicMethodInvocation"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"action"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.action.ActionDemo3"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编写访问路径</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href="$&#123;pageContext.request.contextPath&#125;/action!findAll.action"&gt;findAll&lt;/a&gt;</span><br><span class="line">&lt;a href="$&#123;pageContext.request.contextPath&#125;/action!save.action"&gt;save&lt;/a&gt;</span><br><span class="line">&lt;a href="$&#123;pageContext.request.contextPath&#125;/action!update.action"&gt;update&lt;/a&gt;</span><br><span class="line">&lt;a href="$&#123;pageContext.request.contextPath&#125;/action!delete.action"&gt;delete&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="8-Struts2的Servlet的API的访问"><a href="#8-Struts2的Servlet的API的访问" class="headerlink" title="8.Struts2的Servlet的API的访问"></a>8.Struts2的Servlet的API的访问</h3><ol>
+<li><p>完全解耦合的方式</p>
+<ul>
+<li><p>编写jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/RequsetAction.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">      姓名:&lt;input name=<span class="string">"username"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">      密码:&lt;input name=<span class="string">"password"</span> type=<span class="string">"password"</span>&gt;&lt;br&gt;</span><br><span class="line">      &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">  &lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"RequsetAction"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.RequestDemo1"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RequestDemo1</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//接收参数，利用Struts2中的对象ActionContext对象</span></span><br><span class="line">        ActionContext context = ActionContext.getContext();</span><br><span class="line">        <span class="comment">//调用ActionContext中的方法</span></span><br><span class="line">        <span class="comment">//类似于Map&lt;String,String[]&gt; request.getParameterMap();</span></span><br><span class="line">        Map&lt;String, Object&gt; map = context.getParameters();</span><br><span class="line">        <span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">            String[] values = (String[]) map.get(key);</span><br><span class="line">            System.out.println(key+<span class="string">""</span>+ Arrays.toString(values));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//相当于request。setAttribute()</span></span><br><span class="line">        context.put(<span class="string">"reqName"</span>,<span class="string">"revValue"</span>);</span><br><span class="line">        <span class="comment">//相当于session.setAttribute()</span></span><br><span class="line">        context.getSession().put(<span class="string">"sessName"</span>,<span class="string">"sessValues"</span>);</span><br><span class="line">        <span class="comment">//相当于application.setAttribute</span></span><br><span class="line">        context.getApplication().put(<span class="string">"AppName"</span>,<span class="string">"AppValue"</span>);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>==注：这种方式只能获得代表request,session,application的数据的Map集合，不能操作这些对象的本身的方法。==</p>
+</li>
+</ul>
+</li>
+<li><p>使用Servlet的API的原生方式</p>
+<ul>
+<li><p>编写jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/RequestApi.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">     姓名:&lt;input name=<span class="string">"username"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">     密码:&lt;input name=<span class="string">"password"</span> type=<span class="string">"password"</span>&gt;&lt;br&gt;</span><br><span class="line">     &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line"> &lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用servlet API的方式--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"RequestApi"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.RequestDemo2"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RequestDemo2</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//接受数据，直接获得request对象，通过ServletActionContext</span></span><br><span class="line">        HttpServletRequest request = ServletActionContext.getRequest();</span><br><span class="line">        <span class="comment">//获取参数</span></span><br><span class="line">        Map&lt;String, String[]&gt; map = request.getParameterMap();</span><br><span class="line">        <span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">            String[] values = map.get(key);</span><br><span class="line">            System.out.println(key+<span class="string">""</span>+ Arrays.toString(values));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//向域对象中保存数据,向request中保存数据</span></span><br><span class="line">        request.setAttribute(<span class="string">"reqName"</span>,<span class="string">"reqValues"</span>);</span><br><span class="line">        <span class="comment">//向session中保存数据</span></span><br><span class="line">        request.getSession().setAttribute(<span class="string">"sessName"</span>,<span class="string">"sessValue"</span>);</span><br><span class="line">        <span class="comment">//向application中保存数据</span></span><br><span class="line">        ServletActionContext.getServletContext().setAttribute(<span class="string">"appName"</span>,<span class="string">"appValue"</span>);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h6 id="注：使用此方式可以操作域对象的数据，同时也可以获得对象的方法。"><a href="#注：使用此方式可以操作域对象的数据，同时也可以获得对象的方法。" class="headerlink" title="==注：使用此方式可以操作域对象的数据，同时也可以获得对象的方法。=="></a>==注：使用此方式可以操作域对象的数据，同时也可以获得对象的方法。==</h6></li>
+</ul>
+</li>
+<li><p>接口注入的方式</p>
+<ul>
+<li><p>编写jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;h3&gt;接口API&lt;/h3&gt;</span><br><span class="line">&lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/interfaceAPI.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">    姓名:&lt;input name=<span class="string">"username"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    密码:&lt;input name=<span class="string">"password"</span> type=<span class="string">"password"</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用接口 API的方式--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"interfaceAPI"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.RequestDemo3"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RequestDemo3</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> <span class="keyword">implements</span> <span class="title">ServletRequestAware</span>,<span class="title">ServletContextAware</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> HttpServletRequest request;</span><br><span class="line">    <span class="keyword">private</span> ServletContext context;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="comment">//接收参数，通过接口注入的方式获得request对象</span></span><br><span class="line">        Map&lt;String, String[]&gt; map = request.getParameterMap();</span><br><span class="line">        <span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">            String[] values = map.get(key);</span><br><span class="line">            System.out.println(key+<span class="string">""</span>+ Arrays.toString(values));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//向域对象中中保存数据，向request域中保存数据</span></span><br><span class="line">        request.setAttribute(<span class="string">"reqName"</span>,<span class="string">"reqValues"</span>);</span><br><span class="line">        <span class="comment">//向session中保存数据</span></span><br><span class="line">        request.getSession().setAttribute(<span class="string">"sessName"</span>,<span class="string">"sessValues"</span>);</span><br><span class="line">        <span class="comment">//向application中保存数据</span></span><br><span class="line">        context.setAttribute(<span class="string">"appName"</span>,<span class="string">"appValues"</span>);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setServletRequest</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.request = request;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setServletContext</span><span class="params">(ServletContext context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>==注：Servlet是单例的，多个程序访问同一个Servlet只会创建一个Servlet的实例，Action是多例的，一次请求，创建一个Action的实例(不会出现线程安全问题)。==</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="9-Struts2的结果页面的配置"><a href="#9-Struts2的结果页面的配置" class="headerlink" title="9.Struts2的结果页面的配置"></a>9.Struts2的结果页面的配置</h3><ul>
+<li><p>全局结果页面配置</p>
+<ul>
+<li>指在包中配置一次，其他的在这个包中的所有action只要返回了这个值，都可以跳转到这个页面，针对这个包中的所有的action的配置都有效。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"demo"</span> <span class="attr">namespace</span>=<span class="string">"/"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--全局结果页面配置--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">global-results</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">global-results</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="10-result标签的配置"><a href="#10-result标签的配置" class="headerlink" title="10.result标签的配置"></a>10.result标签的配置</h3><ul>
+<li>result标签用于配置页面的跳转，有两个属性<ul>
+<li>name属性：逻辑视图的名称，默认值：success</li>
+<li>type属性：页面跳转的类型<ul>
+<li>dispatcher:默认值，请求转发(Action转发JSP)</li>
+<li>redirect:重定向(Action重定向JSP)</li>
+<li>chain:转发(Action转发Action)</li>
+<li>redirectAction:重定向(Action重定向Action)</li>
+<li>stream:Struts2中提供文件下载的功能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-struts2的数据的封装"><a href="#11-struts2的数据的封装" class="headerlink" title="11.struts2的数据的封装"></a>11.struts2的数据的封装</h3><ol>
+<li><p>属性驱动，提供属性的set方法的方式(不常用)</p>
+<ul>
+<li><p>编写jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;属性驱动：提供属性set方法的方式&lt;/h3&gt;</span><br><span class="line"> &lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/userAction1.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">     用户名:&lt;input name=<span class="string">"username"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     密码:&lt;input name=<span class="string">"password"</span> type=<span class="string">"password"</span>&gt;&lt;br/&gt;</span><br><span class="line">     年龄:&lt;input name=<span class="string">"age"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     生日:&lt;input name=<span class="string">"birthday"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     工资:&lt;input name=<span class="string">"salary"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line"> &lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--set属性封装--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"userAction1"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.UserAction"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAction</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span></span>&#123;</span><br><span class="line">    <span class="comment">//提供对应的属性</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">    <span class="keyword">private</span> Double salary;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Date birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSalary</span><span class="params">(Double salary)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.salary = salary;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//接收数据</span></span><br><span class="line">        System.out.println(username);</span><br><span class="line">        System.out.println(password);</span><br><span class="line">        System.out.println(age);</span><br><span class="line">        System.out.println(birthday);</span><br><span class="line">        System.out.println(salary);</span><br><span class="line">        <span class="comment">//封装数据</span></span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setUsername(username);</span><br><span class="line">        user.setPassword(password);</span><br><span class="line">        user.setAge(age);</span><br><span class="line">        user.setBirthday(birthday);</span><br><span class="line">        user.setSalary(salary);</span><br><span class="line">        ActionContext context = ActionContext.getContext();</span><br><span class="line"><span class="comment">//        Map&lt;String, Object&gt; map = context.getParameters();</span></span><br><span class="line">       context.put(<span class="string">"user"</span>,user);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>属性驱动，页面中提供表达式方式</p>
+<ul>
+<li><p>编写jsp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;属性驱动：在页面中提供表达式方式&lt;/h3&gt;</span><br><span class="line"> &lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/userAction2.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">     用户名:&lt;input name=<span class="string">"user.username"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     密码:&lt;input name=<span class="string">"user.password"</span> type=<span class="string">"password"</span>&gt;&lt;br/&gt;</span><br><span class="line">     年龄:&lt;input name=<span class="string">"user.age"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     生日:&lt;input name=<span class="string">"user.birthday"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     工资:&lt;input name=<span class="string">"user.salary"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line"> &lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--在页面中提供表达式的方式--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"userAction2"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.UserAction2"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAction2</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    提供User对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     提供set,get方法，一定要提供get方法，</span></span><br><span class="line"><span class="comment">     因为拦截器完成数据封装，需要创建user对象，</span></span><br><span class="line"><span class="comment">     通过get方法可以获得同一个对象，</span></span><br><span class="line"><span class="comment">     将数据封装到同一个对象中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>模型驱动：采用模型驱动的方式(最常用)</p>
+<ul>
+<li><p>编写jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;模型驱动：采用模型驱动的方式&lt;/h3&gt;</span><br><span class="line"> &lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/userAction3.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">     用户名:&lt;input name=<span class="string">"username"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     密码:&lt;input name=<span class="string">"password"</span> type=<span class="string">"password"</span>&gt;&lt;br/&gt;</span><br><span class="line">     年龄:&lt;input name=<span class="string">"age"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     生日:&lt;input name=<span class="string">"birthday"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     工资:&lt;input name=<span class="string">"salary"</span> type=<span class="string">"text"</span>&gt;&lt;br/&gt;</span><br><span class="line">     &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line"> &lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--采用模型驱动的方式--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"userAction3"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.UserAction3"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAction3</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> <span class="keyword">implements</span> <span class="title">ModelDriven</span></span>&#123;</span><br><span class="line">    <span class="comment">//模型驱动使用的对象，前提必须手动提供对象的实例</span></span><br><span class="line">    <span class="keyword">private</span> User user = <span class="keyword">new</span> User();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">//模型驱动需要使用的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getModel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Struts2复杂数据类型的封装</p>
+<ul>
+<li><p>封装数据到List集合中</p>
+<ul>
+<li><p>编写jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;封装到List集合中，批量插入商品&lt;/h3&gt;</span><br><span class="line">&lt;form action=<span class="string">"$&#123;pageContext.request.contextPath&#125;/productAction1.action"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">    商品名称：&lt;input name=<span class="string">"products[0].name"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    商品价格：&lt;input name=<span class="string">"products[0].price"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    商品名称：&lt;input name=<span class="string">"products[1].name"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    商品价格：&lt;input name=<span class="string">"products[1].price"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    商品名称：&lt;input name=<span class="string">"products[2].name"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    商品价格：&lt;input name=<span class="string">"products[2].price"</span> type=<span class="string">"text"</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写struts.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"productAction1"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day02.ProductAction1"</span> <span class="attr">method</span>=<span class="string">"execute"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写Action</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductAction1</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Products&gt; products;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Products&gt; <span class="title">getProducts</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> products;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProducts</span><span class="params">(List&lt;Products&gt; products)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.products = products;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Products product : products) &#123;</span><br><span class="line">            System.out.println(product);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        ActionContext context = ActionContext.getContext();</span></span><br><span class="line"><span class="comment">//        context.put("p",products);</span></span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="12-OGNL"><a href="#12-OGNL" class="headerlink" title="12.OGNL"></a>12.OGNL</h3><p><code>OGNL是Object-Graph Navigation 
+Language的缩写，它是一种功能强大的表达式语言，通过它简单一致的表达式语法，可以存取对象的任意属性，调用对象的方法，遍历整个对象的结构图，实现字段类型转化等功能。它使用相同的表达式去存取对象的属性。这样可以更好的取得数据。</code></p>
+<ul>
+<li><p>Struts2使用OGNL的优势</p>
+<ul>
+<li>支持对象方法调用。如ObjName.methodName()</li>
+<li>支持类静态方法调用和值访问，表达式的格式为@[全类名(包括包路径)]@[方法名 | 值名]。如@java.lang.String@format(‘foo %s’,’bar’)。</li>
+<li>支持赋值操作和表达式串联。</li>
+<li>访问OGNL上下文(OGNL context) 和ActionContext。</li>
+<li>操作集合对象。</li>
+</ul>
+</li>
+<li><p>OGNL三要素</p>
+<ul>
+<li>表达式<ul>
+<li>OGNL的核心，OGNL会根据表达式去对象中取值，所有的OGNL操作都是针对表达式解析后进行的，表明了此次OGNL操作要“做什么”。表达式就是一个带有语法含义的字符串，这个字符串规定了操作的类型和操作的内容。OGNL支持大量的表达式语法，不仅支持这种“链式”对象访问路径，还支持在表达式中进行简单的计算。</li>
+</ul>
+</li>
+<li>根对象<ul>
+<li>Root对象可以理解为OGNL的操作语言，表达式规定了“做什么”，而Root对象则规定了“对谁操作”。OGNL称为对象图导航语言，所谓对象图，即以任意对象为根，通过OGNL可以访问与这个对象关联的其他对象。</li>
+</ul>
+</li>
+<li>Context对象<ul>
+<li>实际上OGNL的取值还需要一个上下文环境，设置了Root环境，OGNL可以对Root对象进行取值或写值等操作，Root对象所在环境就是OGNL的上下文环境(Context)。上下文环境规定了OGNL的操作“在哪里进行”。上下文环境Context是一个Map类型的对象，在表达式中访问Context中的对象，需要使用“#”号加上对象名称，即“#对象名称”的形式。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>OGNL简单演示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">       demo demo = <span class="keyword">new</span> demo();</span><br><span class="line"><span class="comment">//       demo.demo1();</span></span><br><span class="line"><span class="comment">//       demo.demo2();</span></span><br><span class="line">       demo.demo3();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//OGNL调用对象的方法</span></span><br><span class="line">        OgnlContext context = <span class="keyword">new</span> OgnlContext();</span><br><span class="line">        Object obj = Ognl.getValue(<span class="string">"'HelloWorld'.length()"</span>, context, context.getRoot());</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * OGNL调用对象静态的方法</span></span><br><span class="line"><span class="comment">         * 格式：</span></span><br><span class="line"><span class="comment">         *      @类的全路径名@方法名(参数列表)</span></span><br><span class="line"><span class="comment">         *      @类的全路径名@属性名称</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        OgnlContext context = <span class="keyword">new</span> OgnlContext();</span><br><span class="line">        Object obj = Ognl.getValue(<span class="string">"@java.lang.Math@random()"</span>, context, context.getRoot());</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo3</span><span class="params">()</span> <span class="keyword">throws</span> OgnlException </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * OGNL获取数据</span></span><br><span class="line"><span class="comment">         * 获取root中的数据</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        OgnlContext context = <span class="keyword">new</span> OgnlContext();</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line"><span class="comment">//        user.setUsername("张三");</span></span><br><span class="line">        context.setRoot(<span class="keyword">new</span> User(<span class="string">"张三"</span>,<span class="string">"11111111"</span>,<span class="number">12</span>,<span class="keyword">new</span> Date(),<span class="number">12.3</span>));</span><br><span class="line">        Object username =  Ognl.getValue(<span class="string">"username"</span>, context,context.getRoot());</span><br><span class="line">        Object password =  Ognl.getValue(<span class="string">"password"</span>, context,context.getRoot());</span><br><span class="line">        Object age =  Ognl.getValue(<span class="string">"age"</span>, context,context.getRoot());</span><br><span class="line">        Object birthday =  Ognl.getValue(<span class="string">"birthday"</span>, context,context.getRoot());</span><br><span class="line">        Object salary =  Ognl.getValue(<span class="string">"salary"</span>, context,context.getRoot());</span><br><span class="line">        System.out.println(username+<span class="string">""</span>+password+<span class="string">""</span>+age+<span class="string">""</span>+birthday+<span class="string">""</span>+salary);</span><br><span class="line"><span class="comment">//        System.out.println(password);</span></span><br><span class="line"><span class="comment">//        System.out.println(age);</span></span><br><span class="line"><span class="comment">//        System.out.println(birthday);</span></span><br><span class="line"><span class="comment">//        System.out.println(salary);</span></span><br><span class="line"><span class="comment">//        System.out.println(username);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>struts2使用OGNL</p>
+<ul>
+<li><p>创建demo1ognl.jsp页面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;%--引入struts2标签--%&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"/struts-tags"</span> prefix=<span class="string">"s"</span>%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;ognl&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;OGNL在struts2环境中的入门&lt;/h1&gt;</span><br><span class="line">&lt;h3&gt;调用对象的方法&lt;/h3&gt;</span><br><span class="line">&lt;%--使用OGNL的标签--%&gt;</span><br><span class="line">&lt;h3&gt;调用对象的方法&lt;/h3&gt;</span><br><span class="line">&lt;s:property value=<span class="string">"'struts2'.length()"</span>/&gt;</span><br><span class="line">&lt;h3&gt;调用对象的静态方法&lt;/h3&gt;</span><br><span class="line">&lt;%--静态方法在struts中默认是关闭的需要在struts.xml中开启--%&gt;</span><br><span class="line">&lt;s:property value=<span class="string">"@java.lang.Math@random()"</span>/&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在struts.xml中关闭struts对静态资源的过滤</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启struts静态资源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.ognl.allowStaticMethodAccess"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问成功</p>
+<p><img src="/2019/07/09/struts/1558409702790.png" alt="1558409702790"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-值栈"><a href="#13-值栈" class="headerlink" title="13.值栈"></a>13.值栈</h3><ul>
+<li><p>什么是值栈</p>
+<ul>
+<li>ValueStack是Struts的一个接口，字面意义为值栈，OgnlValueStack是ValueStack的实现类，客户端发起一个请求，Struts2架构会创建一个action实例同时创建一个OgnlValueStack值栈实例，OgnlValueStack贯穿整个Action的生命周期，struts2中使用OGNL将请求Action的参数封装为对象存储到值栈中，并通过OGNL表达式读取值栈中的对象属性值。</li>
+<li>valueStack类似于一个数据中转站(Struts2的框架当中的数据就都保存到了ValueStack中)<ul>
+<li>ValueStack接口：实现类ognlValueStack对象。</li>
+<li>ValueStack贯穿整个Action的生命周期。（Action一旦创建了，框架就会创建一个ValueStack对象）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>值栈的内部结构</p>
+<ul>
+<li><p>在OgnlValueStack中包括两部分，值栈和map(即ognl上下文)</p>
+<p><img src="/2019/07/09/struts/1558423520232.png" alt="1558423520232"></p>
+</li>
+</ul>
+<ul>
+<li><p>Context:即OgnlContext上下文，它是一个map结构，上下文中存储了一些引用，parameters，request，session，application等，上下文的Root为CompoundRoot。</p>
+</li>
+<li><p>OgnlContext中的一些引用</p>
+<ul>
+<li>parameters：该Map中包含当前请求的请求参数。</li>
+<li>request：该Map中包含当前request对象中的所有属性。</li>
+<li>session：该Map中包含当前session对象中的所有属性。</li>
+<li>application：该Map中包含当前application对象中的所有属性</li>
+<li>attr：该Map按如下顺序来检索某个属性：request,session,application</li>
+</ul>
+</li>
+<li><p>CompoundRoot:存储了action实例，它作为OgnlContext的Root对象。</p>
+<ul>
+<li>CompoundRoot继承了ArrayList实现压栈和出栈功能，拥有栈的特点，先进先出，后进后出，最后压进栈的数据在栈顶，称之为对象栈。</li>
+</ul>
+</li>
+<li><p>Struts2对原OGNL作出的改变就是Root使用CompoundRoot(自定义帐)，使用OgnlValueStack的findValue方法可以在CompoundRoot中从栈顶向栈底查找对象的属性值。</p>
+</li>
+<li><p>CompoundRoot作为OgnlContext的Root对象，并且在CompoundRoot中action实例位于栈顶，当读取action的属性值时会先从栈对象中找对应的属性，如果找不到则继续找栈中的其他对象，如果找到则停止查找。</p>
+</li>
+</ul>
+</li>
+<li><p>值栈与ActionContext的关系</p>
+<ul>
+<li>ActionContext：Action的上下文，通过看源码发现，当请求过来的时候，执行过滤器中的diFilter方法，在这个方法中创建ActionContext，在创建ActionContext过程中，创建ValueStack对象，将ValueStack对象传递给ActionContext对象，所以可以通过ActionContext获取值栈对象。</li>
+<li>ActionContext对象之所以能够访问Servlet的API（访问的是域对象的数据）。因为在其内部有值栈的引用。</li>
+</ul>
+</li>
+<li><p>获得值栈</p>
+<ul>
+<li>通过ActionContext对象获取值栈。</li>
+<li>在struts2的内部，将值栈存入request中一份。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValueStackdemo1</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//通过ActionContext对象获取值栈</span></span><br><span class="line">        ValueStack valueStack = ActionContext.getContext().getValueStack();</span><br><span class="line">        <span class="comment">//通过request域获取值栈</span></span><br><span class="line">         ValueStack attribute = (ValueStack) ServletActionContext.getRequest().getAttribute(ServletActionContext.STRUTS_VALUESTACK_KEY);</span><br><span class="line">        <span class="comment">//true一个Action实例，只会创建一个ValueStack实例</span></span><br><span class="line">        System.out.println(valueStack == attribute);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>操作值栈-向值栈中存入数据</p>
+<ol>
+<li><p>在Action中提供属性的get方法的方式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValueStackdemo2</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        user = <span class="keyword">new</span> User(<span class="string">"张三"</span>,<span class="string">"11111111"</span>,<span class="number">20</span>,<span class="keyword">new</span>  Date(),<span class="number">12.1</span>);</span><br><span class="line">        <span class="keyword">return</span> SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用ValueStack中本身的方法的方式(常用）。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValueStackdemo3</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//向值栈中保存数据，获得值栈对象</span></span><br><span class="line">        ValueStack valueStack = ActionContext.getContext().getValueStack();</span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"张三"</span>,<span class="string">"11111111"</span>,<span class="number">20</span>,<span class="keyword">new</span>  Date(),<span class="number">12.1</span>);</span><br><span class="line">        <span class="comment">//向值栈中放入对象</span></span><br><span class="line">        valueStack.push(user);</span><br><span class="line">        <span class="comment">//调用父类的方法默认返回success.jsp</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>success.jsp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">"com.ym.struts2.domain.User"</span> %&gt;&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: Mr Yan</span><br><span class="line">  Date: <span class="number">2019</span>/<span class="number">5</span>/<span class="number">18</span></span><br><span class="line">  Time: <span class="number">17</span>:<span class="number">30</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"/struts-tags"</span> prefix=<span class="string">"s"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;$Title$&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;s:debug&gt;&lt;/s:debug&gt;</span><br><span class="line">       &lt;%--使用ValueStack本身的方法--%&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"username"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"password"</span>/&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取值栈数据</p>
+<ul>
+<li><p>获取值栈中的数据就是在页面中使用OGNL表达式    </p>
+<ul>
+<li>获取root的数据</li>
+<li>获取context的数据(需要使用#)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValueStackdemo4</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//向值栈中保存一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"李四"</span>,<span class="string">"11111111"</span>,<span class="number">12</span>,<span class="keyword">new</span> Date(),<span class="number">12.3</span>);</span><br><span class="line">        ActionContext.getContext().getValueStack().push(user);</span><br><span class="line">        <span class="comment">//向值栈中保存一个集合</span></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">"张三"</span>,<span class="string">"11111111"</span>,<span class="number">13</span>,<span class="keyword">new</span> Date(),<span class="number">100.0</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">"王五"</span>,<span class="string">"11111111"</span>,<span class="number">13</span>,<span class="keyword">new</span> Date(),<span class="number">100.0</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">"赵六"</span>,<span class="string">"11111111"</span>,<span class="number">13</span>,<span class="keyword">new</span> Date(),<span class="number">100.0</span>));</span><br><span class="line">        ActionContext.getContext().getValueStack().set(<span class="string">"list"</span>,list);</span><br><span class="line">        <span class="comment">//向context中存入数据</span></span><br><span class="line">        <span class="comment">//request</span></span><br><span class="line">        ServletActionContext.getRequest().setAttribute(<span class="string">"周七"</span>,<span class="string">"22222222"</span>);</span><br><span class="line">        <span class="comment">//session</span></span><br><span class="line">        ServletActionContext.getRequest().getSession().setAttribute(<span class="string">"name"</span>,<span class="string">"哈哈"</span>);</span><br><span class="line">        <span class="comment">//application</span></span><br><span class="line">        ServletActionContext.getServletContext().setAttribute(<span class="string">"name"</span>,<span class="string">"yyy"</span>);</span><br><span class="line">        <span class="comment">//调用父类的方法默认返回success.jsp</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>success.jsp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">"com.ym.struts2.domain.User"</span> %&gt;&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: Mr Yan</span><br><span class="line">  Date: <span class="number">2019</span>/<span class="number">5</span>/<span class="number">18</span></span><br><span class="line">  Time: <span class="number">17</span>:<span class="number">30</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"/struts-tags"</span> prefix=<span class="string">"s"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;$Title$&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;s:debug&gt;&lt;/s:debug&gt;</span><br><span class="line">  &lt;%--使用ValueStack本身的方法--%&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"username"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"password"</span>/&gt;</span><br><span class="line">  &lt;%--从值栈中获取集合--%&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"list[0].username"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"list[0].password"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"list[1].username"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"list[1].password"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"list[2].username"</span>/&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"list[2].password"</span>/&gt;</span><br><span class="line">  &lt;%--获取context中的数据格式为</span><br><span class="line">    #request.username</span><br><span class="line">    #request.password</span><br><span class="line">  --%&gt;</span><br><span class="line">  &lt;%--获取request中的数据--%&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"#request.周七"</span>/&gt;</span><br><span class="line">  &lt;%--获取session中的数据--%&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"#session.name"</span>/&gt;</span><br><span class="line">  &lt;%--获取application中的数据--%&gt;</span><br><span class="line">  &lt;s:property value=<span class="string">"#application.name"</span>/&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-OGNL中特殊字符"><a href="#14-OGNL中特殊字符" class="headerlink" title="14.OGNL中特殊字符"></a>14.OGNL中特殊字符</h3><ul>
+<li><p>#号</p>
+<ul>
+<li>获取context中的数据</li>
+<li>使用#构建map集合</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"/struts-tags"</span> prefix=<span class="string">"s"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;构建map集合&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;s:iterator <span class="keyword">var</span>=<span class="string">"i"</span> value=<span class="string">"&#123;'aa','bb','ccc'&#125;"</span>&gt;</span><br><span class="line">        &lt;s:property value=<span class="string">"i"</span>/&gt; -- &lt;s:property value=<span class="string">"#i"</span>/&gt;&lt;br/&gt;</span><br><span class="line">&lt;/s:iterator&gt;</span><br><span class="line">&lt;s:iterator value=<span class="string">"#&#123;'aaa':'11','bb':'22','cc':33&#125;"</span>&gt;</span><br><span class="line">    &lt;s:property value=<span class="string">"key"</span>/&gt;--&lt;s:property value=<span class="string">"value"</span>/&gt;&lt;br/&gt;</span><br><span class="line">&lt;/s:iterator&gt;</span><br><span class="line">&lt;%--单选--%&gt;</span><br><span class="line">&lt;s:radio list=<span class="string">"#&#123;'1':'男','2':'女'&#125;"</span> name=<span class="string">"sex"</span> label=<span class="string">"性别"</span>/&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>%号</p>
+<ul>
+<li><p>强制解析OGNL表达式</p>
+</li>
+<li><p>强制不解析OGNL表达式</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;%号的用法&lt;/h3&gt;</span><br><span class="line">&lt;%</span><br><span class="line">request.setAttribute(<span class="string">"name"</span>,<span class="string">"ym"</span>);</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%--强制解析--%&gt;</span><br><span class="line">姓名&lt;s:textfield name=<span class="string">"name"</span> value=<span class="string">"%&#123;#request.name&#125;"</span>/&gt;</span><br><span class="line">&lt;%--强制不解析--%&gt;</span><br><span class="line">姓名&lt;s:textfield name=<span class="string">"name"</span> value=<span class="string">"%&#123;'#request.name'&#125;"</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/09/struts/1558451680695.png" alt="1558451680695"></p>
+</li>
+</ul>
+</li>
+<li><p>$号</p>
+<ul>
+<li>主要用于在配置文件中使用OGNL表达式</li>
+</ul>
+</li>
+</ul>
+<h3 id="15-Struts2拦截器"><a href="#15-Struts2拦截器" class="headerlink" title="15.Struts2拦截器"></a>15.Struts2拦截器</h3><ul>
+<li>作用：起到拦截Action的作用。</li>
+<li>Interceptor：拦截器，拦截是客户端对Action的访问，更细粒度化的拦截（拦截Action中的具体方法）</li>
+<li>Struts2框架核心的功能都是以来与拦截器实现的。</li>
+</ul>
+<h3 id="16-拦截器demo"><a href="#16-拦截器demo" class="headerlink" title="16.拦截器demo"></a>16.拦截器demo</h3><ul>
+<li><p>创建一个类实现Interceptor接口或继承AbstractInterceptor类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrutsInterceptor</span> <span class="keyword">extends</span> <span class="title">AbstractInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">intercept</span><span class="params">(ActionInvocation actionInvocation)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"拦截方法执行了"</span>);</span><br><span class="line">        String invoke = actionInvocation.invoke();</span><br><span class="line">        System.out.println(<span class="string">"拦截器执行完毕"</span>);</span><br><span class="line">        <span class="keyword">return</span> invoke;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置struts.xml</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置拦截器进行拦截--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">interceptors</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"interceptor"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.day04.StrutsInterceptor"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"valueStartdemo4"</span> <span class="attr">class</span>=<span class="string">"com.ym.struts2.ognl.ValueStackdemo4"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/page/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--在此方法上引入拦截器(一旦引入拦截器，默认的拦截器就不执行了，需要手动的引入)--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"interceptor"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行完毕</li>
+</ul>
+<p><img src="/2019/07/09/struts/1558496234242.png" alt="1558496234242"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/09/struts/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Hibernate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -177,15 +680,15 @@
         <h2 id="Hibernate笔记"><a href="#Hibernate笔记" class="headerlink" title="Hibernate笔记"></a>Hibernate笔记</h2><h3 id="day01"><a href="#day01" class="headerlink" title="day01"></a>day01</h3><h3 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h3><h4 id="1-什么是Hibernate"><a href="#1-什么是Hibernate" class="headerlink" title="1. 什么是Hibernate"></a>1. 什么是Hibernate</h4><ul>
 <li><code>Hibernate是一个开源的ORM(Object Relational Mapping对象关系映射)框架,对JDBC进行了轻量级的对象封装,使我们开发人员可以使用面向对象的编程思想来操作数据库.</code></li>
 </ul>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5CORM%E5%8E%9F%E7%90%86.png" alt="ORM原理"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5CORM%E5%8E%9F%E7%90%86.png" alt="ORM原理"></p>
 <h4 id="2-优势"><a href="#2-优势" class="headerlink" title="2. 优势"></a>2. 优势</h4><ul>
 <li>对JDBC访问数据库的代码进行了轻量级封装,大大简化了数据访问层繁琐的重复性代码,减少内存消耗,加快运行效率.</li>
 <li>Hibernate是一款基于JDBC的主流持久化框架,是一个优秀的ORM实现,很大程度的简化了DAO(Data Access Object,数据访问对象)层编码工作.</li>
 <li>性能好,映射的灵活性很出色,它支持关系型数据库,从1对1到多对多的各种复杂关系.</li>
 <li>可拓展性强,由于源代码的开源以及API的开放,当本身功能不够用时,可以自行编码进行拓展.</li>
 </ul>
-<h4 id="3-入门"><a href="#3-入门" class="headerlink" title="3.入门"></a>3.入门</h4><h5 id="1-首先看一下项目的整体目录结构"><a href="#1-首先看一下项目的整体目录结构" class="headerlink" title="1.首先看一下项目的整体目录结构"></a>1.首先看一下项目的整体目录结构</h5><p>​        <img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="目录结构"></p>
-<h5 id="2-项目需要的jar包"><a href="#2-项目需要的jar包" class="headerlink" title="2.项目需要的jar包"></a>2.项目需要的jar包</h5><p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5Clib%E7%9B%AE%E5%BD%95.png" alt="lib目录"></p>
+<h4 id="3-入门"><a href="#3-入门" class="headerlink" title="3.入门"></a>3.入门</h4><h5 id="1-首先看一下项目的整体目录结构"><a href="#1-首先看一下项目的整体目录结构" class="headerlink" title="1.首先看一下项目的整体目录结构"></a>1.首先看一下项目的整体目录结构</h5><p>​        <img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="目录结构"></p>
+<h5 id="2-项目需要的jar包"><a href="#2-项目需要的jar包" class="headerlink" title="2.项目需要的jar包"></a>2.项目需要的jar包</h5><p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5Clib%E7%9B%AE%E5%BD%95.png" alt="lib目录"></p>
 <h5 id="3-创建实体类"><a href="#3-创建实体类" class="headerlink" title="3.创建实体类"></a>3.创建实体类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ym.hibernate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: hibernatedemo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-05-16 13:04</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="comment">//声明当前类为实体类</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="comment">//指定当前类与数据库表的映射关系</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"cst_customer"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line"><span class="comment">//用于指定主键</span></span><br><span class="line"><span class="meta">@Id</span></span><br><span class="line"><span class="comment">//用于指定主键的生成策略,GenerationType.IDENTITY为mysql默认的</span></span><br><span class="line">    <span class="comment">//当使用xml建立实体类与数据库表的关系时,不需要以上所有的注解</span></span><br><span class="line"><span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Long cust_id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String cust_name;</span><br><span class="line">    <span class="keyword">private</span> String cust_source;</span><br><span class="line">    <span class="keyword">private</span> String cust_industry;</span><br><span class="line">    <span class="keyword">private</span> String cust_linkman;</span><br><span class="line">    <span class="keyword">private</span> String cust_phone;</span><br><span class="line">    <span class="keyword">private</span> String cust_mobile;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getCust_id</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_id</span><span class="params">(Long cust_id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_id = cust_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_name</span><span class="params">(String cust_name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_name = cust_name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_source</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_source;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_source</span><span class="params">(String cust_source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_source = cust_source;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_industry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_industry;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_industry</span><span class="params">(String cust_industry)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_industry = cust_industry;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_linkman</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_linkman;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_linkman</span><span class="params">(String cust_linkman)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_linkman = cust_linkman;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_phone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_phone;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_phone</span><span class="params">(String cust_phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_phone = cust_phone;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_mobile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_mobile;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_mobile</span><span class="params">(String cust_mobile)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_mobile = cust_mobile;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Customer&#123;"</span> +</span><br><span class="line">                <span class="string">"cust_id="</span> + cust_id +</span><br><span class="line">                <span class="string">", cust_name='"</span> + cust_name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_source='"</span> + cust_source + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_industry='"</span> + cust_industry + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_linkman='"</span> + cust_linkman + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_phone='"</span> + cust_phone + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_mobile='"</span> + cust_mobile + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="4-创建实体类与数据库的映射关系-Customer-hbm-xml"><a href="#4-创建实体类与数据库的映射关系-Customer-hbm-xml" class="headerlink" title="4.创建实体类与数据库的映射关系(Customer.hbm.xml)"></a>4.创建实体类与数据库的映射关系(Customer.hbm.xml)</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置表与实体对象的关系 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- package属性:填写一个包名.在元素内部凡是需要书写完整类名的属性,可以直接写简答类名了. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"com.ym.hibernate"</span> &gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        class元素: 配置实体与表的对应关系的</span></span><br><span class="line"><span class="comment">            name: 完整类名</span></span><br><span class="line"><span class="comment">            table:数据库表名</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"Customer"</span> <span class="attr">table</span>=<span class="string">"cst_customer"</span> &gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- id元素:配置主键映射的属性</span></span><br><span class="line"><span class="comment">                name: 填写主键对应属性名</span></span><br><span class="line"><span class="comment">                column(可选): 填写表中的主键列名.默认值:列名会默认使用属性名</span></span><br><span class="line"><span class="comment">                type(可选):填写列(属性)的类型.hibernate会自动检测实体的属性类型.</span></span><br><span class="line"><span class="comment">                        每个类型有三种填法: java类型|hibernate类型|数据库类型</span></span><br><span class="line"><span class="comment">                not-null(可选):配置该属性(列)是否不能为空. 默认值:false</span></span><br><span class="line"><span class="comment">                length(可选):配置数据库中列的长度. 默认值:使用数据库类型的最大长度</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"cust_id"</span>  &gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- generator:主键生成策略 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>&gt;</span><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- property元素:除id之外的普通属性映射</span></span><br><span class="line"><span class="comment">                name: 填写属性名</span></span><br><span class="line"><span class="comment">                column(可选): 填写列名</span></span><br><span class="line"><span class="comment">                type(可选):填写列(属性)的类型.hibernate会自动检测实体的属性类型.</span></span><br><span class="line"><span class="comment">                        每个类型有三种填法: java类型|hibernate类型|数据库类型</span></span><br><span class="line"><span class="comment">                not-null(可选):配置该属性(列)是否不能为空. 默认值:false</span></span><br><span class="line"><span class="comment">                length(可选):配置数据库中列的长度. 默认值:使用数据库类型的最大长度</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_name"</span> <span class="attr">column</span>=<span class="string">"cust_name"</span> &gt;</span></span><br><span class="line">            <span class="comment">&lt;!--  &lt;column name="cust_name" sql-type="varchar" &gt;&lt;/column&gt; --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_source"</span> <span class="attr">column</span>=<span class="string">"cust_source"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_industry"</span> <span class="attr">column</span>=<span class="string">"cust_industry"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_linkman"</span> <span class="attr">column</span>=<span class="string">"cust_linkman"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_phone"</span> <span class="attr">column</span>=<span class="string">"cust_phone"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_mobile"</span> <span class="attr">column</span>=<span class="string">"cust_mobile"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -243,7 +746,7 @@
 </ul>
 </li>
 <li><p><strong>主键生成策略</strong></p>
-<p> <img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558060355939.png" alt="1558060355939"></p>
+<p> <img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558060355939.png" alt="1558060355939"></p>
 <table>
 <thead>
 <tr>
@@ -301,7 +804,7 @@
 <li><p><strong>持久化对象三种状态转换图解</strong></p>
 </li>
 </ol>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558062569476.png" alt="1558062569476"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558062569476.png" alt="1558062569476"></p>
 <ol start="4">
 <li><p><strong>瞬时状态转换到其他状态</strong></p>
 <ul>
@@ -352,7 +855,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558077587353.png" alt="1558077587353"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558077587353.png" alt="1558077587353"></p>
 <ul>
 <li>可以看到在第一次执行session的get()方法获取customer1对象时,由于一级缓存中没有数据,所以Hibernate会向数据库发送一条sql语句,查询id=2的对象,当再次调用session的get()方法获取customer2对象时,将不会再发送sql语句,这是因为customer2对象是从一级缓存中获取的.</li>
 </ul>
@@ -361,7 +864,7 @@
 <h3 id="五-一级缓存的内部结构-快照区"><a href="#五-一级缓存的内部结构-快照区" class="headerlink" title="五.一级缓存的内部结构(快照区)"></a>五.一级缓存的内部结构(快照区)</h3><ul>
 <li>Hibernate向一级缓存存放入数据时,同时复制一份数据放到Hibernate快照区,当使用commit()方法提交事务时,同时会清理Session的一级缓存,<strong>这时会使用OID判断一级缓存中的对象和快照中的对象是否一致,如果两个对象中的属性发生变化,则执行update语句,将缓存的内容同步到数据库,并更新快照,如果一致,则不执行update语句</strong>,Hibernate快照的作用就是确保一级缓存中的数据和数据库中的数据一致.</li>
 </ul>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558078245102.png" alt="1558078245102"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558078245102.png" alt="1558078245102"></p>
 <h3 id="六-Hibernate事务控制"><a href="#六-Hibernate事务控制" class="headerlink" title="六.Hibernate事务控制"></a>六.Hibernate事务控制</h3><ul>
 <li><strong>事务的隔离级别</strong></li>
 </ul>
@@ -482,7 +985,7 @@
 <li><p>级联是有方向性的,所谓的方向性是指,在保存一的一方级联多的一方合在保存多的一方级联一的一方.</p>
 </li>
 <li><p>主控方:保存哪一方哪一方就是就是主控方,在主控方的xml中进行配置</p>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558104622754.png" alt="1558104622754"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558104622754.png" alt="1558104622754"></p>
 </li>
 <li><p>测试</p>
 </li>
@@ -506,7 +1009,7 @@
 <li><p><strong>cascade和inverse</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="comment">//cascade和inverse</span></span><br><span class="line"><span class="comment">//cascade强调的是操作一个对象的时候,是否操作其关联对象</span></span><br><span class="line"><span class="comment">//inverse强调的是外键的维护权</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtile.getCurrentSession();</span><br><span class="line">    Transaction transaction = session.beginTransaction();</span><br><span class="line">    Customer customer = <span class="keyword">new</span> Customer();</span><br><span class="line">    customer.setCust_name(<span class="string">"王总"</span>);</span><br><span class="line">    LinkMan linkman = <span class="keyword">new</span> LinkMan();</span><br><span class="line">    linkman.setLkm_name(<span class="string">"李秘书"</span>);</span><br><span class="line">    <span class="comment">//在Customer.hbm.xml中的set上配置cascade="save-update" inverse="true"</span></span><br><span class="line">    customer.getLinkMans().add(linkMan);</span><br><span class="line">    session.save(customer);</span><br><span class="line">    transaction.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558106423425.png" alt="1558106423425"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558106423425.png" alt="1558106423425"></p>
 </li>
 </ul>
 <h3 id="二-多对多关系映射"><a href="#二-多对多关系映射" class="headerlink" title="二.多对多关系映射"></a>二.多对多关系映射</h3><ul>
@@ -587,7 +1090,7 @@
 </ul>
 </li>
 </ol>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558162391908.png" alt="1558162391908"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558162391908.png" alt="1558162391908"></p>
 <ol start="3">
 <li><p><strong>离线条件检索(DetachedCriteria)</strong></p>
 <p>我们知道Criteria对象必须由session对象来创建,那么也就是说必须先有session才可以生成Criteria对象,而DetachedCriteria对象可以在其他层对条件进行封装</p>
@@ -639,7 +1142,7 @@
 <li><p>Hibernate的抓取策略是Hibernate提升性能的一种手段,可以在获取关联对象的时候,对发送的语句进行优化,往往抓取策略需要和延迟加载一起使用来提升性能.</p>
 </li>
 <li><p>抓取策略配置</p>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558167014786.png" alt="1558167014786"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558167014786.png" alt="1558167014786"></p>
 </li>
 </ul>
 </li>
@@ -666,7 +1169,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558166823799.png" alt="1558166823799"></p>
+<p><img src="/2019/07/09/Hibernate/D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558166823799.png" alt="1558166823799"></p>
 
       
 
@@ -1040,14 +1543,14 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="/.com//%E5%8C%85%E5%8C%85%E5%AD%90.png" alt></p>
+<p><img src="/2019/03/22/多线程3线程池/%E5%8C%85%E5%8C%85%E5%AD%90.png" alt></p>
 <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="传统创建线程缺点"><a href="#传统创建线程缺点" class="headerlink" title="传统创建线程缺点"></a>传统创建线程缺点</h3><ul>
 <li>如果并发的线程数量很多,并且每一个线程都是执行一个时间很短的任务就结束,这样频繁的创建线程就会降低系统的效率,因为频繁的创建线程和销毁线程都需要时间.</li>
 </ul>
 <h3 id="线程池介绍"><a href="#线程池介绍" class="headerlink" title="线程池介绍"></a>线程池介绍</h3><ul>
 <li>线程池就是一个容纳多个线程的容器,其中的线程可以反复使用,省去了频繁创建线程对象的操作,无需反复创建线程而消耗过多资源.</li>
 </ul>
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E6%B1%A0.png" alt></p>
+<p><img src="/2019/03/22/多线程3线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0.png" alt></p>
 <h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ol>
 <li>降低资源消耗,减少了创建和销毁线程的次数,每个线程都可以被反复利用,可执行多个任务.</li>
 <li>提高响应速度,当任务到达时,任务可以不需要等到线程创建就能立即执行.</li>
@@ -1058,10 +1561,10 @@
 </li>
 <li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Future&lt;?&gt; submit(Runnable task); <span class="comment">//获取线程池中的某一个线程对象,并运行.</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E6%B1%A0api.png" alt></p>
+<p><img src="/2019/03/22/多线程3线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0api.png" alt></p>
 </li>
 </ul>
-<p><img src="/.com//submitAPI.png" alt></p>
+<p><img src="/2019/03/22/多线程3线程池/submitAPI.png" alt></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我需要一个教练"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"教练来了"</span>);</span><br><span class="line">        System.out.println(<span class="string">"教我游泳,交完后,教练回到泳池"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        MyRunnable mr = <span class="keyword">new</span> MyRunnable();</span><br><span class="line">        service.submit(mr);</span><br><span class="line">        service.submit(mr);</span><br><span class="line">        service.shutdown();    <span class="comment">//关闭线程池</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -1161,7 +1664,7 @@
 <ul>
 <li><code>通过控制台输出我们可以看到票数出现了问题</code>,我们将其称之为线程不安全.</li>
 </ul>
-<p><img src="/.com//%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png" alt="1553179327672"></p>
+<p><img src="/2019/03/19/多线程2并发/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png" alt="1553179327672"></p>
 <h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><ul>
 <li>当我们使用多线程访问同一个资源的时候,且多个线程都对资源有写的操作,就会出现问题(比如,在十字路口没有红绿灯,没有人指挥就容易出现意外)</li>
 </ul>
@@ -1187,7 +1690,7 @@
 <ul>
 <li>通过查看控制台发现这个问题我们已经解决了.</li>
 </ul>
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png" alt="1553181542863"></p>
+<p><img src="/2019/03/19/多线程2并发/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png" alt="1553181542863"></p>
 </li>
 </ul>
 <h4 id="同步方法"><a href="#同步方法" class="headerlink" title="同步方法"></a>同步方法</h4><ul>
@@ -1227,12 +1730,12 @@
 <ul>
 <li>Timed Waiting线程状态图</li>
 </ul>
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<p><img src="/2019/03/19/多线程2并发/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="锁阻塞-Blocked"><a href="#锁阻塞-Blocked" class="headerlink" title="锁阻塞(Blocked)"></a>锁阻塞(Blocked)</h3><ul>
 <li>一个正在阻塞等待一个监视器锁(锁对象)的线程处于这一状态.</li>
 <li>线程A与线程B代码中使用同一把锁,如果线程A获取到锁,线程A进入到<strong>Runnable</strong>状态,那么线程B就进入到<strong>Blocked</strong>锁阻塞状态.</li>
 </ul>
-<p><img src="/.com//%E9%94%81%E9%98%BB%E5%A1%9E.png" alt></p>
+<p><img src="/2019/03/19/多线程2并发/%E9%94%81%E9%98%BB%E5%A1%9E.png" alt></p>
 <h3 id="无限等待-Waiting"><a href="#无限等待-Waiting" class="headerlink" title="无限等待(Waiting)"></a>无限等待(Waiting)</h3><ul>
 <li>一个正在无限期等待另一个线程执行一个特别的(唤醒)动作的线程处于这一状态.</li>
 </ul>
@@ -1260,7 +1763,7 @@
 <li>通知所有的等待在这个同步对象的线程,你们可以苏醒过来了,有机会重新占用当前对象了.</li>
 </ul>
 <p><code>注:以上三方法均为Object上的方法</code></p>
-<p><img src="/.com//%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png" alt></p>
+<p><img src="/2019/03/19/多线程2并发/%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png" alt></p>
 </li>
 </ul>
 <p><a href="https://github.com/YanMao186/Thread" target="_blank" rel="noopener">源码github链接</a></p>
@@ -1361,7 +1864,7 @@
 <li><p><code>windows系统中任务管理器，下图</code></p>
 </li>
 </ul>
-<p><img src="/.com//%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
+<p><img src="/2019/03/19/多线程/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
 <ul>
 <li><code>简单说如果进程是火车的话，那么线程就是火车的每一节车厢</code></li>
 <li><code>多线程优点</code><ul>
@@ -1379,7 +1882,7 @@
 <li>指两个或多个事件在同一时间段内发生。</li>
 <li><code>简单说就是你在吃饭的时候，电话响了，然后你去接电话，电话打完又接着吃饭</code></li>
 </ul>
-<p><img src="/.com//%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
+<p><img src="/2019/03/19/多线程/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
 <h3 id="多任务处理"><a href="#多任务处理" class="headerlink" title="多任务处理"></a>多任务处理</h3><ul>
 <li>多任务处理是同时执行多个任务的过程，使用多任务来利用CPU，多任务处理可以通过两种方式实现：<ol>
 <li>基于进程的多任务处理（多进程）</li>
@@ -1412,7 +1915,7 @@
 </ol>
 </li>
 </ul>
-<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<p><img src="/2019/03/19/多线程/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><ol>
 <li><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</li>
 <li><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</li>
@@ -1430,7 +1933,7 @@
 <h2 id="Thread类简单介绍"><a href="#Thread类简单介绍" class="headerlink" title="Thread类简单介绍"></a>Thread类简单介绍</h2><ul>
 <li><strong>Thread</strong>类提供了在线程上创建和执行操作的构造函数和方法，<strong>Thread</strong>类扩展了<strong>Object</strong>类并实现了<strong>Runnable</strong>接口。</li>
 </ul>
-<p><img src="/.com//Thread%E7%B1%BB.png" alt="1552993473274"></p>
+<p><img src="/2019/03/19/多线程/Thread%E7%B1%BB.png" alt="1552993473274"></p>
 <h3 id="常用的Thread类构造函数"><a href="#常用的Thread类构造函数" class="headerlink" title="常用的Thread类构造函数"></a>常用的<strong>Thread</strong>类构造函数</h3><ul>
 <li><code>Thread()</code></li>
 <li><code>Thread(String name)</code></li>
@@ -1482,7 +1985,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<p><img src="/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
 <ul>
 <li>join方法简单演示</li>
 </ul>
@@ -1514,7 +2017,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<p><img src="/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
 <h2 id="Thread-与-Runnable区别"><a href="#Thread-与-Runnable区别" class="headerlink" title="Thread 与 Runnable区别"></a>Thread 与 Runnable区别</h2><ul>
 <li>使用继承的话，不适合资源共享，实现接口，容易实现资源共享。</li>
 <li>java是单继承，多实现的。</li>
@@ -1627,7 +2130,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="HTTP协议通信流程"><a href="#HTTP协议通信流程" class="headerlink" title="HTTP协议通信流程"></a>HTTP协议通信流程</h3><p><img src="/.com//Http%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B.png" alt></p>
+<h3 id="HTTP协议通信流程"><a href="#HTTP协议通信流程" class="headerlink" title="HTTP协议通信流程"></a>HTTP协议通信流程</h3><p><img src="/2019/03/19/Http/Http%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B.png" alt></p>
 <h3 id="HTTP消息结构"><a href="#HTTP消息结构" class="headerlink" title="HTTP消息结构"></a>HTTP消息结构</h3><ul>
 <li><p>HTTP是基于客户端/服务端(C/S)的架构模型,通过一个可靠的链接来交换信息,是一个无状态的请求/响应协议。</p>
 </li>
@@ -1641,11 +2144,11 @@
 </li>
 </ul>
 <h3 id="客户端请求消息"><a href="#客户端请求消息" class="headerlink" title="客户端请求消息"></a>客户端请求消息</h3><ul>
-<li>客户端发送一个HTTP请求到服务器的请求消息包括以下格式:<strong>请求行</strong>(request line ),<strong>请求头</strong>(header),<strong>空行</strong>和<strong>请求数据</strong>四个部分组成.如下:<br><img src="/.com//%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt></li>
+<li>客户端发送一个HTTP请求到服务器的请求消息包括以下格式:<strong>请求行</strong>(request line ),<strong>请求头</strong>(header),<strong>空行</strong>和<strong>请求数据</strong>四个部分组成.如下:<br><img src="/2019/03/19/Http/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt></li>
 </ul>
 <h3 id="服务器响应消息"><a href="#服务器响应消息" class="headerlink" title="服务器响应消息"></a>服务器响应消息</h3><ul>
 <li><p>HTTP响应也是由四个部分组成,分别是:<strong>状态行</strong>,<strong>消息报头</strong>,<strong>空行</strong>和<strong>响应正文</strong>.</p>
-<p><img src="/.com//%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%93%8D%E5%BA%94.png" alt></p>
+<p><img src="/2019/03/19/Http/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%93%8D%E5%BA%94.png" alt></p>
 <h3 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h3></li>
 <li><p>HTTP1.0定义了三种请求方式:<strong>GET</strong>,<strong>POST</strong>和<strong>HEAD</strong>方法.</p>
 </li>
@@ -2105,7 +2608,7 @@
 
 <h4 id="节点流和处理流"><a href="#节点流和处理流" class="headerlink" title="节点流和处理流"></a>节点流和处理流</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">节点流：直接与数据源相连，读入或读出，也被称之为低级流。</span><br><span class="line">处理流：是对一个已存在的流进行连接或封装，通过封装后的流来实现数据读/写操作，也被称之为高效流。</span><br></pre></td></tr></table></figure>
 
-<h3 id="IO流结构图"><a href="#IO流结构图" class="headerlink" title="IO流结构图"></a>IO流结构图</h3><p><img src="/.com//IO.png" alt></p>
+<h3 id="IO流结构图"><a href="#IO流结构图" class="headerlink" title="IO流结构图"></a>IO流结构图</h3><p><img src="/2019/03/18/IO总结/IO.png" alt></p>
 <h3 id="IO流的四大基类-四大基类均为抽象类不可实例化"><a href="#IO流的四大基类-四大基类均为抽象类不可实例化" class="headerlink" title="IO流的四大基类(四大基类均为抽象类不可实例化)"></a>IO流的四大基类(四大基类均为抽象类不可实例化)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|</span><br><span class="line">|_Reader</span><br><span class="line">|_Writer</span><br><span class="line">|_InputStream</span><br><span class="line">|_OutputStream</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -2226,7 +2729,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="首先我们先看下集合的大体结构图"><a href="#首先我们先看下集合的大体结构图" class="headerlink" title="首先我们先看下集合的大体结构图"></a>首先我们先看下集合的大体结构图</h1><p><img src="/.com//%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt></p>
+        <h1 id="首先我们先看下集合的大体结构图"><a href="#首先我们先看下集合的大体结构图" class="headerlink" title="首先我们先看下集合的大体结构图"></a>首先我们先看下集合的大体结构图</h1><p><img src="/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt></p>
 <h2 id="接口Collection讲解"><a href="#接口Collection讲解" class="headerlink" title="接口Collection讲解"></a>接口<code>Collection</code>讲解</h2><ul>
 <li><p>首先接口<code>Collection</code>作为我们常用的<code>List</code>,<code>Set</code>,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：</p>
    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; str = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"><span class="comment">//或者使用接口new实现类</span></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
@@ -2403,7 +2906,7 @@
 </li>
 </ul>
 <h2 id="继承-is-a"><a href="#继承-is-a" class="headerlink" title="继承(is-a)"></a>继承(is-a)</h2><p><code>多个类中存在相同的行为和属性，将这些内容抽取到一个单独的类中(被称为基类，父类或超类),那么多个类(被称为基类，继承类或子类)无需再定义这些属性和行为，只要继承(extends)父类即可。</code></p>
-<p><img src="/.com//1552570451346.png" alt="1552570451346"></p>
+<p><img src="/2019/03/17/面向对象总结/1552570451346.png" alt="1552570451346"></p>
 <ul>
 <li><p>如</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-17 12:05</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">protected</span> String userName;</span><br><span class="line">    <span class="keyword">protected</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age, String userName, String gender, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.userName = userName;</span><br><span class="line">        <span class="keyword">this</span>.gender = gender;</span><br><span class="line">        <span class="keyword">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//setting/getting方法此处省略。</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Person&#123;"</span> +</span><br><span class="line">                <span class="string">"age="</span> + age +</span><br><span class="line">                <span class="string">", userName='"</span> + userName + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", gender='"</span> + gender + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", height="</span> + height +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2413,7 +2916,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:测试类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-17 15:46</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person p = <span class="keyword">new</span> Person(); <span class="comment">//首先进行父类测试</span></span><br><span class="line">        p.setAge(<span class="number">40</span>);</span><br><span class="line">        p.setGender(<span class="string">"男"</span>);</span><br><span class="line">        p.setHeight(<span class="number">180</span>);</span><br><span class="line"><span class="comment">//        p.heigth = 180;   这两种方法都可以进行赋值</span></span><br><span class="line">        p.setUserName(<span class="string">"张三"</span>);</span><br><span class="line">        System.out.println(p);</span><br><span class="line">        Student s = <span class="keyword">new</span> Student();</span><br><span class="line"><span class="comment">//        s.heigth = 175;   //我们发现子类的heigth不可以直接赋值，因为父类对他进行了私有化，但是提供了公共的setting/getting方法</span></span><br><span class="line">        s.setHeight(<span class="number">175</span>);</span><br><span class="line">        s.setAge(<span class="number">20</span>);</span><br><span class="line">        s.setUserName(<span class="string">"李四"</span>);</span><br><span class="line">        s.setGender(<span class="string">"男"</span>);</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>控制台输出</code></p>
-<p><img src="/.com//1552810048863.png" alt="1552810048863"></p>
+<p><img src="/2019/03/17/面向对象总结/1552810048863.png" alt="1552810048863"></p>
 </li>
 </ul>
 <ul>
@@ -2480,8 +2983,8 @@
 </ol>
 <h2 id="类与类，接口与接口，类与接口的关系"><a href="#类与类，接口与接口，类与接口的关系" class="headerlink" title="类与类，接口与接口，类与接口的关系"></a>类与类，接口与接口，类与接口的关系</h2></li>
 </ul>
-<p>  <img src="/.com//1552574794659.png" alt="1552574794659"></p>
-<p><img src="/.com//1552574827383.png" alt></p>
+<p>  <img src="/2019/03/17/面向对象总结/1552574794659.png" alt="1552574794659"></p>
+<p><img src="/2019/03/17/面向对象总结/1552574827383.png" alt></p>
 <h2 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h2><ul>
 <li>static主要用来内存管理，用于变量，代码块等，static属于类，而不是类的实例</li>
 <li>静态变量<ul>
@@ -2663,19 +3166,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2696,6 +3199,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
               </li>
              
               <li class="article-tag-list-item">
