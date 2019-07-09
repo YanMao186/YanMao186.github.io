@@ -6,29 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>多线程(1)基础 | MrYan���˲���</title>
+  <title>多线程(1)基础 | MrYan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="java多线程相关概念讲解进程 是指一个内存中运行的应用程序，每个进程都有独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位，系统运行一个程序即是一个进程从创建，运行到消亡的过程。  线程 进程内部的一个独立执行单元；一个进程可以同时并发的运行多个线程，可以理解为进程便相当于一个单CPU操作系统，而线程便是这个系统中运行的多个任务。  windo">
 <meta name="keywords" content="java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程(1)基础">
 <meta property="og:url" content="http://yoursite.com/2019/03/19/多线程/index.html">
-<meta property="og:site_name" content="MrYan���˲���">
+<meta property="og:site_name" content="MrYan">
 <meta property="og:description" content="java多线程相关概念讲解进程 是指一个内存中运行的应用程序，每个进程都有独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位，系统运行一个程序即是一个进程从创建，运行到消亡的过程。  线程 进程内部的一个独立执行单元；一个进程可以同时并发的运行多个线程，可以理解为进程便相当于一个单CPU操作系统，而线程便是这个系统中运行的多个任务。  windo">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Thread%E7%B1%BB.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
+<meta property="og:image" content="http://yoursite.com/.com//%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png">
+<meta property="og:image" content="http://yoursite.com/.com//%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png">
+<meta property="og:image" content="http://yoursite.com/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png">
+<meta property="og:image" content="http://yoursite.com/.com//Thread%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
+<meta property="og:image" content="http://yoursite.com/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
 <meta property="og:updated_time" content="2019-03-30T03:22:42.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程(1)基础">
 <meta name="twitter:description" content="java多线程相关概念讲解进程 是指一个内存中运行的应用程序，每个进程都有独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位，系统运行一个程序即是一个进程从创建，运行到消亡的过程。  线程 进程内部的一个独立执行单元；一个进程可以同时并发的运行多个线程，可以理解为进程便相当于一个单CPU操作系统，而线程便是这个系统中运行的多个任务。  windo">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/19/多线程/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png">
+<meta name="twitter:image" content="http://yoursite.com/.com//%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png">
   
-    <link rel="alternative" href="/atom.xml" title="MrYan���˲���" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="MrYan" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -193,7 +193,7 @@
 <li><p><code>windows系统中任务管理器，下图</code></p>
 </li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
+<p><img src="/.com//%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
 <ul>
 <li><code>简单说如果进程是火车的话，那么线程就是火车的每一节车厢</code></li>
 <li><code>多线程优点</code><ul>
@@ -211,7 +211,7 @@
 <li>指两个或多个事件在同一时间段内发生。</li>
 <li><code>简单说就是你在吃饭的时候，电话响了，然后你去接电话，电话打完又接着吃饭</code></li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
+<p><img src="/.com//%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
 <h3 id="多任务处理"><a href="#多任务处理" class="headerlink" title="多任务处理"></a>多任务处理</h3><ul>
 <li>多任务处理是同时执行多个任务的过程，使用多任务来利用CPU，多任务处理可以通过两种方式实现：<ol>
 <li>基于进程的多任务处理（多进程）</li>
@@ -244,7 +244,7 @@
 </ol>
 </li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><ol>
 <li><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</li>
 <li><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</li>
@@ -262,7 +262,7 @@
 <h2 id="Thread类简单介绍"><a href="#Thread类简单介绍" class="headerlink" title="Thread类简单介绍"></a>Thread类简单介绍</h2><ul>
 <li><strong>Thread</strong>类提供了在线程上创建和执行操作的构造函数和方法，<strong>Thread</strong>类扩展了<strong>Object</strong>类并实现了<strong>Runnable</strong>接口。</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/Thread%E7%B1%BB.png" alt="1552993473274"></p>
+<p><img src="/.com//Thread%E7%B1%BB.png" alt="1552993473274"></p>
 <h3 id="常用的Thread类构造函数"><a href="#常用的Thread类构造函数" class="headerlink" title="常用的Thread类构造函数"></a>常用的<strong>Thread</strong>类构造函数</h3><ul>
 <li><code>Thread()</code></li>
 <li><code>Thread(String name)</code></li>
@@ -314,7 +314,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<p><img src="/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
 <ul>
 <li>join方法简单演示</li>
 </ul>
@@ -346,7 +346,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<p><img src="/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
 <h2 id="Thread-与-Runnable区别"><a href="#Thread-与-Runnable区别" class="headerlink" title="Thread 与 Runnable区别"></a>Thread 与 Runnable区别</h2><ul>
 <li>使用继承的话，不适合资源共享，实现接口，容易实现资源共享。</li>
 <li>java是单继承，多实现的。</li>
@@ -655,19 +655,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">

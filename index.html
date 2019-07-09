@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MrYan���˲���</title>
+  <title>MrYan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="MrYan���˲���">
+<meta property="og:title" content="MrYan">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="MrYan���˲���">
+<meta property="og:site_name" content="MrYan">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MrYan���˲���">
+<meta name="twitter:title" content="MrYan">
   
-    <link rel="alternative" href="/atom.xml" title="MrYan���˲���" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="MrYan" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -177,15 +177,15 @@
         <h2 id="Hibernate笔记"><a href="#Hibernate笔记" class="headerlink" title="Hibernate笔记"></a>Hibernate笔记</h2><h3 id="day01"><a href="#day01" class="headerlink" title="day01"></a>day01</h3><h3 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h3><h4 id="1-什么是Hibernate"><a href="#1-什么是Hibernate" class="headerlink" title="1. 什么是Hibernate"></a>1. 什么是Hibernate</h4><ul>
 <li><code>Hibernate是一个开源的ORM(Object Relational Mapping对象关系映射)框架,对JDBC进行了轻量级的对象封装,使我们开发人员可以使用面向对象的编程思想来操作数据库.</code></li>
 </ul>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5CORM%E5%8E%9F%E7%90%86.png" alt="ORM原理"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5CORM%E5%8E%9F%E7%90%86.png" alt="ORM原理"></p>
 <h4 id="2-优势"><a href="#2-优势" class="headerlink" title="2. 优势"></a>2. 优势</h4><ul>
 <li>对JDBC访问数据库的代码进行了轻量级封装,大大简化了数据访问层繁琐的重复性代码,减少内存消耗,加快运行效率.</li>
 <li>Hibernate是一款基于JDBC的主流持久化框架,是一个优秀的ORM实现,很大程度的简化了DAO(Data Access Object,数据访问对象)层编码工作.</li>
 <li>性能好,映射的灵活性很出色,它支持关系型数据库,从1对1到多对多的各种复杂关系.</li>
 <li>可拓展性强,由于源代码的开源以及API的开放,当本身功能不够用时,可以自行编码进行拓展.</li>
 </ul>
-<h4 id="3-入门"><a href="#3-入门" class="headerlink" title="3.入门"></a>3.入门</h4><h5 id="1-首先看一下项目的整体目录结构"><a href="#1-首先看一下项目的整体目录结构" class="headerlink" title="1.首先看一下项目的整体目录结构"></a>1.首先看一下项目的整体目录结构</h5><p>​        <img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="目录结构"></p>
-<h5 id="2-项目需要的jar包"><a href="#2-项目需要的jar包" class="headerlink" title="2.项目需要的jar包"></a>2.项目需要的jar包</h5><p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5Clib%E7%9B%AE%E5%BD%95.png" alt="lib目录"></p>
+<h4 id="3-入门"><a href="#3-入门" class="headerlink" title="3.入门"></a>3.入门</h4><h5 id="1-首先看一下项目的整体目录结构"><a href="#1-首先看一下项目的整体目录结构" class="headerlink" title="1.首先看一下项目的整体目录结构"></a>1.首先看一下项目的整体目录结构</h5><p>​        <img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="目录结构"></p>
+<h5 id="2-项目需要的jar包"><a href="#2-项目需要的jar包" class="headerlink" title="2.项目需要的jar包"></a>2.项目需要的jar包</h5><p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5Clib%E7%9B%AE%E5%BD%95.png" alt="lib目录"></p>
 <h5 id="3-创建实体类"><a href="#3-创建实体类" class="headerlink" title="3.创建实体类"></a>3.创建实体类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ym.hibernate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: hibernatedemo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-05-16 13:04</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="comment">//声明当前类为实体类</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="comment">//指定当前类与数据库表的映射关系</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"cst_customer"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line"><span class="comment">//用于指定主键</span></span><br><span class="line"><span class="meta">@Id</span></span><br><span class="line"><span class="comment">//用于指定主键的生成策略,GenerationType.IDENTITY为mysql默认的</span></span><br><span class="line">    <span class="comment">//当使用xml建立实体类与数据库表的关系时,不需要以上所有的注解</span></span><br><span class="line"><span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Long cust_id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String cust_name;</span><br><span class="line">    <span class="keyword">private</span> String cust_source;</span><br><span class="line">    <span class="keyword">private</span> String cust_industry;</span><br><span class="line">    <span class="keyword">private</span> String cust_linkman;</span><br><span class="line">    <span class="keyword">private</span> String cust_phone;</span><br><span class="line">    <span class="keyword">private</span> String cust_mobile;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getCust_id</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_id</span><span class="params">(Long cust_id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_id = cust_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_name</span><span class="params">(String cust_name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_name = cust_name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_source</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_source;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_source</span><span class="params">(String cust_source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_source = cust_source;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_industry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_industry;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_industry</span><span class="params">(String cust_industry)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_industry = cust_industry;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_linkman</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_linkman;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_linkman</span><span class="params">(String cust_linkman)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_linkman = cust_linkman;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_phone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_phone;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_phone</span><span class="params">(String cust_phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_phone = cust_phone;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCust_mobile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cust_mobile;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCust_mobile</span><span class="params">(String cust_mobile)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cust_mobile = cust_mobile;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Customer&#123;"</span> +</span><br><span class="line">                <span class="string">"cust_id="</span> + cust_id +</span><br><span class="line">                <span class="string">", cust_name='"</span> + cust_name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_source='"</span> + cust_source + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_industry='"</span> + cust_industry + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_linkman='"</span> + cust_linkman + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_phone='"</span> + cust_phone + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", cust_mobile='"</span> + cust_mobile + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="4-创建实体类与数据库的映射关系-Customer-hbm-xml"><a href="#4-创建实体类与数据库的映射关系-Customer-hbm-xml" class="headerlink" title="4.创建实体类与数据库的映射关系(Customer.hbm.xml)"></a>4.创建实体类与数据库的映射关系(Customer.hbm.xml)</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置表与实体对象的关系 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- package属性:填写一个包名.在元素内部凡是需要书写完整类名的属性,可以直接写简答类名了. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">"com.ym.hibernate"</span> &gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        class元素: 配置实体与表的对应关系的</span></span><br><span class="line"><span class="comment">            name: 完整类名</span></span><br><span class="line"><span class="comment">            table:数据库表名</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"Customer"</span> <span class="attr">table</span>=<span class="string">"cst_customer"</span> &gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- id元素:配置主键映射的属性</span></span><br><span class="line"><span class="comment">                name: 填写主键对应属性名</span></span><br><span class="line"><span class="comment">                column(可选): 填写表中的主键列名.默认值:列名会默认使用属性名</span></span><br><span class="line"><span class="comment">                type(可选):填写列(属性)的类型.hibernate会自动检测实体的属性类型.</span></span><br><span class="line"><span class="comment">                        每个类型有三种填法: java类型|hibernate类型|数据库类型</span></span><br><span class="line"><span class="comment">                not-null(可选):配置该属性(列)是否不能为空. 默认值:false</span></span><br><span class="line"><span class="comment">                length(可选):配置数据库中列的长度. 默认值:使用数据库类型的最大长度</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"cust_id"</span>  &gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- generator:主键生成策略 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>&gt;</span><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- property元素:除id之外的普通属性映射</span></span><br><span class="line"><span class="comment">                name: 填写属性名</span></span><br><span class="line"><span class="comment">                column(可选): 填写列名</span></span><br><span class="line"><span class="comment">                type(可选):填写列(属性)的类型.hibernate会自动检测实体的属性类型.</span></span><br><span class="line"><span class="comment">                        每个类型有三种填法: java类型|hibernate类型|数据库类型</span></span><br><span class="line"><span class="comment">                not-null(可选):配置该属性(列)是否不能为空. 默认值:false</span></span><br><span class="line"><span class="comment">                length(可选):配置数据库中列的长度. 默认值:使用数据库类型的最大长度</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_name"</span> <span class="attr">column</span>=<span class="string">"cust_name"</span> &gt;</span></span><br><span class="line">            <span class="comment">&lt;!--  &lt;column name="cust_name" sql-type="varchar" &gt;&lt;/column&gt; --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_source"</span> <span class="attr">column</span>=<span class="string">"cust_source"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_industry"</span> <span class="attr">column</span>=<span class="string">"cust_industry"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_linkman"</span> <span class="attr">column</span>=<span class="string">"cust_linkman"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_phone"</span> <span class="attr">column</span>=<span class="string">"cust_phone"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cust_mobile"</span> <span class="attr">column</span>=<span class="string">"cust_mobile"</span> &gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -243,7 +243,7 @@
 </ul>
 </li>
 <li><p><strong>主键生成策略</strong></p>
-<p> <img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558060355939.png" alt="1558060355939"></p>
+<p> <img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558060355939.png" alt="1558060355939"></p>
 <table>
 <thead>
 <tr>
@@ -301,7 +301,7 @@
 <li><p><strong>持久化对象三种状态转换图解</strong></p>
 </li>
 </ol>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558062569476.png" alt="1558062569476"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558062569476.png" alt="1558062569476"></p>
 <ol start="4">
 <li><p><strong>瞬时状态转换到其他状态</strong></p>
 <ul>
@@ -352,7 +352,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558077587353.png" alt="1558077587353"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558077587353.png" alt="1558077587353"></p>
 <ul>
 <li>可以看到在第一次执行session的get()方法获取customer1对象时,由于一级缓存中没有数据,所以Hibernate会向数据库发送一条sql语句,查询id=2的对象,当再次调用session的get()方法获取customer2对象时,将不会再发送sql语句,这是因为customer2对象是从一级缓存中获取的.</li>
 </ul>
@@ -361,7 +361,7 @@
 <h3 id="五-一级缓存的内部结构-快照区"><a href="#五-一级缓存的内部结构-快照区" class="headerlink" title="五.一级缓存的内部结构(快照区)"></a>五.一级缓存的内部结构(快照区)</h3><ul>
 <li>Hibernate向一级缓存存放入数据时,同时复制一份数据放到Hibernate快照区,当使用commit()方法提交事务时,同时会清理Session的一级缓存,<strong>这时会使用OID判断一级缓存中的对象和快照中的对象是否一致,如果两个对象中的属性发生变化,则执行update语句,将缓存的内容同步到数据库,并更新快照,如果一致,则不执行update语句</strong>,Hibernate快照的作用就是确保一级缓存中的数据和数据库中的数据一致.</li>
 </ul>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558078245102.png" alt="1558078245102"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558078245102.png" alt="1558078245102"></p>
 <h3 id="六-Hibernate事务控制"><a href="#六-Hibernate事务控制" class="headerlink" title="六.Hibernate事务控制"></a>六.Hibernate事务控制</h3><ul>
 <li><strong>事务的隔离级别</strong></li>
 </ul>
@@ -482,7 +482,7 @@
 <li><p>级联是有方向性的,所谓的方向性是指,在保存一的一方级联多的一方合在保存多的一方级联一的一方.</p>
 </li>
 <li><p>主控方:保存哪一方哪一方就是就是主控方,在主控方的xml中进行配置</p>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558104622754.png" alt="1558104622754"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558104622754.png" alt="1558104622754"></p>
 </li>
 <li><p>测试</p>
 </li>
@@ -506,7 +506,7 @@
 <li><p><strong>cascade和inverse</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="comment">//cascade和inverse</span></span><br><span class="line"><span class="comment">//cascade强调的是操作一个对象的时候,是否操作其关联对象</span></span><br><span class="line"><span class="comment">//inverse强调的是外键的维护权</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtile.getCurrentSession();</span><br><span class="line">    Transaction transaction = session.beginTransaction();</span><br><span class="line">    Customer customer = <span class="keyword">new</span> Customer();</span><br><span class="line">    customer.setCust_name(<span class="string">"王总"</span>);</span><br><span class="line">    LinkMan linkman = <span class="keyword">new</span> LinkMan();</span><br><span class="line">    linkman.setLkm_name(<span class="string">"李秘书"</span>);</span><br><span class="line">    <span class="comment">//在Customer.hbm.xml中的set上配置cascade="save-update" inverse="true"</span></span><br><span class="line">    customer.getLinkMans().add(linkMan);</span><br><span class="line">    session.save(customer);</span><br><span class="line">    transaction.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558106423425.png" alt="1558106423425"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558106423425.png" alt="1558106423425"></p>
 </li>
 </ul>
 <h3 id="二-多对多关系映射"><a href="#二-多对多关系映射" class="headerlink" title="二.多对多关系映射"></a>二.多对多关系映射</h3><ul>
@@ -587,7 +587,7 @@
 </ul>
 </li>
 </ol>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558162391908.png" alt="1558162391908"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558162391908.png" alt="1558162391908"></p>
 <ol start="3">
 <li><p><strong>离线条件检索(DetachedCriteria)</strong></p>
 <p>我们知道Criteria对象必须由session对象来创建,那么也就是说必须先有session才可以生成Criteria对象,而DetachedCriteria对象可以在其他层对条件进行封装</p>
@@ -639,7 +639,7 @@
 <li><p>Hibernate的抓取策略是Hibernate提升性能的一种手段,可以在获取关联对象的时候,对发送的语句进行优化,往往抓取策略需要和延迟加载一起使用来提升性能.</p>
 </li>
 <li><p>抓取策略配置</p>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558167014786.png" alt="1558167014786"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558167014786.png" alt="1558167014786"></p>
 </li>
 </ul>
 </li>
@@ -666,7 +666,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558166823799.png" alt="1558166823799"></p>
+<p><img src="/.com//D:%5Cblogs%5Chexo%5Csource_posts%5CHibernate%5C1558166823799.png" alt="1558166823799"></p>
 
       
 
@@ -1040,14 +1040,14 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B3%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E5%8C%85%E5%8C%85%E5%AD%90.png" alt></p>
+<p><img src="/.com//%E5%8C%85%E5%8C%85%E5%AD%90.png" alt></p>
 <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="传统创建线程缺点"><a href="#传统创建线程缺点" class="headerlink" title="传统创建线程缺点"></a>传统创建线程缺点</h3><ul>
 <li>如果并发的线程数量很多,并且每一个线程都是执行一个时间很短的任务就结束,这样频繁的创建线程就会降低系统的效率,因为频繁的创建线程和销毁线程都需要时间.</li>
 </ul>
 <h3 id="线程池介绍"><a href="#线程池介绍" class="headerlink" title="线程池介绍"></a>线程池介绍</h3><ul>
 <li>线程池就是一个容纳多个线程的容器,其中的线程可以反复使用,省去了频繁创建线程对象的操作,无需反复创建线程而消耗过多资源.</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B3%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E7%BA%BF%E7%A8%8B%E6%B1%A0.png" alt></p>
+<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E6%B1%A0.png" alt></p>
 <h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ol>
 <li>降低资源消耗,减少了创建和销毁线程的次数,每个线程都可以被反复利用,可执行多个任务.</li>
 <li>提高响应速度,当任务到达时,任务可以不需要等到线程创建就能立即执行.</li>
@@ -1058,10 +1058,10 @@
 </li>
 <li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Future&lt;?&gt; submit(Runnable task); <span class="comment">//获取线程池中的某一个线程对象,并运行.</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B3%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E7%BA%BF%E7%A8%8B%E6%B1%A0api.png" alt></p>
+<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E6%B1%A0api.png" alt></p>
 </li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B3%E7%BA%BF%E7%A8%8B%E6%B1%A0/submitAPI.png" alt></p>
+<p><img src="/.com//submitAPI.png" alt></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我需要一个教练"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"教练来了"</span>);</span><br><span class="line">        System.out.println(<span class="string">"教我游泳,交完后,教练回到泳池"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        MyRunnable mr = <span class="keyword">new</span> MyRunnable();</span><br><span class="line">        service.submit(mr);</span><br><span class="line">        service.submit(mr);</span><br><span class="line">        service.shutdown();    <span class="comment">//关闭线程池</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -1161,7 +1161,7 @@
 <ul>
 <li><code>通过控制台输出我们可以看到票数出现了问题</code>,我们将其称之为线程不安全.</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B2%E5%B9%B6%E5%8F%91/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png" alt="1553179327672"></p>
+<p><img src="/.com//%E4%B8%8D%E5%AE%89%E5%85%A8%E7%BA%BF%E7%A8%8B.png" alt="1553179327672"></p>
 <h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><ul>
 <li>当我们使用多线程访问同一个资源的时候,且多个线程都对资源有写的操作,就会出现问题(比如,在十字路口没有红绿灯,没有人指挥就容易出现意外)</li>
 </ul>
@@ -1187,7 +1187,7 @@
 <ul>
 <li>通过查看控制台发现这个问题我们已经解决了.</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B2%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png" alt="1553181542863"></p>
+<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8.png" alt="1553181542863"></p>
 </li>
 </ul>
 <h4 id="同步方法"><a href="#同步方法" class="headerlink" title="同步方法"></a>同步方法</h4><ul>
@@ -1227,12 +1227,12 @@
 <ul>
 <li>Timed Waiting线程状态图</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B2%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="锁阻塞-Blocked"><a href="#锁阻塞-Blocked" class="headerlink" title="锁阻塞(Blocked)"></a>锁阻塞(Blocked)</h3><ul>
 <li>一个正在阻塞等待一个监视器锁(锁对象)的线程处于这一状态.</li>
 <li>线程A与线程B代码中使用同一把锁,如果线程A获取到锁,线程A进入到<strong>Runnable</strong>状态,那么线程B就进入到<strong>Blocked</strong>锁阻塞状态.</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B2%E5%B9%B6%E5%8F%91/%E9%94%81%E9%98%BB%E5%A1%9E.png" alt></p>
+<p><img src="/.com//%E9%94%81%E9%98%BB%E5%A1%9E.png" alt></p>
 <h3 id="无限等待-Waiting"><a href="#无限等待-Waiting" class="headerlink" title="无限等待(Waiting)"></a>无限等待(Waiting)</h3><ul>
 <li>一个正在无限期等待另一个线程执行一个特别的(唤醒)动作的线程处于这一状态.</li>
 </ul>
@@ -1260,7 +1260,7 @@
 <li>通知所有的等待在这个同步对象的线程,你们可以苏醒过来了,有机会重新占用当前对象了.</li>
 </ul>
 <p><code>注:以上三方法均为Object上的方法</code></p>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B2%E5%B9%B6%E5%8F%91/%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png" alt></p>
+<p><img src="/.com//%E6%97%A0%E9%99%90%E7%AD%89%E5%BE%85.png" alt></p>
 </li>
 </ul>
 <p><a href="https://github.com/YanMao186/Thread" target="_blank" rel="noopener">源码github链接</a></p>
@@ -1361,7 +1361,7 @@
 <li><p><code>windows系统中任务管理器，下图</code></p>
 </li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
+<p><img src="/.com//%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
 <ul>
 <li><code>简单说如果进程是火车的话，那么线程就是火车的每一节车厢</code></li>
 <li><code>多线程优点</code><ul>
@@ -1379,7 +1379,7 @@
 <li>指两个或多个事件在同一时间段内发生。</li>
 <li><code>简单说就是你在吃饭的时候，电话响了，然后你去接电话，电话打完又接着吃饭</code></li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
+<p><img src="/.com//%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
 <h3 id="多任务处理"><a href="#多任务处理" class="headerlink" title="多任务处理"></a>多任务处理</h3><ul>
 <li>多任务处理是同时执行多个任务的过程，使用多任务来利用CPU，多任务处理可以通过两种方式实现：<ol>
 <li>基于进程的多任务处理（多进程）</li>
@@ -1412,7 +1412,7 @@
 </ol>
 </li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<p><img src="/.com//%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><ol>
 <li><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</li>
 <li><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</li>
@@ -1430,7 +1430,7 @@
 <h2 id="Thread类简单介绍"><a href="#Thread类简单介绍" class="headerlink" title="Thread类简单介绍"></a>Thread类简单介绍</h2><ul>
 <li><strong>Thread</strong>类提供了在线程上创建和执行操作的构造函数和方法，<strong>Thread</strong>类扩展了<strong>Object</strong>类并实现了<strong>Runnable</strong>接口。</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/Thread%E7%B1%BB.png" alt="1552993473274"></p>
+<p><img src="/.com//Thread%E7%B1%BB.png" alt="1552993473274"></p>
 <h3 id="常用的Thread类构造函数"><a href="#常用的Thread类构造函数" class="headerlink" title="常用的Thread类构造函数"></a>常用的<strong>Thread</strong>类构造函数</h3><ul>
 <li><code>Thread()</code></li>
 <li><code>Thread(String name)</code></li>
@@ -1482,7 +1482,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<p><img src="/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
 <ul>
 <li>join方法简单演示</li>
 </ul>
@@ -1514,7 +1514,7 @@
 <ul>
 <li>控制台输出</li>
 </ul>
-<p><img src="%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<p><img src="/.com//%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
 <h2 id="Thread-与-Runnable区别"><a href="#Thread-与-Runnable区别" class="headerlink" title="Thread 与 Runnable区别"></a>Thread 与 Runnable区别</h2><ul>
 <li>使用继承的话，不适合资源共享，实现接口，容易实现资源共享。</li>
 <li>java是单继承，多实现的。</li>
@@ -1627,7 +1627,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="HTTP协议通信流程"><a href="#HTTP协议通信流程" class="headerlink" title="HTTP协议通信流程"></a>HTTP协议通信流程</h3><p><img src="Http/Http%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B.png" alt></p>
+<h3 id="HTTP协议通信流程"><a href="#HTTP协议通信流程" class="headerlink" title="HTTP协议通信流程"></a>HTTP协议通信流程</h3><p><img src="/.com//Http%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B.png" alt></p>
 <h3 id="HTTP消息结构"><a href="#HTTP消息结构" class="headerlink" title="HTTP消息结构"></a>HTTP消息结构</h3><ul>
 <li><p>HTTP是基于客户端/服务端(C/S)的架构模型,通过一个可靠的链接来交换信息,是一个无状态的请求/响应协议。</p>
 </li>
@@ -1641,11 +1641,11 @@
 </li>
 </ul>
 <h3 id="客户端请求消息"><a href="#客户端请求消息" class="headerlink" title="客户端请求消息"></a>客户端请求消息</h3><ul>
-<li>客户端发送一个HTTP请求到服务器的请求消息包括以下格式:<strong>请求行</strong>(request line ),<strong>请求头</strong>(header),<strong>空行</strong>和<strong>请求数据</strong>四个部分组成.如下:<br><img src="Http/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt></li>
+<li>客户端发送一个HTTP请求到服务器的请求消息包括以下格式:<strong>请求行</strong>(request line ),<strong>请求头</strong>(header),<strong>空行</strong>和<strong>请求数据</strong>四个部分组成.如下:<br><img src="/.com//%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt></li>
 </ul>
 <h3 id="服务器响应消息"><a href="#服务器响应消息" class="headerlink" title="服务器响应消息"></a>服务器响应消息</h3><ul>
 <li><p>HTTP响应也是由四个部分组成,分别是:<strong>状态行</strong>,<strong>消息报头</strong>,<strong>空行</strong>和<strong>响应正文</strong>.</p>
-<p><img src="Http/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%93%8D%E5%BA%94.png" alt></p>
+<p><img src="/.com//%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%93%8D%E5%BA%94.png" alt></p>
 <h3 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h3></li>
 <li><p>HTTP1.0定义了三种请求方式:<strong>GET</strong>,<strong>POST</strong>和<strong>HEAD</strong>方法.</p>
 </li>
@@ -2105,7 +2105,7 @@
 
 <h4 id="节点流和处理流"><a href="#节点流和处理流" class="headerlink" title="节点流和处理流"></a>节点流和处理流</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">节点流：直接与数据源相连，读入或读出，也被称之为低级流。</span><br><span class="line">处理流：是对一个已存在的流进行连接或封装，通过封装后的流来实现数据读/写操作，也被称之为高效流。</span><br></pre></td></tr></table></figure>
 
-<h3 id="IO流结构图"><a href="#IO流结构图" class="headerlink" title="IO流结构图"></a>IO流结构图</h3><p><img src="IO%E6%80%BB%E7%BB%93/IO.png" alt></p>
+<h3 id="IO流结构图"><a href="#IO流结构图" class="headerlink" title="IO流结构图"></a>IO流结构图</h3><p><img src="/.com//IO.png" alt></p>
 <h3 id="IO流的四大基类-四大基类均为抽象类不可实例化"><a href="#IO流的四大基类-四大基类均为抽象类不可实例化" class="headerlink" title="IO流的四大基类(四大基类均为抽象类不可实例化)"></a>IO流的四大基类(四大基类均为抽象类不可实例化)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|</span><br><span class="line">|_Reader</span><br><span class="line">|_Writer</span><br><span class="line">|_InputStream</span><br><span class="line">|_OutputStream</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -2226,7 +2226,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="首先我们先看下集合的大体结构图"><a href="#首先我们先看下集合的大体结构图" class="headerlink" title="首先我们先看下集合的大体结构图"></a>首先我们先看下集合的大体结构图</h1><p><img src="%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt></p>
+        <h1 id="首先我们先看下集合的大体结构图"><a href="#首先我们先看下集合的大体结构图" class="headerlink" title="首先我们先看下集合的大体结构图"></a>首先我们先看下集合的大体结构图</h1><p><img src="/.com//%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt></p>
 <h2 id="接口Collection讲解"><a href="#接口Collection讲解" class="headerlink" title="接口Collection讲解"></a>接口<code>Collection</code>讲解</h2><ul>
 <li><p>首先接口<code>Collection</code>作为我们常用的<code>List</code>,<code>Set</code>,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：</p>
    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; str = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"><span class="comment">//或者使用接口new实现类</span></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
@@ -2403,7 +2403,7 @@
 </li>
 </ul>
 <h2 id="继承-is-a"><a href="#继承-is-a" class="headerlink" title="继承(is-a)"></a>继承(is-a)</h2><p><code>多个类中存在相同的行为和属性，将这些内容抽取到一个单独的类中(被称为基类，父类或超类),那么多个类(被称为基类，继承类或子类)无需再定义这些属性和行为，只要继承(extends)父类即可。</code></p>
-<p><img src="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/1552570451346.png" alt="1552570451346"></p>
+<p><img src="/.com//1552570451346.png" alt="1552570451346"></p>
 <ul>
 <li><p>如</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-17 12:05</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">protected</span> String userName;</span><br><span class="line">    <span class="keyword">protected</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age, String userName, String gender, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.userName = userName;</span><br><span class="line">        <span class="keyword">this</span>.gender = gender;</span><br><span class="line">        <span class="keyword">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//setting/getting方法此处省略。</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Person&#123;"</span> +</span><br><span class="line">                <span class="string">"age="</span> + age +</span><br><span class="line">                <span class="string">", userName='"</span> + userName + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", gender='"</span> + gender + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", height="</span> + height +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2413,7 +2413,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:测试类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-17 15:46</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person p = <span class="keyword">new</span> Person(); <span class="comment">//首先进行父类测试</span></span><br><span class="line">        p.setAge(<span class="number">40</span>);</span><br><span class="line">        p.setGender(<span class="string">"男"</span>);</span><br><span class="line">        p.setHeight(<span class="number">180</span>);</span><br><span class="line"><span class="comment">//        p.heigth = 180;   这两种方法都可以进行赋值</span></span><br><span class="line">        p.setUserName(<span class="string">"张三"</span>);</span><br><span class="line">        System.out.println(p);</span><br><span class="line">        Student s = <span class="keyword">new</span> Student();</span><br><span class="line"><span class="comment">//        s.heigth = 175;   //我们发现子类的heigth不可以直接赋值，因为父类对他进行了私有化，但是提供了公共的setting/getting方法</span></span><br><span class="line">        s.setHeight(<span class="number">175</span>);</span><br><span class="line">        s.setAge(<span class="number">20</span>);</span><br><span class="line">        s.setUserName(<span class="string">"李四"</span>);</span><br><span class="line">        s.setGender(<span class="string">"男"</span>);</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>控制台输出</code></p>
-<p><img src="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/1552810048863.png" alt="1552810048863"></p>
+<p><img src="/.com//1552810048863.png" alt="1552810048863"></p>
 </li>
 </ul>
 <ul>
@@ -2480,8 +2480,8 @@
 </ol>
 <h2 id="类与类，接口与接口，类与接口的关系"><a href="#类与类，接口与接口，类与接口的关系" class="headerlink" title="类与类，接口与接口，类与接口的关系"></a>类与类，接口与接口，类与接口的关系</h2></li>
 </ul>
-<p>  <img src="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/1552574794659.png" alt="1552574794659"></p>
-<p><img src="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/1552574827383.png" alt></p>
+<p>  <img src="/.com//1552574794659.png" alt="1552574794659"></p>
+<p><img src="/.com//1552574827383.png" alt></p>
 <h2 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h2><ul>
 <li>static主要用来内存管理，用于变量，代码块等，static属于类，而不是类的实例</li>
 <li>静态变量<ul>
@@ -2663,19 +2663,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
