@@ -150,6 +150,136 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-IO总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/18/IO总结/">IO总结</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/18/IO总结/" class="archive-article-date">
+  	<time datetime="2019-03-18T10:57:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IO基本概念讲解"><a href="#IO基本概念讲解" class="headerlink" title="IO基本概念讲解"></a>IO基本概念讲解</h1><h2 id="IO流概念"><a href="#IO流概念" class="headerlink" title="IO流概念"></a>IO流概念</h2><ul>
+<li>IO流是实现输入/输出的基础，方便的实现了数据的输入/输出操作，在java把不同的输入/输出抽象为“流”,流是一组有顺序，有起点和终点的字节集合，是对数据传输的总称或抽象。</li>
+</ul>
+<h2 id="IO流分类"><a href="#IO流分类" class="headerlink" title="IO流分类"></a>IO流分类</h2><h4 id="输入流和输出流。"><a href="#输入流和输出流。" class="headerlink" title="输入流和输出流。"></a>输入流和输出流。</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入流：只能从中读取数据，而不能向其中写入数据。（如：从硬盘读取文件到内存）</span><br><span class="line">输出流：只能向其写入数据，而不能从中读取数据。（如：从内存读取数据到硬盘）</span><br></pre></td></tr></table></figure>
+
+<h4 id="字节流和字符流"><a href="#字节流和字符流" class="headerlink" title="字节流和字符流"></a>字节流和字符流</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节流：以字节为单位，每次读取或写入是8位数据，可以读取任意类型数据。</span><br><span class="line">字符流：以字符为单为，每次读取或写入是16位数据，只能读取字符类型数据。</span><br><span class="line">读取文本文件优先考虑字符流，读取图片，视频等非文本类型的只能使用字节流。</span><br></pre></td></tr></table></figure>
+
+<h4 id="节点流和处理流"><a href="#节点流和处理流" class="headerlink" title="节点流和处理流"></a>节点流和处理流</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">节点流：直接与数据源相连，读入或读出，也被称之为低级流。</span><br><span class="line">处理流：是对一个已存在的流进行连接或封装，通过封装后的流来实现数据读/写操作，也被称之为高效流。</span><br></pre></td></tr></table></figure>
+
+<h3 id="IO流结构图"><a href="#IO流结构图" class="headerlink" title="IO流结构图"></a>IO流结构图</h3><p><img src="/2019/03/18/IO总结/IO.png" alt></p>
+<h3 id="IO流的四大基类-四大基类均为抽象类不可实例化"><a href="#IO流的四大基类-四大基类均为抽象类不可实例化" class="headerlink" title="IO流的四大基类(四大基类均为抽象类不可实例化)"></a>IO流的四大基类(四大基类均为抽象类不可实例化)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|</span><br><span class="line">|_Reader</span><br><span class="line">|_Writer</span><br><span class="line">|_InputStream</span><br><span class="line">|_OutputStream</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Reader常用方法</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//读取一个字符并以整数形式返回，如果返回-1表示已到输入流末尾。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span>[] buffer)</span>；</span></span><br><span class="line"><span class="function"><span class="comment">//读取一系列字符并存储到一个数组buffer，返回实际读取的字符数，如果读取前已到输入流末尾返回-1</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span>[] buffer,<span class="keyword">int</span> off,<span class="keyword">int</span> len)</span></span>;</span><br><span class="line"><span class="comment">//读取length个字符并存储到一个字符数组buffer，从off位置开始，最多len，返回实际读取字符数，如果读取前已到输入流末尾返回-1.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Writer常用方法</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> c)</span></span>;</span><br><span class="line"><span class="comment">//向输出流中写入字符数据，该字节数据为参数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span>[] c)</span></span>;</span><br><span class="line"><span class="comment">//将一个字符类型的数组中的数据写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span>[] c,<span class="keyword">int</span> off,<span class="keyword">int</span> length)</span></span>;</span><br><span class="line"><span class="comment">//从一个字符类型的数组中的指定位置开始，length个字符写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(String string)</span></span>;</span><br><span class="line"><span class="comment">//将一个字符串中的字符写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(String ,<span class="keyword">int</span> off,<span class="keyword">int</span> length)</span></span>;</span><br><span class="line"><span class="comment">//将一个字符串从off开始的length个字符写入到输出流.</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//将输出流中的缓冲数据全部写出到目的地。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>InputStream常用方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//读取一个字节并以整数的形式返回,如果返回-1已到达输出流末尾。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] buffer)</span></span>;</span><br><span class="line"><span class="comment">//读取一系列字节并存储到一个数组，返回实际读取的字节数，如果读取前已到输入流的末尾返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] buffer,<span class="keyword">int</span> off,<span class="keyword">int</span> len)</span></span>;</span><br><span class="line"><span class="comment">//读取length个字节并保存到一个字节数组，从off位置开始存，最多len，返回实际读取的字节数，如果读取前已到输出流的末尾返回-1.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>OutputStream常用方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//向输出流中写入一个字节数据，该字节数据为参数b。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b)</span></span>;</span><br><span class="line"><span class="comment">//将一个字节类型的数组中的数据写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b,<span class="keyword">int</span> off,<span class="keyword">int</span> len)</span></span>;</span><br><span class="line"><span class="comment">//将一个字节类型的数组中的数据从指定位置开始，len个字节写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//将输出流中的缓冲数据全部写出到目的地。</span></span><br></pre></td></tr></table></figure>
+
+<p>==注：java的IO流执行完成后，均要关闭流，调用close()方法，释放资源==</p>
+<ul>
+<li>InputStream/OutpurStream简单演示</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:测试高效流与普通流用时</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-03 01:35</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IO</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        IO.buffer();</span><br><span class="line">        IO.file();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buffer</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> l = System.nanoTime();</span><br><span class="line">        BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"E:\\迅雷下载\\win7x64.iso"</span>));</span><br><span class="line">        BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"E:\\高效流.iso"</span>));</span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">while</span> ((i = bis.read(b)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            bos.write(b, <span class="number">0</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l1 = System.nanoTime();</span><br><span class="line">        System.out.println(<span class="string">"高效流用时："</span> + (l1 - l) / <span class="number">1000</span> + <span class="string">"秒"</span>);</span><br><span class="line">        bis.close();</span><br><span class="line">        bos.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">file</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> l = System.nanoTime();</span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"E:\\迅雷下载\\win7x64.iso"</span>));</span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"E:\\file.iso"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">while</span> ((i = fis.read(b)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            fos.write(b, <span class="number">0</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l1 = System.nanoTime();</span><br><span class="line">        System.out.println(<span class="string">"普通流用时："</span> + (l1 - l) / <span class="number">1000</span> + <span class="string">"秒"</span>);</span><br><span class="line">        fis.close();</span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Reader/Writer简单演示</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IO2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"E:\\使用说明.txt"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">"E:\\aaa.txt"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">char</span>[] c = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">while</span> ((i = isr.read(c))!= -<span class="number">1</span>) &#123;</span><br><span class="line">            osw.write(c,<span class="number">0</span>,i);</span><br><span class="line">        &#125;</span><br><span class="line">        isr.close();</span><br><span class="line">        osw.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/18/IO总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-集合总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -631,7 +761,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,7 +769,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">

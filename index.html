@@ -150,6 +150,236 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-二-java类的加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/11/JVM-二-java类的加载机制/">JVM(二)java类的加载机制</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/11/JVM-二-java类的加载机制/" class="archive-article-date">
+  	<time datetime="2019-07-11T10:18:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-什么是类加载"><a href="#1-什么是类加载" class="headerlink" title="1. 什么是类加载"></a>1. 什么是类加载</h3><ul>
+<li>类加载指的是将类的.class文件中的二进制数据读入到内存中,将其放在运行时数据区的方法区内,然后在堆区创建一个<strong>java.lang.Class</strong>对象,用来封装类在方法区内的数据结构,类的加载的最终是位于堆中的<strong>Class对象</strong>,Class对象封装了类在方法区的数据结构,并且向Java程序员提供了访问方法区内的数据结构的接口.</li>
+<li>类加载器并不需要等到某个类被初次主动使用时再加载它,JVM规范允许类加载器在预料某个类将要被使用时就预先加载它,如果在预先加载的过程中遇到.class文件异常问题,类加载器必须在程序首次主动使用该类时才报告错误,如果这个类一直没有被程序主动使用,那么类加载器就不会报告错误.</li>
+</ul>
+<p><img src="/2019/07/11/JVM-二-java类的加载机制/%E7%B1%BB%E5%8A%A0%E8%BD%BD.jpg" alt="类加载"></p>
+<ul>
+<li>加载.class文件的方式<ul>
+<li>从本地系统中直接加载</li>
+<li>通过网络下载.class文件</li>
+<li>从zip,jar等文件中加载.class文件</li>
+<li>从专有数据库中提取.class文件</li>
+<li>将Java源文件动态编译为.class文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-类的生命周期"><a href="#2-类的生命周期" class="headerlink" title="2. 类的生命周期"></a>2. 类的生命周期</h3><h3 id><a href="#" class="headerlink" title></a><img src="/2019/07/11/JVM-二-java类的加载机制/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.jpg" alt="类的加载过程"></h3><ul>
+<li>一个java类的完整生命周期会经历<strong>加载,连接,初始化,使用和卸载</strong>五个阶段,其中,加载,验证,准备和初始化这四个阶段发生的顺序是确定的,但解析阶段则不一定,在某些情况下可以在初始化阶段之后开始,这是为了支持Java的运行时绑定.此外还需要注意这里的几个阶段是按顺序开始的,而不是按顺序进行或完成,因为这些阶段通常都是互相交叉混合进行的,通常在一个阶段执行的过程中调用或激活另一个阶段.</li>
+<li><strong>加载</strong><ul>
+<li>查找并加载类的二进制数据是类加载过程的第一个阶段,在加载阶段,虚拟机需要完成以下三件事.<ul>
+<li>通过一个类的全限定类名来获取其定义的二进制字节流.</li>
+<li>将这个字节流所代表的静态存储结构转换为方法区的运行时数据结构</li>
+<li>在Java堆中生成一个代表这个类的<code>java.lang.Class</code>对象,作为对方法区中这些数据的访问入口.</li>
+</ul>
+</li>
+<li>相对于类加载的其他阶段而言,加载阶段是可控性最强的阶段,因此开发者即可以使用系统提供的类加载器来完成加载,也可以自定义自己的类加载器来完成加载.</li>
+<li>加载阶段完成后,虚拟机外部的二进制字节流就按照虚拟机所需的格式存储在方法区之中,而且在Java堆中也创建一个<code>java.lang.Class</code>类的对象,这样便可以通过该对象访问方法区中的这些数据.</li>
+</ul>
+</li>
+<li><strong>连接</strong><ul>
+<li><strong>验证:确保被加载的类的正确性.</strong><ul>
+<li>验证是连接阶段的第一步,这一阶段的目的是为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求,并且不会危害虚拟机自身的安全,验证阶段大致会完成4个阶段的检验动作.<ul>
+<li><strong>文件格式验证</strong>:验证字节流是否符合Class文件格式的规范,如:是否以<code>0xCAFEBABE</code>开头,主次版本号是否在当前虚拟机的处理范围之内,常量池中的常量是否有不被支持的阶段.</li>
+<li><strong>元数据验证</strong>:对字节码描述的信息进行语义分析,以保证其描述的信息符合Java语言规范的要求;如:这个类是否有父类,除了<code>java.lang.Object</code>之外的.</li>
+<li><strong>字节码验证</strong>:通过数据流和控制流分析,确定程序语义是合法的,符合逻辑的.</li>
+<li><strong>符号引用验证</strong>:确保解析动作能正确执行.</li>
+</ul>
+</li>
+<li>验证阶段是非常重要的,但不是必须的,它对程序运行期没有影响,如果所引用的类经过反复验证,那么可以考虑采用<code>-Xverifynone</code>参数来关闭大部分的类验证措施,以缩短虚拟机类加载的时间.</li>
+</ul>
+</li>
+<li><strong>准备:为类的静态变量分配内存,并将其初始化为默认值</strong><ul>
+<li>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段,这些内存都将在方法区中分配,对于该阶段的注意事项.<ul>
+<li>这时进行内存分配的仅包括类变量(static),而不包括实例变量,实例变量会在对象实例化时随着对象一块分配在Java堆中.</li>
+<li>这里所设置的初始值通常情况下是数据类型默认的零值(如:0,0L,null,false等等),而不是被在Java代码中被显式地赋予的值.</li>
+<li>如果类字节地字段属性表中存在<code>ConstantValue</code>属性,即同时被final和static修饰,那么在准备阶段变量value就会被初始化为ConstValue属性所指定的值.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>解析:把类中的符号引用转换为直接引用</strong><ul>
+<li>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程,解析动作主要针对类或接口,字段,类方法,接口方法,方法类型,方法句柄和调用点限定符7类符号引用进行,符号引用就是一组符号来描述目标,可以是任何字面量.</li>
+<li>直接引用就是直接指向目标的指针,相对偏移量或一个间接定位到目标的句柄.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>初始化</strong><ul>
+<li>初始化,为类的静态变量赋予正确的初始值,JVM负责对类进行初始化,主要对类变量进行初始化,在Java中对类变量进行初始值设定有两种方式.<ul>
+<li>声明类变量是指定初始化</li>
+<li>使用静态代码块为类变量指定初始值</li>
+</ul>
+</li>
+<li>JVM初始化步骤<ul>
+<li>加入这个类还没有被加载和连接,则程序先加载并连接该类</li>
+<li>假如该类的直接父类还没有被1初始化,则先加载其直接父类</li>
+<li>假如类中有初始化语句,则系统依次执行这些初始化语句</li>
+</ul>
+</li>
+<li>类初始化时机:只有当对类的主动使用的时候才会导致类的初始化,类的主动使用包括以下六种<ul>
+<li>创建类的实例,也就是new的方法</li>
+<li>访问某个类或接口的静态变量,或者对该静态变量赋值</li>
+<li>调用类的静态方法</li>
+<li>反射</li>
+<li>初始化某个类的子类,则其父类也会被初始化</li>
+<li>Java虚拟机启动时被标明为启动类的类,直接使用java.exe命令来运行某个主类.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>结束生命周期</strong><ul>
+<li>在这几种情况下,Java虚拟机将结束生命周期<ul>
+<li>执行了<code>System.exit()</code>方法</li>
+<li>程序正常执行结束</li>
+<li>程序在执行过程中遇到了异常或错误而异常终止</li>
+<li>由于操作系统出现错误而导致Java虚拟机进程终止</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3. 类加载器"></a>3. 类加载器</h3><p>先看一个例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ym.classloader;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ClassLoader loader = Thread.currentThread().getContextClassLoader();</span><br><span class="line">        System.out.println(loader);</span><br><span class="line">        System.out.println(loader.getParent());</span><br><span class="line">     System.out.println(loader.getParent().getParent());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>控制台输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sun.misc.Launcher$AppClassLoader@<span class="number">18</span>b4aac2</span><br><span class="line">sun.misc.Launcher$ExtClassLoader@<span class="number">4554617</span>c</span><br><span class="line"><span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到,没有获取到ExtClassLoader的父Loader,原因是Bootstrap Loadder是用C写的,找不到一个确定的返回父Loader的方法,于是就返回null.</p>
+<ul>
+<li>类加载器的层次关系图</li>
+</ul>
+<p><img src="/2019/07/11/JVM-二-java类的加载机制/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.jpg" alt="类加载器"></p>
+<ul>
+<li><strong>启动类加载器</strong>:负责加载存放在<code>JDK/jre/lib</code>下,或被<code>-Xbootclasspath</code>参数指定的路径中的,并且能被虚拟机识别的类库,启动类加载器是无法被Java程序直接引用的.</li>
+<li><strong>扩展类加载器</strong>:该加载器由<code>sun.misc.Launcher$ExtClassLoader</code>实现,他负责加载<code>JDK/jre/lib/ext</code>目录中,或者由<code>java.ext.dirs</code>系统变量指定的路径中的所由类库,开发者可以直接使用扩展类加载器.</li>
+<li><strong>应用程序类加载器</strong>:该类加载器由<code>sun.misc.Launcher#AppClassLoader</code>来实现,它负责加载用户类路径所指定的类,开发者可以直接使用该类加载器,如果程序中没有自定义过自己的类加载器,一般情况下这个就是程序中默认的类加载器.</li>
+</ul>
+<h4 id="JVM类加载机制"><a href="#JVM类加载机制" class="headerlink" title="JVM类加载机制"></a>JVM类加载机制</h4><ul>
+<li><strong>全盘负责</strong>:当一个类加载器负责加载某个Class时,该Class所依赖的和引用的其他Classs也将由该类加载器负责载入,除非显式使用另外一个类加载器来载入.</li>
+<li><strong>父类委派</strong>:先让父类加载器试图加载该类,只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类.</li>
+<li><strong>缓存机制</strong>:缓存价值将会保证所有加载过的Class都会被缓存,当程序中需要使用某个Class时,类加载器先从缓存区寻找该Class,只有缓存区不存在,系统才会读取该类对应的二进制数据,并将其转换为Class对象,存入缓存区,这就是为什么修改Class后,必须重启JVM,程序的修改才会生效.</li>
+</ul>
+<h3 id="4-类的加载"><a href="#4-类的加载" class="headerlink" title="4. 类的加载"></a>4. 类的加载</h3><ul>
+<li>类的加载有三种方式<ul>
+<li>命令行启动应用时候由JVM初始化加载</li>
+<li>通过Class.forName()方法动态加载</li>
+<li>通过ClassLoader.loadClass()方法动态加载</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">loaderTest</span> </span>&#123; </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123; </span><br><span class="line">                ClassLoader loader = HelloWorld.class.getClassLoader(); </span><br><span class="line">                System.out.println(loader); </span><br><span class="line">                <span class="comment">//使用ClassLoader.loadClass()来加载类，不会执行初始化块 </span></span><br><span class="line">                loader.loadClass(<span class="string">"Test2"</span>); </span><br><span class="line">                <span class="comment">//使用Class.forName()来加载类，默认会执行初始化块 </span></span><br><span class="line">                <span class="comment">//Class.forName("Test2"); </span></span><br><span class="line">                <span class="comment">//使用Class.forName()来加载类，并指定ClassLoader，初始化时不执行静态块 </span></span><br><span class="line">                <span class="comment">//Class.forName("Test2", false, loader); </span></span><br><span class="line"></span><br><span class="line">        &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"静态初始化块执行了);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Class.forName()和ClassLoader.loadClass()区别</strong></p>
+<ul>
+<li><code>Class.forName()</code>:将类的.class文件加载到JVM中之外1,还会对类进行解释,执行类中的static块.</li>
+<li><code>ClassLoader.loadClass()</code>:只干一件事,就是将.class文件加载到jvm中,不会执行static中的内容,只有在newlnstance才会去执行static块</li>
+<li><code>Class.forName(name,initialize,loader)带参函数也可以控制是否加载static块,并且只有调用newInstance()方法采用调用构造函数,创建类的对象</code>.</li>
+</ul>
+<h3 id="5-双亲委派模型"><a href="#5-双亲委派模型" class="headerlink" title="5. 双亲委派模型"></a>5. 双亲委派模型</h3><ul>
+<li>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</li>
+<li>双亲委派机制<ul>
+<li>当 <code>AppClassLoader</code>加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器<code>ExtClassLoader</code>去完成。</li>
+<li>当 <code>ExtClassLoader</code>加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给<code>BootStrapClassLoader</code>去完成。</li>
+<li>如果 <code>BootStrapClassLoader</code>加载失败（例如在 <code>$JAVA_HOME/jre/lib</code>里未查找到该class），会使用 <code>ExtClassLoader</code>来尝试加载；</li>
+<li>若ExtClassLoader也加载失败，则会使用 <code>AppClassLoader</code>来加载，如果 <code>AppClassLoader</code>也加载失败，则会报出异常 <code>ClassNotFoundException</code>。</li>
+</ul>
+</li>
+<li>双亲委派模型意义<ul>
+<li>系统类防止内存中出现多份同样的字节码</li>
+<li>保证Java程序安全稳定运行</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-自定义类加载器"><a href="#6-自定义类加载器" class="headerlink" title="6. 自定义类加载器"></a>6. 自定义类加载器</h3><ul>
+<li>通常情况下，我们都是直接使用系统类加载器。但是，有的时候，我们也需要自定义类加载器。比如应用是通过网络来传输<br>Java类的字节码，为保证安全性，这些字节码经过了加密处理，这时系统类加载器就无法对其进行加载，这样则需要自定义类加载器来实现。自定义类加载器一般都是继承自 <code>ClassLoader</code>类，从上面对 <code>loadClass</code>方法来分析来看，我们只需要重写 findClass 方法即可。下面我们通过一个示例来演示自定义类加载器的流程：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String root;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">byte</span>[] classData = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            classData = loadClassData(name);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (classData == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> defineClass(name, classData, <span class="number">0</span>, classData.length);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] loadClassData(String className) <span class="keyword">throws</span> FileNotFoundException &#123;</span><br><span class="line">        String fileName = root + File.separatorChar</span><br><span class="line">                + className.replace(<span class="string">'.'</span>, File.separatorChar) + <span class="string">".class"</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStream ins = <span class="keyword">new</span> FileInputStream(fileName);</span><br><span class="line">            ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            <span class="keyword">int</span> bufferSize = <span class="number">1024</span>;</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[bufferSize];</span><br><span class="line">            <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((length = ins.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                baos.write(buffer, <span class="number">0</span>, length);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> baos.toByteArray();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRoot</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoot</span><span class="params">(String root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.root = root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyClassLoader classLoader = <span class="keyword">new</span> MyClassLoader();</span><br><span class="line">        classLoader.setRoot(<span class="string">"E:\\temp"</span>);</span><br><span class="line">        Class&lt;?&gt; testClass = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            testClass = classLoader.loadClass(<span class="string">"com.ym.jvm.Test2"</span>);</span><br><span class="line">            Object object = testClass.newInstance();</span><br><span class="line">            System.out.println(object.getClass().getClassLoader());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义类加载器的核心在于对字节码文件的获取，如果是加密的字节码则需要在该类中对文件进行解密。由于这里只是演示，我并未对class文件进行加密，因此没有解密的过程。这里有几点需要注意<ul>
+<li>这里传递的文件名需要是类的全限定性名称，即 <code>com.paddx.test.classloading.Test</code>格式的，因为 defineClass 方法是按这种格式进行处理的.</li>
+<li>最好不要重写loadClass方法，因为这样容易破坏双亲委托模式.</li>
+<li>3、这类Test 类本身可以被 <code>AppClassLoader</code>类加载，因此我们不能把 <code>com/paddx/test/classloading/Test.class</code>放在类路径下。否则，由于双亲委托机制的存在，会直接导致该类由 <code>AppClassLoader</code>加载，而不会通过我们自定义类加载器来加载.</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/11/JVM-二-java类的加载机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JVM-一-内存结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2998,136 +3228,6 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
 
 
   
-    <article id="post-IO总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/18/IO总结/">IO总结</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/18/IO总结/" class="archive-article-date">
-  	<time datetime="2019-03-18T10:57:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="IO基本概念讲解"><a href="#IO基本概念讲解" class="headerlink" title="IO基本概念讲解"></a>IO基本概念讲解</h1><h2 id="IO流概念"><a href="#IO流概念" class="headerlink" title="IO流概念"></a>IO流概念</h2><ul>
-<li>IO流是实现输入/输出的基础，方便的实现了数据的输入/输出操作，在java把不同的输入/输出抽象为“流”,流是一组有顺序，有起点和终点的字节集合，是对数据传输的总称或抽象。</li>
-</ul>
-<h2 id="IO流分类"><a href="#IO流分类" class="headerlink" title="IO流分类"></a>IO流分类</h2><h4 id="输入流和输出流。"><a href="#输入流和输出流。" class="headerlink" title="输入流和输出流。"></a>输入流和输出流。</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入流：只能从中读取数据，而不能向其中写入数据。（如：从硬盘读取文件到内存）</span><br><span class="line">输出流：只能向其写入数据，而不能从中读取数据。（如：从内存读取数据到硬盘）</span><br></pre></td></tr></table></figure>
-
-<h4 id="字节流和字符流"><a href="#字节流和字符流" class="headerlink" title="字节流和字符流"></a>字节流和字符流</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节流：以字节为单位，每次读取或写入是8位数据，可以读取任意类型数据。</span><br><span class="line">字符流：以字符为单为，每次读取或写入是16位数据，只能读取字符类型数据。</span><br><span class="line">读取文本文件优先考虑字符流，读取图片，视频等非文本类型的只能使用字节流。</span><br></pre></td></tr></table></figure>
-
-<h4 id="节点流和处理流"><a href="#节点流和处理流" class="headerlink" title="节点流和处理流"></a>节点流和处理流</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">节点流：直接与数据源相连，读入或读出，也被称之为低级流。</span><br><span class="line">处理流：是对一个已存在的流进行连接或封装，通过封装后的流来实现数据读/写操作，也被称之为高效流。</span><br></pre></td></tr></table></figure>
-
-<h3 id="IO流结构图"><a href="#IO流结构图" class="headerlink" title="IO流结构图"></a>IO流结构图</h3><p><img src="/2019/03/18/IO总结/IO.png" alt></p>
-<h3 id="IO流的四大基类-四大基类均为抽象类不可实例化"><a href="#IO流的四大基类-四大基类均为抽象类不可实例化" class="headerlink" title="IO流的四大基类(四大基类均为抽象类不可实例化)"></a>IO流的四大基类(四大基类均为抽象类不可实例化)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|</span><br><span class="line">|_Reader</span><br><span class="line">|_Writer</span><br><span class="line">|_InputStream</span><br><span class="line">|_OutputStream</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>Reader常用方法</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//读取一个字符并以整数形式返回，如果返回-1表示已到输入流末尾。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span>[] buffer)</span>；</span></span><br><span class="line"><span class="function"><span class="comment">//读取一系列字符并存储到一个数组buffer，返回实际读取的字符数，如果读取前已到输入流末尾返回-1</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span>[] buffer,<span class="keyword">int</span> off,<span class="keyword">int</span> len)</span></span>;</span><br><span class="line"><span class="comment">//读取length个字符并存储到一个字符数组buffer，从off位置开始，最多len，返回实际读取字符数，如果读取前已到输入流末尾返回-1.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Writer常用方法</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> c)</span></span>;</span><br><span class="line"><span class="comment">//向输出流中写入字符数据，该字节数据为参数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span>[] c)</span></span>;</span><br><span class="line"><span class="comment">//将一个字符类型的数组中的数据写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span>[] c,<span class="keyword">int</span> off,<span class="keyword">int</span> length)</span></span>;</span><br><span class="line"><span class="comment">//从一个字符类型的数组中的指定位置开始，length个字符写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(String string)</span></span>;</span><br><span class="line"><span class="comment">//将一个字符串中的字符写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(String ,<span class="keyword">int</span> off,<span class="keyword">int</span> length)</span></span>;</span><br><span class="line"><span class="comment">//将一个字符串从off开始的length个字符写入到输出流.</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//将输出流中的缓冲数据全部写出到目的地。</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>InputStream常用方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//读取一个字节并以整数的形式返回,如果返回-1已到达输出流末尾。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] buffer)</span></span>;</span><br><span class="line"><span class="comment">//读取一系列字节并存储到一个数组，返回实际读取的字节数，如果读取前已到输入流的末尾返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] buffer,<span class="keyword">int</span> off,<span class="keyword">int</span> len)</span></span>;</span><br><span class="line"><span class="comment">//读取length个字节并保存到一个字节数组，从off位置开始存，最多len，返回实际读取的字节数，如果读取前已到输出流的末尾返回-1.</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>OutputStream常用方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//向输出流中写入一个字节数据，该字节数据为参数b。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b)</span></span>;</span><br><span class="line"><span class="comment">//将一个字节类型的数组中的数据写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b,<span class="keyword">int</span> off,<span class="keyword">int</span> len)</span></span>;</span><br><span class="line"><span class="comment">//将一个字节类型的数组中的数据从指定位置开始，len个字节写入到输出流。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//将输出流中的缓冲数据全部写出到目的地。</span></span><br></pre></td></tr></table></figure>
-
-<p>==注：java的IO流执行完成后，均要关闭流，调用close()方法，释放资源==</p>
-<ul>
-<li>InputStream/OutpurStream简单演示</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:测试高效流与普通流用时</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-03 01:35</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IO</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        IO.buffer();</span><br><span class="line">        IO.file();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buffer</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> l = System.nanoTime();</span><br><span class="line">        BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"E:\\迅雷下载\\win7x64.iso"</span>));</span><br><span class="line">        BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"E:\\高效流.iso"</span>));</span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">while</span> ((i = bis.read(b)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            bos.write(b, <span class="number">0</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l1 = System.nanoTime();</span><br><span class="line">        System.out.println(<span class="string">"高效流用时："</span> + (l1 - l) / <span class="number">1000</span> + <span class="string">"秒"</span>);</span><br><span class="line">        bis.close();</span><br><span class="line">        bos.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">file</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> l = System.nanoTime();</span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"E:\\迅雷下载\\win7x64.iso"</span>));</span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"E:\\file.iso"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">while</span> ((i = fis.read(b)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            fos.write(b, <span class="number">0</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l1 = System.nanoTime();</span><br><span class="line">        System.out.println(<span class="string">"普通流用时："</span> + (l1 - l) / <span class="number">1000</span> + <span class="string">"秒"</span>);</span><br><span class="line">        fis.close();</span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Reader/Writer简单演示</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IO2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"E:\\使用说明.txt"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">"E:\\aaa.txt"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">char</span>[] c = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">while</span> ((i = isr.read(c))!= -<span class="number">1</span>) &#123;</span><br><span class="line">            osw.write(c,<span class="number">0</span>,i);</span><br><span class="line">        &#125;</span><br><span class="line">        isr.close();</span><br><span class="line">        osw.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/18/IO总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -3237,7 +3337,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3245,7 +3345,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
