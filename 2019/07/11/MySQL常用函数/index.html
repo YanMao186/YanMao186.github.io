@@ -6,22 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>集合总结 | MrYan</title>
+  <title>MySQL常用函数 | MrYan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先我们先看下集合的大体结构图 接口Collection讲解 首先接口Collection作为我们常用的List,Set,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：    123Collection&amp;lt;String&amp;gt; str = new ArrayList&amp;lt;String&amp;gt;();//或者使用接口new实现类List&amp;lt;String&amp;gt; list">
-<meta name="keywords" content="java,集合">
+  <meta name="description" content="MySQL常用函数1. 函数与大多数计算机语言一样,SQL支持利用函数来处理数据,函数一般是在数据上执行的,它给数据的转换和处理提供了方便.2. 函数的作用​    用于处理文本串(如删除或填充值,转换值为大写或小写)的文本函数. ​       用于在数值上进行算术操作(如返回绝对值,进行代数运算)的数值函数. ​       用于处理日期和时间值并从这些值中提取特定成分(如,返回两个日期之差,">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="集合总结">
-<meta property="og:url" content="http://yoursite.com/2019/03/17/集合总结/index.html">
+<meta property="og:title" content="MySQL常用函数">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/MySQL常用函数/index.html">
 <meta property="og:site_name" content="MrYan">
-<meta property="og:description" content="首先我们先看下集合的大体结构图 接口Collection讲解 首先接口Collection作为我们常用的List,Set,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：    123Collection&amp;lt;String&amp;gt; str = new ArrayList&amp;lt;String&amp;gt;();//或者使用接口new实现类List&amp;lt;String&amp;gt; list">
+<meta property="og:description" content="MySQL常用函数1. 函数与大多数计算机语言一样,SQL支持利用函数来处理数据,函数一般是在数据上执行的,它给数据的转换和处理提供了方便.2. 函数的作用​    用于处理文本串(如删除或填充值,转换值为大写或小写)的文本函数. ​       用于在数值上进行算术操作(如返回绝对值,进行代数运算)的数值函数. ​       用于处理日期和时间值并从这些值中提取特定成分(如,返回两个日期之差,">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-03-19T12:43:17.529Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6400.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6402.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/640.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6404.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6405.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6403.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6407.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6406.webp">
+<meta property="og:updated_time" content="2019-07-11T03:54:53.045Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="集合总结">
-<meta name="twitter:description" content="首先我们先看下集合的大体结构图 接口Collection讲解 首先接口Collection作为我们常用的List,Set,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：    123Collection&amp;lt;String&amp;gt; str = new ArrayList&amp;lt;String&amp;gt;();//或者使用接口new实现类List&amp;lt;String&amp;gt; list">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta name="twitter:title" content="MySQL常用函数">
+<meta name="twitter:description" content="MySQL常用函数1. 函数与大多数计算机语言一样,SQL支持利用函数来处理数据,函数一般是在数据上执行的,它给数据的转换和处理提供了方便.2. 函数的作用​    用于处理文本串(如删除或填充值,转换值为大写或小写)的文本函数. ​       用于在数值上进行算术操作(如返回绝对值,进行代数运算)的数值函数. ​       用于处理日期和时间值并从这些值中提取特定成分(如,返回两个日期之差,">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/11/MySQL常用函数/6400.webp">
   
     <link rel="alternative" href="/atom.xml" title="MrYan" type="application/atom+xml">
   
@@ -155,91 +162,240 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-集合总结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL常用函数" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      集合总结
+      MySQL常用函数
     </h1>
   
 
         
-        <a href="/2019/03/17/集合总结/" class="archive-article-date">
-  	<time datetime="2019-03-17T11:12:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-17</time>
+        <a href="/2019/07/11/MySQL常用函数/" class="archive-article-date">
+  	<time datetime="2019-07-11T03:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="首先我们先看下集合的大体结构图"><a href="#首先我们先看下集合的大体结构图" class="headerlink" title="首先我们先看下集合的大体结构图"></a>首先我们先看下集合的大体结构图</h1><p><img src="/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt></p>
-<h2 id="接口Collection讲解"><a href="#接口Collection讲解" class="headerlink" title="接口Collection讲解"></a>接口<code>Collection</code>讲解</h2><ul>
-<li><p>首先接口<code>Collection</code>作为我们常用的<code>List</code>,<code>Set</code>,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：</p>
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; str = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"><span class="comment">//或者使用接口new实现类</span></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口<code>Collection</code>常用方式介绍</p>
-<ul>
-<li><code>boolean add(E e)</code>:给集合添加元素</li>
-<li><code>boolean remove(Object obj):删除集合中指定的元素，成功返回true，失败返回false</code></li>
-<li><code>boolean contains(Object obj):判断集合中是否包含指定的元素</code></li>
-<li><code>int size():获取集合中元素的个数</code></li>
-<li><code>boolean isEmpty():判断集合是否为空，就是判断集合中的元素个数是否为零</code></li>
-<li><code>Object[] toArray():把集合中的元素，存储到数组中。</code></li>
-</ul>
-</li>
-<li><p>常用方法简单演示</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CollectionTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        CollectionTest test = <span class="keyword">new</span> CollectionTest();</span><br><span class="line">        System.out.println(test.add());</span><br><span class="line">        System.out.println(test.remove());</span><br><span class="line">        System.out.println(test.contains());</span><br><span class="line">        test.size();</span><br><span class="line">        System.out.println(test.isEmpty());</span><br><span class="line">        test.toArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean add()方法测试</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">boolean</span> b = name.add(<span class="string">"张三"</span>);</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean remove(Object obj)测试</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> remove = name.remove(<span class="string">"张三"</span>);</span><br><span class="line">        <span class="keyword">return</span> remove;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean contains(Object obj)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"李四"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> contains = name.contains(<span class="string">"王五"</span>);</span><br><span class="line">        <span class="keyword">return</span> contains;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * int size()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"李四"</span>);</span><br><span class="line">        name.add(<span class="string">"王五"</span>);</span><br><span class="line">        <span class="keyword">int</span> size = name.size();</span><br><span class="line">        System.out.println(size);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean isEmpty()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;Integer&gt; isnull = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        isnull.add(<span class="number">1</span>);</span><br><span class="line">        isnull.add(<span class="number">2</span>);</span><br><span class="line">        isnull.add(<span class="number">3</span>);</span><br><span class="line">        isnull.add(<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">boolean</span> empty = isnull.isEmpty();</span><br><span class="line">        <span class="keyword">return</span> empty;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Object[] toArray()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">toArray</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"李四"</span>);</span><br><span class="line">        name.add(<span class="string">"王五"</span>);</span><br><span class="line">        name.add(<span class="string">"赵六"</span>);</span><br><span class="line">        Object[] objects =  name.toArray();</span><br><span class="line">        <span class="keyword">for</span> (Object object : objects) &#123;</span><br><span class="line">            System.out.println(object);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="MySQL常用函数"><a href="#MySQL常用函数" class="headerlink" title="MySQL常用函数"></a>MySQL常用函数</h2><h3 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h3><pre><code>与大多数计算机语言一样,SQL支持利用函数来处理数据,函数一般是在数据上执行的,它给数据的转换和处理提供了方便.</code></pre><h3 id="2-函数的作用"><a href="#2-函数的作用" class="headerlink" title="2. 函数的作用"></a>2. 函数的作用</h3><p>​    用于处理文本串(如删除或填充值,转换值为大写或小写)的文本函数.</p>
+<p>​       用于在数值上进行算术操作(如返回绝对值,进行代数运算)的数值函数.</p>
+<p>​       用于处理日期和时间值并从这些值中提取特定成分(如,返回两个日期之差,检查日期有效性等)的日期和时间函数.</p>
+<p>​       返回DBMS正使用的特殊信息(如,返回用户登录信息,检查版本细节)的系统函数.</p>
+<h3 id="3-函数分类"><a href="#3-函数分类" class="headerlink" title="3. 函数分类"></a>3. 函数分类</h3><p>​     函数按照其用途功能可分为四大类,分别为:文本处理函数,日期和时间处理函数,数值处理函数和聚集函数.接下来详细讲解各函数.</p>
+<h4 id="文本函数"><a href="#文本函数" class="headerlink" title="文本函数"></a>文本函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Left()</td>
+<td>返回串左边的字符</td>
+</tr>
+<tr>
+<td>Length()</td>
+<td>返回串的长度</td>
+</tr>
+<tr>
+<td>Locate()</td>
+<td>找出串的一个子串</td>
+</tr>
+<tr>
+<td>Lower()</td>
+<td>将串转换为小写</td>
+</tr>
+<tr>
+<td>LTrim()</td>
+<td>去掉串左边的空格</td>
+</tr>
+<tr>
+<td>Right()</td>
+<td>返回串右边的字符</td>
+</tr>
+<tr>
+<td>Soundex()</td>
+<td>返回串的SOUNDEX值</td>
+</tr>
+<tr>
+<td>SubString()</td>
+<td>返回子串的字符</td>
+</tr>
+<tr>
+<td>Upper()</td>
+<td>将串转换为大写</td>
+</tr>
+<tr>
+<td>RTrim()</td>
+<td>返回串右边的空格</td>
+</tr>
+</tbody></table>
+<p>简单演示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 将名称转为大写</span><br><span class="line">SELECT prod_name,UPPER(prod_name) 大写姓名 FROM products;</span><br><span class="line">-- 返回名字最左边的三个字符</span><br><span class="line">SELECT prod_name,LEFT(prod_name,3)  FROM  products;</span><br><span class="line">-- 查询名称中含有&apos;anvil&apos;的产品,返回0表示不存在</span><br><span class="line">SELECT prod_name,LOCATE(&apos;anvil&apos;,prod_name) FROM products;</span><br></pre></td></tr></table></figure>
 
-<h2 id="接口List讲解"><a href="#接口List讲解" class="headerlink" title="接口List讲解"></a>接口<code>List</code>讲解</h2><ol>
-<li><p>接口List继承了Collection接口，因此具有了Collection接口的方法。</p>
-</li>
-<li><p>除此之外<code>List</code>常用方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">get(<span class="keyword">int</span> index);</span><br><span class="line">set(<span class="keyword">int</span> index,Object obj);</span><br><span class="line">add(<span class="keyword">int</span> index,Object obj);</span><br><span class="line">remove(<span class="keyword">int</span> index);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>List</code>常用实现类讲解。</p>
-<ul>
-<li><p><code>ArrayList</code>讲解：</p>
-<ul>
-<li>ArrayList是基于数组实现的list类，所以ArrayList类封装了一个动态的，允许再分配的Object[]数组，允许保存所有元素，包括null，可以根据索引位置对集合进行访问，查询快，增删慢，线程不安全，ArrayList创建时大小为0，当加入第一个元素时，进行第一次扩容，默认容量大小为10，每次都已当前数组大小的1.5倍去扩容。</li>
-</ul>
-</li>
-<li><p><code>ArrayList</code>创建以及遍历方式。</p>
-<ul>
-<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ArrayList创建方式</span></span><br><span class="line">List&lt;T&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 使用iterator迭代器遍历</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">List</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       list.add(<span class="string">"张三"</span>);</span><br><span class="line">       list.add(<span class="string">"李四"</span>);</span><br><span class="line">       list.add(<span class="string">"王五"</span>);</span><br><span class="line">       list.add(<span class="string">"赵六"</span>);</span><br><span class="line">       list.add(<span class="string">"周七"</span>);</span><br><span class="line">       Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line">       <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">           String next = iterator.next();</span><br><span class="line">           System.out.println(next);</span><br><span class="line">       &#125;</span><br><span class="line">  </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/07/11/MySQL常用函数/6400.webp" alt="6400"><img src="/2019/07/11/MySQL常用函数/6402.webp" alt="6402"><img src="/2019/07/11/MySQL常用函数/640.webp" alt="640"></p>
+<h4 id="日期和时间处理函数"><a href="#日期和时间处理函数" class="headerlink" title="日期和时间处理函数"></a>日期和时间处理函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addDate()</td>
+<td>增加一个日期(天,周等)</td>
+</tr>
+<tr>
+<td>AddTime()</td>
+<td>增加一个时间(时.分等)</td>
+</tr>
+<tr>
+<td>CurDate()</td>
+<td>返回当前日期</td>
+</tr>
+<tr>
+<td>CurTime()</td>
+<td>返回当前时间</td>
+</tr>
+<tr>
+<td>Date()</td>
+<td>返回日期时间的日期部分</td>
+</tr>
+<tr>
+<td>DateDiff()</td>
+<td>计算两个日期之差</td>
+</tr>
+<tr>
+<td>Date_Add()</td>
+<td>高度灵活的日期运算函数</td>
+</tr>
+<tr>
+<td>Date_Format()</td>
+<td>返回一个格式化的日期或者时间串</td>
+</tr>
+<tr>
+<td>Day()</td>
+<td>返回一个日期的天数部分</td>
+</tr>
+<tr>
+<td>DayofWeek()</td>
+<td>对于一个日期,返回对应的星期几</td>
+</tr>
+<tr>
+<td>Hour()</td>
+<td>返回一个时间的小时部分</td>
+</tr>
+<tr>
+<td>Month()</td>
+<td>返回一个日期的月份部分</td>
+</tr>
+<tr>
+<td>Now()</td>
+<td>返回当前日期和时间</td>
+</tr>
+<tr>
+<td>Second()</td>
+<td>返回一个时间的秒部分</td>
+</tr>
+<tr>
+<td>Time()</td>
+<td>返回一个日期时间的时间部分</td>
+</tr>
+<tr>
+<td>Year()</td>
+<td>返回一个日期的年份部分</td>
+</tr>
+<tr>
+<td>Minute()</td>
+<td>返回一个时间的分钟部分</td>
+</tr>
+</tbody></table>
+<p>==注:时间格式必须为yyyy-mm-dd==</p>
+<p>简单演示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 查询时间为05年9月1日的产品信息</span><br><span class="line">SELECT * FROM orders WHERE DATE(order_date) = &apos;2005-09-01&apos;;</span><br><span class="line">-- 查询两个日期之差</span><br><span class="line">SELECT DATEDIFF(&apos;2005-10-08&apos;,&apos;2005-09-01&apos;) 日期差为;</span><br><span class="line">-- 返回日期对应的星期,由于老外的计算方式与中国人不同,在星期上需要减1</span><br><span class="line">SELECT  DAYOFWEEK(&apos;2019-7-10&apos;) 今天星期;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ ````java</span><br><span class="line">   /**</span><br><span class="line">       * 使用for遍历</span><br><span class="line">       */</span><br><span class="line">      public void List() &#123;</span><br><span class="line">          List&lt;String&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">          list.add(&quot;张三&quot;);</span><br><span class="line">          list.add(&quot;李四&quot;);</span><br><span class="line">          list.add(&quot;王五&quot;);</span><br><span class="line">          list.add(&quot;赵六&quot;);</span><br><span class="line">          list.add(&quot;周七&quot;);</span><br><span class="line">          for (String s : list) &#123;</span><br><span class="line">              System.out.println(s);</span><br><span class="line">          &#125;</span><br><span class="line">  </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>list遍历方式还有foreach,转数组等，此处就不一一列举了。</p>
-</li>
-</ul>
-</li>
-<li><p><code>ListedList</code>讲解</p>
-<ul>
-<li>底层使用双向循环链表的数据结构，排列有序可重复，查询慢，增删快，线程不安全。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="接口Set讲解"><a href="#接口Set讲解" class="headerlink" title="接口Set讲解"></a>接口<code>Set</code>讲解</h2><ul>
-<li><code>Set</code>无序，不可重复。</li>
-<li><code>HashSet</code>底层使用<code>Hash</code>表实现，内部使用了<code>HashMap</code>，排列无序不可重复，存储速度快，线程安全。</li>
-<li><code>LinkedHashSet</code>底层采用<code>Hash</code>表存储，并用双向链表记录插入顺序，排列有序不可重复，存取速度较<code>HashSet</code>略慢，比<code>TreeSet</code>快，线程不安全。</li>
-<li><code>TreeSet</code>底层使用红黑树实现，内部使用了<code>NavigableMap</code>，按自然顺序或者自定义顺序存放，不可重复，线程不安全。</li>
-</ul>
-<h2 id="接口Map讲解"><a href="#接口Map讲解" class="headerlink" title="接口Map讲解"></a>接口<code>Map</code>讲解</h2><ul>
-<li>接口<code>Map</code>不属于<code>Collection</code>接口，<code>Map</code>代表具有映射关系的集合。</li>
-<li><code>HashMap</code>底层使用哈希表，1.8以后又加了红黑树来实现，键无序，不可重复，可为null,值可重复为null，存储速度快，线程不安全。</li>
-<li><code>HashTable</code>不允许null，线程安全。</li>
-<li><code>TreeMap</code>二叉树实现，可对集合中的键进行排序。</li>
-</ul>
+<p><img src="/2019/07/11/MySQL常用函数/6404.webp" alt="6404"><img src="/2019/07/11/MySQL常用函数/6405.webp" alt="6405"><img src="/2019/07/11/MySQL常用函数/6403.webp" alt="6403"></p>
+<h4 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Abs()</td>
+<td>返回一个数的绝对值</td>
+</tr>
+<tr>
+<td>Cos()</td>
+<td>返回一个角度的余弦值</td>
+</tr>
+<tr>
+<td>Sin()</td>
+<td>返回一个角度的正弦值</td>
+</tr>
+<tr>
+<td>Tan()</td>
+<td>返回一个角度的正切值</td>
+</tr>
+<tr>
+<td>Exp()</td>
+<td>返回一个角度的指数值</td>
+</tr>
+<tr>
+<td>Mod()</td>
+<td>返回除操作的余数</td>
+</tr>
+<tr>
+<td>Pi()</td>
+<td>返回圆周率</td>
+</tr>
+<tr>
+<td>Rand()</td>
+<td>返回一个随机数</td>
+</tr>
+<tr>
+<td>Sqrt()</td>
+<td>返回一个数的平方根</td>
+</tr>
+</tbody></table>
+<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVG()</td>
+<td>返回平均值</td>
+</tr>
+<tr>
+<td>Count()</td>
+<td>返回行数</td>
+</tr>
+<tr>
+<td>Max()</td>
+<td>返回最大值</td>
+</tr>
+<tr>
+<td>Min()</td>
+<td>返回最小值</td>
+</tr>
+<tr>
+<td>Sum()</td>
+<td>返回某列之和</td>
+</tr>
+</tbody></table>
+<p>简单演示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 计算商品平均价格</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(prod_price) 商品均价 <span class="keyword">FROM</span> products;</span><br><span class="line"><span class="comment">-- 返回指定列值的和</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(quantity) <span class="keyword">AS</span> 和 <span class="keyword">FROM</span> orderitems <span class="keyword">WHERE</span> order_num = <span class="number">20005</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/11/MySQL常用函数/6407.webp" alt="6407"><img src="/2019/07/11/MySQL常用函数/6406.webp" alt="6406"></p>
 
       
 
@@ -284,28 +440,13 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -355,7 +496,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/17/集合总结/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/11/MySQL常用函数/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -369,18 +510,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/18/IO总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          IO总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/17/面向对象总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">面向对象总结</div>
+    <a href="/2019/07/10/JVM优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM优化</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -408,7 +540,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="集合总结" data-title="集合总结" data-url="http://yoursite.com/2019/03/17/集合总结/"></div>
+	<div class="ds-thread" data-thread-key="MySQL常用函数" data-title="MySQL常用函数" data-url="http://yoursite.com/2019/07/11/MySQL常用函数/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -431,8 +563,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2019/03/17/集合总结/", 
-    sourceId: "集合总结",
+    url: "http://yoursite.com/2019/07/11/MySQL常用函数/", 
+    sourceId: "MySQL常用函数",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -441,7 +573,7 @@
   
 
   
-  <div id="SOHUCS" sid="集合总结" ></div> 
+  <div id="SOHUCS" sid="MySQL常用函数" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
