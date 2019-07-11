@@ -6,22 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>集合总结 | MrYan</title>
+  <title>JVM(一)内存结构 | MrYan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先我们先看下集合的大体结构图 接口Collection讲解 首先接口Collection作为我们常用的List,Set,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：    123Collection&amp;lt;String&amp;gt; str = new ArrayList&amp;lt;String&amp;gt;();//或者使用接口new实现类List&amp;lt;String&amp;gt; list">
-<meta name="keywords" content="java,集合">
+  <meta name="description" content="JVM1. JVM内存结构 ​    JVM内存结构主要有三大块:堆内存,方法区和栈 ​    堆内存是JVM内存中最大的一块区域,由年轻代和老年代组成,而年轻代由可分为三部分,EdenSpace,FromSpace,ToSpace,默认情况下三者比例为8:1:1的比例. ​    方法区存储类信息,常量,静态变量等数据,是线程共享的区域. ​    栈又可以分为java虚拟机栈和本地方法栈主要用">
+<meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="集合总结">
-<meta property="og:url" content="http://yoursite.com/2019/03/17/集合总结/index.html">
+<meta property="og:title" content="JVM(一)内存结构">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/index.html">
 <meta property="og:site_name" content="MrYan">
-<meta property="og:description" content="首先我们先看下集合的大体结构图 接口Collection讲解 首先接口Collection作为我们常用的List,Set,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：    123Collection&amp;lt;String&amp;gt; str = new ArrayList&amp;lt;String&amp;gt;();//或者使用接口new实现类List&amp;lt;String&amp;gt; list">
+<meta property="og:description" content="JVM1. JVM内存结构 ​    JVM内存结构主要有三大块:堆内存,方法区和栈 ​    堆内存是JVM内存中最大的一块区域,由年轻代和老年代组成,而年轻代由可分为三部分,EdenSpace,FromSpace,ToSpace,默认情况下三者比例为8:1:1的比例. ​    方法区存储类信息,常量,静态变量等数据,是线程共享的区域. ​    栈又可以分为java虚拟机栈和本地方法栈主要用">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-03-19T12:43:17.529Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-1562826662961.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D-1562827418260.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/JVM%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1562828203417.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/javahome.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/Jconsole.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF.png">
+<meta property="og:updated_time" content="2019-07-11T08:00:42.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="集合总结">
-<meta name="twitter:description" content="首先我们先看下集合的大体结构图 接口Collection讲解 首先接口Collection作为我们常用的List,Set,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：    123Collection&amp;lt;String&amp;gt; str = new ArrayList&amp;lt;String&amp;gt;();//或者使用接口new实现类List&amp;lt;String&amp;gt; list">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta name="twitter:title" content="JVM(一)内存结构">
+<meta name="twitter:description" content="JVM1. JVM内存结构 ​    JVM内存结构主要有三大块:堆内存,方法区和栈 ​    堆内存是JVM内存中最大的一块区域,由年轻代和老年代组成,而年轻代由可分为三部分,EdenSpace,FromSpace,ToSpace,默认情况下三者比例为8:1:1的比例. ​    方法区存储类信息,常量,静态变量等数据,是线程共享的区域. ​    栈又可以分为java虚拟机栈和本地方法栈主要用">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-1562826662961.jpg">
   
     <link rel="alternative" href="/atom.xml" title="MrYan" type="application/atom+xml">
   
@@ -155,90 +160,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-集合总结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JVM-一-内存结构" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      集合总结
+      JVM(一)内存结构
     </h1>
   
 
         
-        <a href="/2019/03/17/集合总结/" class="archive-article-date">
-  	<time datetime="2019-03-17T11:12:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-17</time>
+        <a href="/2019/07/11/JVM-一-内存结构/" class="archive-article-date">
+  	<time datetime="2019-07-11T05:33:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="首先我们先看下集合的大体结构图"><a href="#首先我们先看下集合的大体结构图" class="headerlink" title="首先我们先看下集合的大体结构图"></a>首先我们先看下集合的大体结构图</h1><p><img src="/2019/03/17/集合总结/%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt></p>
-<h2 id="接口Collection讲解"><a href="#接口Collection讲解" class="headerlink" title="接口Collection讲解"></a>接口<code>Collection</code>讲解</h2><ul>
-<li><p>首先接口<code>Collection</code>作为我们常用的<code>List</code>,<code>Set</code>,的顶层接口，由于三者都是接口不能直接new接口，我们通常都是使用：</p>
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; str = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"><span class="comment">//或者使用接口new实现类</span></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口<code>Collection</code>常用方式介绍</p>
+        <h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="1-JVM内存结构"><a href="#1-JVM内存结构" class="headerlink" title="1. JVM内存结构"></a>1. JVM内存结构</h3><p><img src="/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-1562826662961.jpg" alt="jvm内存结构"></p>
+<p>​    JVM内存结构主要有三大块:<strong>堆内存</strong>,<strong>方法区</strong>和<strong>栈</strong></p>
+<p>​    <strong>堆内存</strong>是JVM内存中最大的一块区域,由年轻代和老年代组成,而年轻代由可分为三部分,EdenSpace,FromSpace,ToSpace,默认情况下三者比例为8:1:1的比例.</p>
+<p>​    <strong>方法区</strong>存储类信息,常量,静态变量等数据,是线程共享的区域.</p>
+<p>​    <strong>栈</strong>又可以分为java虚拟机栈和本地方法栈主要用于方法的执行</p>
+<h3 id="2-JVM内存区域分配"><a href="#2-JVM内存区域分配" class="headerlink" title="2.JVM内存区域分配"></a>2.JVM内存区域分配</h3><p><img src="/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D-1562827418260.jpg" alt="jvm内存分配"></p>
 <ul>
-<li><code>boolean add(E e)</code>:给集合添加元素</li>
-<li><code>boolean remove(Object obj):删除集合中指定的元素，成功返回true，失败返回false</code></li>
-<li><code>boolean contains(Object obj):判断集合中是否包含指定的元素</code></li>
-<li><code>int size():获取集合中元素的个数</code></li>
-<li><code>boolean isEmpty():判断集合是否为空，就是判断集合中的元素个数是否为零</code></li>
-<li><code>Object[] toArray():把集合中的元素，存储到数组中。</code></li>
+<li>图中控制参数说明<ul>
+<li>-Xmx:设置堆内存的最大值</li>
+<li>-Xms:设置堆内存的最小值</li>
+<li>-XX:MaxNewSize:设置新生代内存的最大值</li>
+<li>-XX:NewSize:设置新生代内存的最小值</li>
+<li>-XX:MaxPermSize:设置永久代内存的最大值</li>
+<li>-XX:PermSize:设置永久代内存的最小值</li>
+<li>-Xss:设置每个线程的堆栈大小</li>
 </ul>
 </li>
-<li><p>常用方法简单演示</p>
-</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CollectionTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        CollectionTest test = <span class="keyword">new</span> CollectionTest();</span><br><span class="line">        System.out.println(test.add());</span><br><span class="line">        System.out.println(test.remove());</span><br><span class="line">        System.out.println(test.contains());</span><br><span class="line">        test.size();</span><br><span class="line">        System.out.println(test.isEmpty());</span><br><span class="line">        test.toArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean add()方法测试</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">boolean</span> b = name.add(<span class="string">"张三"</span>);</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean remove(Object obj)测试</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> remove = name.remove(<span class="string">"张三"</span>);</span><br><span class="line">        <span class="keyword">return</span> remove;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean contains(Object obj)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"李四"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> contains = name.contains(<span class="string">"王五"</span>);</span><br><span class="line">        <span class="keyword">return</span> contains;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * int size()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"李四"</span>);</span><br><span class="line">        name.add(<span class="string">"王五"</span>);</span><br><span class="line">        <span class="keyword">int</span> size = name.size();</span><br><span class="line">        System.out.println(size);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * boolean isEmpty()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;Integer&gt; isnull = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        isnull.add(<span class="number">1</span>);</span><br><span class="line">        isnull.add(<span class="number">2</span>);</span><br><span class="line">        isnull.add(<span class="number">3</span>);</span><br><span class="line">        isnull.add(<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">boolean</span> empty = isnull.isEmpty();</span><br><span class="line">        <span class="keyword">return</span> empty;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Object[] toArray()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">toArray</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collection&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        name.add(<span class="string">"张三"</span>);</span><br><span class="line">        name.add(<span class="string">"李四"</span>);</span><br><span class="line">        name.add(<span class="string">"王五"</span>);</span><br><span class="line">        name.add(<span class="string">"赵六"</span>);</span><br><span class="line">        Object[] objects =  name.toArray();</span><br><span class="line">        <span class="keyword">for</span> (Object object : objects) &#123;</span><br><span class="line">            System.out.println(object);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="接口List讲解"><a href="#接口List讲解" class="headerlink" title="接口List讲解"></a>接口<code>List</code>讲解</h2><ol>
-<li><p>接口List继承了Collection接口，因此具有了Collection接口的方法。</p>
-</li>
-<li><p>除此之外<code>List</code>常用方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">get(<span class="keyword">int</span> index);</span><br><span class="line">set(<span class="keyword">int</span> index,Object obj);</span><br><span class="line">add(<span class="keyword">int</span> index,Object obj);</span><br><span class="line">remove(<span class="keyword">int</span> index);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>List</code>常用实现类讲解。</p>
+<h3 id="3-JVM与系统之间调用关系"><a href="#3-JVM与系统之间调用关系" class="headerlink" title="3. JVM与系统之间调用关系"></a>3. JVM与系统之间调用关系</h3><p><img src="/2019/07/11/JVM-一-内存结构/JVM%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1562828203417.jpg" alt="JVM与系统调用"></p>
 <ul>
-<li><p><code>ArrayList</code>讲解：</p>
-<ul>
-<li>ArrayList是基于数组实现的list类，所以ArrayList类封装了一个动态的，允许再分配的Object[]数组，允许保存所有元素，包括null，可以根据索引位置对集合进行访问，查询快，增删慢，线程不安全，ArrayList创建时大小为0，当加入第一个元素时，进行第一次扩容，默认容量大小为10，每次都已当前数组大小的1.5倍去扩容。</li>
+<li>方法区,堆属于所有线程间所共享的,而栈,程序计数器是属于线程私有的.</li>
+<li><strong>java堆</strong><ul>
+<li>对于大多数应用来说,java堆是java虚拟机所管理的内存中最大的一块,java堆是所有线程共享的一块内存区域,在虚拟机启动时创建,此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存.</li>
+<li>java堆时垃圾收集器管理的主要区域,因此很多时候也被称之为”<strong>GC堆</strong>“.</li>
+<li>java堆可以位于物理上不连续的内存空间中,只要逻辑上时连续的即可</li>
+<li>如果在堆中没有内存完成实例分配,并且堆也无法再扩展时,将会抛出<strong>OutOfMemoryError</strong>异常.</li>
 </ul>
 </li>
-<li><p><code>ArrayList</code>创建以及遍历方式。</p>
-<ul>
-<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ArrayList创建方式</span></span><br><span class="line">List&lt;T&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 使用iterator迭代器遍历</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">List</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       list.add(<span class="string">"张三"</span>);</span><br><span class="line">       list.add(<span class="string">"李四"</span>);</span><br><span class="line">       list.add(<span class="string">"王五"</span>);</span><br><span class="line">       list.add(<span class="string">"赵六"</span>);</span><br><span class="line">       list.add(<span class="string">"周七"</span>);</span><br><span class="line">       Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line">       <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">           String next = iterator.next();</span><br><span class="line">           System.out.println(next);</span><br><span class="line">       &#125;</span><br><span class="line">  </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ ````java</span><br><span class="line">   /**</span><br><span class="line">       * 使用for遍历</span><br><span class="line">       */</span><br><span class="line">      public void List() &#123;</span><br><span class="line">          List&lt;String&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">          list.add(&quot;张三&quot;);</span><br><span class="line">          list.add(&quot;李四&quot;);</span><br><span class="line">          list.add(&quot;王五&quot;);</span><br><span class="line">          list.add(&quot;赵六&quot;);</span><br><span class="line">          list.add(&quot;周七&quot;);</span><br><span class="line">          for (String s : list) &#123;</span><br><span class="line">              System.out.println(s);</span><br><span class="line">          &#125;</span><br><span class="line">  </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>list遍历方式还有foreach,转数组等，此处就不一一列举了。</p>
-</li>
+<li><strong>方法区</strong><ul>
+<li>与java堆一样,是各个线程间共享的内存区域,它主要用于存储已被虚拟机加载的类信息,常量,静态变量,即时编译器编译后的代码等数据.</li>
+<li>方法区与java堆一样不需要连续的内存和可以选择固定大小或者可扩展外,还可以选择不实现垃圾回收.(垃圾回收在方法区出现的频率很小)</li>
+<li>当方法区无法满足内存分配需求时,将抛出<strong>OutOfMemoryError</strong>异常.</li>
+<li>方法区的执行都是随着线程的,原始类型的本地变量以及引用都存放在线程栈中,而引用关联的对象,都存在堆中.</li>
 </ul>
 </li>
-<li><p><code>ListedList</code>讲解</p>
-<ul>
-<li>底层使用双向循环链表的数据结构，排列有序可重复，查询慢，增删快，线程不安全。</li>
+<li><strong>程序计数器</strong><ul>
+<li>程序计数器是一块较小的内存空间,它的作用可以看作是当前线程所执行的字节码的信号指示器,在虚拟机的概念模型中字节码解释器工作时就是通过改变这个计时器的值来选取下一条需要执行的字节码指令,分支,循环,跳转,异常处理,线程恢复等基础功能都需要依赖这个计数器来完成.</li>
+<li>由于java虚拟机的多线程是通过线程切换并分配处理器执行时间的方式来实现的,在任何一个确定的时刻,一个处理器只会执行一条独立的程序计数器,各条线程之间的1计数器互不影响,独立存储,我们称这种内存区域为”线程私有”的内存.</li>
+<li>如果线程正在执行的是一个java方法,这个计数器记录的是正在执行的虚拟机字节码指令的地址,如果正在执行的是Natvie方法,这个计数器值则为空.</li>
+</ul>
+</li>
+<li><strong>JVM栈</strong><ul>
+<li>同程序计数器,java虚拟机栈也是线程私有的,<strong>它的生命周期与线程一样,虚拟机描述的是java方法执行的内存模型</strong>,每个方法被执行的时候都会同时创建一个栈帧用于存储局部变量表,朝左栈,动态链接,方法出口等信息.<strong>每一个方法被调用直至执行完成的过程,就对应着一个栈帧在虚拟机中从入栈到出栈的过程.</strong></li>
+<li>局部变量表存放了编译器可知的各种基本类型数据类型,对象引用(reference类型,它不等同于对象本身,根据不同的虚拟机实现,它可能是一个指向对象起始地址的引用指针,也可能指向一个代表对象的句柄或其他与此对象相关的位置)和returnAddress类型(指向了一条字节码指令的地址)</li>
+<li>在java虚拟机规范中,对这个区域规定了两种异常状况,如果线程请求的栈深度大于虚拟机所允许的深度,将抛出<strong>StackOverFlowError</strong>异常,如果虚拟机可以动态的扩展,当扩展时无法申请到足够的内存时会抛出<strong>OutOfMemoryError</strong>异常.</li>
+</ul>
+</li>
+<li><strong>本地方法栈</strong><ul>
+<li>本地方法栈与虚拟机栈所发挥的作用时非常相似的,区别不过时虚拟机栈为虚拟机执行Java方法服务,而本地方法栈则是为虚拟机使用到的Native方法服务,虚拟机规范中对本地方法栈中的方法使用的语言,使用方式与数据结构并没有强制规定,因此具体的虚拟机可以自由的实现它.</li>
+<li>与虚拟机栈一样,本地方法栈区域也会抛出<strong>StackOverflowError</strong>和<strong>OutOfMemoryError</strong>异常</li>
 </ul>
 </li>
 </ul>
+<h3 id="4-使用JConsole查看java的相关信息"><a href="#4-使用JConsole查看java的相关信息" class="headerlink" title="4. 使用JConsole查看java的相关信息."></a>4. 使用JConsole查看java的相关信息.</h3><ul>
+<li><p>找到%JAVA_HOME%\bin目录<img src="/2019/07/11/JVM-一-内存结构/javahome.png" alt="javahome"></p>
 </li>
-</ol>
-<h2 id="接口Set讲解"><a href="#接口Set讲解" class="headerlink" title="接口Set讲解"></a>接口<code>Set</code>讲解</h2><ul>
-<li><code>Set</code>无序，不可重复。</li>
-<li><code>HashSet</code>底层使用<code>Hash</code>表实现，内部使用了<code>HashMap</code>，排列无序不可重复，存储速度快，线程安全。</li>
-<li><code>LinkedHashSet</code>底层采用<code>Hash</code>表存储，并用双向链表记录插入顺序，排列有序不可重复，存取速度较<code>HashSet</code>略慢，比<code>TreeSet</code>快，线程不安全。</li>
-<li><code>TreeSet</code>底层使用红黑树实现，内部使用了<code>NavigableMap</code>，按自然顺序或者自定义顺序存放，不可重复，线程不安全。</li>
-</ul>
-<h2 id="接口Map讲解"><a href="#接口Map讲解" class="headerlink" title="接口Map讲解"></a>接口<code>Map</code>讲解</h2><ul>
-<li>接口<code>Map</code>不属于<code>Collection</code>接口，<code>Map</code>代表具有映射关系的集合。</li>
-<li><code>HashMap</code>底层使用哈希表，1.8以后又加了红黑树来实现，键无序，不可重复，可为null,值可重复为null，存储速度快，线程不安全。</li>
-<li><code>HashTable</code>不允许null，线程安全。</li>
-<li><code>TreeMap</code>二叉树实现，可对集合中的键进行排序。</li>
+<li><p>执行cmd,输入jconsole命令,将会打开JConsole面板.<img src="/2019/07/11/JVM-一-内存结构/Jconsole.png" alt="Jconsole"></p>
+</li>
+<li><p>选择你要查看的进程点击连接,成功后如下.<img src="/2019/07/11/JVM-一-内存结构/%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF.png" alt="控制面板"></p>
+</li>
 </ul>
 
       
@@ -284,28 +285,13 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -355,7 +341,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/17/集合总结/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/11/JVM-一-内存结构/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -369,18 +355,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/18/IO总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          IO总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/17/面向对象总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">面向对象总结</div>
+    <a href="/2019/07/11/MySQL常用函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL常用函数</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -408,7 +385,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="集合总结" data-title="集合总结" data-url="http://yoursite.com/2019/03/17/集合总结/"></div>
+	<div class="ds-thread" data-thread-key="JVM-一-内存结构" data-title="JVM(一)内存结构" data-url="http://yoursite.com/2019/07/11/JVM-一-内存结构/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -431,8 +408,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2019/03/17/集合总结/", 
-    sourceId: "集合总结",
+    url: "http://yoursite.com/2019/07/11/JVM-一-内存结构/", 
+    sourceId: "JVM-一-内存结构",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -441,7 +418,7 @@
   
 
   
-  <div id="SOHUCS" sid="集合总结" ></div> 
+  <div id="SOHUCS" sid="JVM-一-内存结构" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
