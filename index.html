@@ -150,6 +150,200 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-三-GC算法-垃圾收集器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/12/JVM-三-GC算法-垃圾收集器/">JVM(三)GC算法-垃圾收集器</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/12/JVM-三-GC算法-垃圾收集器/" class="archive-article-date">
+  	<time datetime="2019-07-12T12:02:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>​    垃圾收集通常被称之为”<strong>GC</strong>“,在jvm内,程序计数器,虚拟机栈,本地地方法栈都是随线程的生成而生成,随线程的销毁而销毁,栈帧随着方法的进入和退出做入栈和出栈操作,实现了自动的内存清理,因此,内存垃圾回收主要集中在java堆和方法区中,在程序运行期间,这部分的内存的分配和使用1都是动态的.</p>
+<h2 id="对象存活的判断"><a href="#对象存活的判断" class="headerlink" title="对象存活的判断"></a>对象存活的判断</h2><p>判断对象是否存活一般有两种方式.</p>
+<ul>
+<li><p><strong>引用计数</strong>:每个对象有一个计数属性,新增一个引用时计数加1,引用释放时计数减1,计数为0时可以回收,此方法简单,无法解决对象相互循环引用的问题.</p>
+</li>
+<li><p><strong>可达性分析</strong>:从GC Roots开始向下搜寻,搜寻所走过的路径称之为引用链,当一个对象到GC Roots没有任何引用链相连时,则证明对象是不可用的,不可达对象.</p>
+</li>
+<li><p>在Java中,GC Roots包括:</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中静态属性实体引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI引用的对象<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2></li>
+</ul>
+</li>
+</ul>
+<h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><p>​    <strong>标记-清除</strong>算法分为”标记”和”清除”两个阶段:首先标记出所有需要回收的对象,在标记完成后统一回收掉所有被标记的对象,之所以说它是最基础的收集算法,是因为后续的收集算法都是基于这种思路并对其缺点进行改善而得到的.</p>
+<p>​    它主要有两个缺点:<strong>一是效率问题</strong>,标记和清除过程的效率都不高,<strong>二是空间问题</strong>,标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致,当程序在以后的运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另外一次垃圾收集动作.</p>
+<h4 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h4><p>​    GC分代的基本假设：绝大部分对象的生命周期都非常短暂，存活时间短。</p>
+<p>​    “<strong>分代收集</strong>”算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。而老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记-清理”或“标记-整理”算法来进行回收。</p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p>​    如果说收集算法是内存回收的方法论,垃圾收集器就是内存回收的具体实现</p>
+<h4 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h4><p>​    串行收集器是最稳定,效率最高的收集器,可能会产生较长的停顿,只使用一个线程去回收,新生代,老年代使用串行回收;新生代复制算法,老年代标记-压缩;垃圾收集的过程中会服务暂停.</p>
+<p>参数控制:<code>-XX:+UseSerialGC</code>串行收集器</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8.jpg" alt="串行收集器"></p>
+<p>​    ParNew收集器ParNew收集器就是Serial收集器的多线程版本,新生代并行,老年代串行;新生代复制算法,老年代标记-压缩.</p>
+<p>参数控制:</p>
+<ul>
+<li><p><code>-XX:+UseParNewGC</code>ParNew收集器</p>
+</li>
+<li><p><code>-XX:ParallelGCThreads</code>限制线程数量</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A82.jpg" alt="串行收集器2"></p>
+</li>
+</ul>
+<h4 id="Paralle收集器"><a href="#Paralle收集器" class="headerlink" title="Paralle收集器"></a>Paralle收集器</h4><p>​    Parallel   Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。可以通过参数来打开自适应调节策略，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或最大的吞吐量；也可以通过参数控制GC的时间不大于多少毫秒或者比例；新生代复制算法、老年代标记-压缩</p>
+<p>参数控制： <code>-XX:+UseParallelGC</code> 使用Parallel收集器+ 老年代串行</p>
+<h4 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h4><p>​    Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法。这个收集器是在JDK 1.6中才开始提供</p>
+<p>参数控制： <code>-XX:+UseParallelOldGC</code> 使用Parallel收集器+ 老年代并行</p>
+<h4 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h4><p>​    CMS收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用都集中在互联网站或B/S系统的服务端上，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。</p>
+<p>​    从名字（包含“Mark Sweep”）上就可以看出CMS收集器是基于“标记-清除”算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为4个步骤，包括：</p>
+<ul>
+<li>初始标记（CMS initial mark）</li>
+<li>并发标记（CMS concurrent mark）</li>
+<li>重新标记（CMS remark）</li>
+<li>并发清除（CMS concurrent sweep）</li>
+</ul>
+<p>​        其中初始标记、重新标记这两个步骤仍然需要“Stop  The World”。初始标记仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots  Tracing的过程，而重新标记阶段则是为了修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记的时间短。</p>
+<p>​    由于整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，所以总体上来说，CMS收集器的内存回收过程是与用户线程一起并发地执行。老年代收集器（新生代使用ParNew）</p>
+<p>​    <strong>优点</strong>: 并发收集、低停顿<br>​    <strong>缺点</strong>: 产生大量空间碎片、并发阶段会降低吞吐量</p>
+<p>参数控制:</p>
+<p><code>-XX:+UseConcMarkSweepGC</code> 使用CMS收集器<br><code>-XX:+ UseCMSCompactAtFullCollection</code> Full GC后，进行一次碎片整理；整理过程是独占的，会引起停顿时间变长<br><code>-XX:+CMSFullGCsBeforeCompaction</code> 设置进行几次Full GC后，进行一次碎片整理<br><code>-XX:ParallelCMSThreads</code> 设定CMS的线程数量（一般情况约等于可用CPU数量）    </p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/CMS.jpg" alt="CMS"></p>
+<h4 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h4><p>​    G1是目前技术发展的最前沿成果之一,与CMS收集器相比G1收集器有以下特点：</p>
+<ul>
+<li><p><strong>空间整合</strong>，G1收集器采用标记整理算法，不会产生内存空间碎片。分配大对象时不会因为无法找到连续空间而提前触发下一次GC。</p>
+</li>
+<li><p><strong>可预测停顿</strong>，这是G1的另一大优势，降低停顿时间是G1和CMS的共同关注点，但G1除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为N毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。</p>
+</li>
+</ul>
+<p>​        上面提到的垃圾收集器，收集的范围都是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔阂了，它们都是一部分（可以不连续）Region的集合。<img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/G1.jpg" alt="G1"></p>
+<p>​    G1的新生代收集跟ParNew类似，当新生代占用达到一定比例的时候，开始出发收集。和CMS类似，G1收集器收集老年代对象会有短暂停顿。</p>
+<p>收集步骤：</p>
+<p>1、标记阶段，首先初始标记(Initial-Mark),这个阶段是停顿的(Stop the World Event)，并且会触发一次普通Mintor GC。对应GC log:GC pause (young) (inital-mark)</p>
+<p>2、Root Region Scanning，程序运行过程中会回收survivor区(存活到老年代)，这一过程必须在young GC之前完成。</p>
+<p>3、Concurrent  Marking，在整个堆中进行并发标记(和应用程序并发执行)，此过程可能被young  GC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那个这个区域会被立即回收(图中打X)。同时，并发标记过程中，会计算每个区域的对象活性(区域中存活对象的比例)。<img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%9B%BE2.png" alt="图2"></p>
+<p>4、Remark, 再标记，会有短暂停顿(STW)。再标记阶段是用来收集 并发标记阶段 产生新的垃圾(并发阶段和应用程序一同运行)；G1中采用了比CMS更快的初始快照算法:snapshot-at-the-beginning (SATB)。</p>
+<p>5、Copy/Clean up，多线程清除失活对象，会有STW。G1将回收区域的存活对象拷贝到新区域，清除Remember Sets，并发清空回收区域并把它返回到空闲区域链表中。</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%9B%BE3.png" alt="图3"></p>
+<p>6、复制/清除过程后。回收区域的活性对象已经被集中回收到深蓝色和深绿色区域。</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%A4%8D%E5%88%B6%E6%B8%85%E9%99%A4.jpg" alt="复制清除"></p>
+<h4 id="常用的收集器组合"><a href="#常用的收集器组合" class="headerlink" title="常用的收集器组合"></a>常用的收集器组合</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>新生代GC策略</th>
+<th>老年代GC策略</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>组合1</td>
+<td>Serial</td>
+<td>Serial Old</td>
+<td align="left">Serial和Serial Old都是单线程进行GC，特点就是GC时暂停所有应用线程。</td>
+</tr>
+<tr>
+<td>组合2</td>
+<td>Serial</td>
+<td>CMS+Serial Old</td>
+<td align="left">CMS（Concurrent Mark Sweep）是并发GC，实现GC线程和应用线程并发工作，不需要暂停所有应用线程。另外，当CMS进行GC失败时，会自动使用Serial Old策略进行GC。</td>
+</tr>
+<tr>
+<td>组合3</td>
+<td>ParNew</td>
+<td>CMS</td>
+<td align="left">使用 <code>-XX:+UseParNewGC</code>选项来开启。ParNew是Serial的并行版本，可以指定GC线程数，默认GC线程数为CPU的数量。可以使用-XX:ParallelGCThreads选项指定GC的线程数。如果指定了选项 <code>-XX:+UseConcMarkSweepGC</code>选项，则新生代默认使用ParNew GC策略。</td>
+</tr>
+<tr>
+<td>组合4</td>
+<td>ParNew</td>
+<td>Serial Old</td>
+<td align="left">使用 <code>-XX:+UseParNewGC</code>选项来开启。新生代使用ParNew GC策略，年老代默认使用Serial Old GC策略。</td>
+</tr>
+<tr>
+<td>组合5</td>
+<td>Parallel Scavenge</td>
+<td>Serial Old</td>
+<td align="left">Parallel Scavenge策略主要是关注一个可控的吞吐量：应用程序运行时间 / (应用程序运行时间 + GC时间)，可见这会使得CPU的利用率尽可能的高，适用于后台持久运行的应用程序，而不适用于交互较多的应用程序。</td>
+</tr>
+<tr>
+<td>组合6</td>
+<td>Parallel Scavenge</td>
+<td>Parallel Old</td>
+<td align="left">Parallel Old是Serial Old的并行版本</td>
+</tr>
+<tr>
+<td>组合7</td>
+<td>G1GC</td>
+<td>G1GC</td>
+<td align="left"><code>-XX:+UnlockExperimentalVMOptions</code> <code>-XX:+UseG1GC</code> #开启； <code>-XX:MaxGCPauseMillis=50</code> #暂停时间目标； <code>-XX:GCPauseIntervalMillis=200</code> #暂停间隔目标； <code>-XX:+G1YoungGenSize=512m</code> #年轻代大小； <code>-XX:SurvivorRatio=6</code> #幸存区比例</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/12/JVM-三-GC算法-垃圾收集器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JVM-二-java类的加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2744,490 +2938,6 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
 
 
   
-    <article id="post-Http" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/19/Http/">Http</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/19/Http/" class="archive-article-date">
-  	<time datetime="2019-03-18T16:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="HTTP总结"><a href="#HTTP总结" class="headerlink" title="HTTP总结"></a>HTTP总结</h1><h3 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h3><ul>
-<li>HTTP协议是Hyper Text Transfer Protocol(超文本传输协议),用于从万维网(World Wide Web)服务器传输超文本到本地浏览器的传输协议..</li>
-<li>HTTP是一个基于TCP/IP通信协议来传递数据(HTML文件,图片文件,查询结果等)。</li>
-</ul>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ul>
-<li>HTTP协议工作于客户端-服务器架构上,浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。</li>
-<li>Web服务器有:Apache服务器,IIS服务器(Internet Information Services)等。</li>
-<li>Web服务器根据接收到的请求后,向客户端发送响应信息 。</li>
-<li>HTTP默认端口号为80,你也可以手动修改。<br><br><strong>HTTP三点注意事项</strong><ul>
-<li><strong>HTTP是无连接的</strong>:无连接的含义是限制每次连接只处理一个请求,服务器处理完客户请求,并收到客户的应答后,即断开连接,采用这种方式节省传输时间。</li>
-<li><strong>HTTP是媒体独立的</strong>:这意味着，只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过HTTP发送。客户端以及服务器指定使用适合的MIME-type内容类型。</li>
-<li><strong>HTTP是无状态的</strong>:HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</li>
-</ul>
-</li>
-</ul>
-<h3 id="HTTP协议通信流程"><a href="#HTTP协议通信流程" class="headerlink" title="HTTP协议通信流程"></a>HTTP协议通信流程</h3><p><img src="/2019/03/19/Http/Http%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B.png" alt></p>
-<h3 id="HTTP消息结构"><a href="#HTTP消息结构" class="headerlink" title="HTTP消息结构"></a>HTTP消息结构</h3><ul>
-<li><p>HTTP是基于客户端/服务端(C/S)的架构模型,通过一个可靠的链接来交换信息,是一个无状态的请求/响应协议。</p>
-</li>
-<li><p>一个HTTP”客户端”是一个应用程序(web浏览器或是其他任何客户端),通过连接到服务器达到向服务器发送一个或多个HTTP请求的目的。</p>
-</li>
-<li><p>一个HTTP”服务器”也是一个应用程序(web服务器,如Apache web 或IIS服务器等),通过接受客户端请求并向客户端发送HTTP响应数据。</p>
-</li>
-<li><p>HTTP使用统一资源标识符(Uniforrm Resource Identifiers,URI)来传输数据和建立连接。</p>
-</li>
-<li><p>一旦建立连接后,数据消息就通过类似Internet邮件所使用的格式[RFC5322]和多用途Internet邮件扩展(MIME)[RFC2045]来传送。</p>
-</li>
-</ul>
-<h3 id="客户端请求消息"><a href="#客户端请求消息" class="headerlink" title="客户端请求消息"></a>客户端请求消息</h3><ul>
-<li>客户端发送一个HTTP请求到服务器的请求消息包括以下格式:<strong>请求行</strong>(request line ),<strong>请求头</strong>(header),<strong>空行</strong>和<strong>请求数据</strong>四个部分组成.如下:<br><img src="/2019/03/19/Http/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt></li>
-</ul>
-<h3 id="服务器响应消息"><a href="#服务器响应消息" class="headerlink" title="服务器响应消息"></a>服务器响应消息</h3><ul>
-<li><p>HTTP响应也是由四个部分组成,分别是:<strong>状态行</strong>,<strong>消息报头</strong>,<strong>空行</strong>和<strong>响应正文</strong>.</p>
-<p><img src="/2019/03/19/Http/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%93%8D%E5%BA%94.png" alt></p>
-<h3 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h3></li>
-<li><p>HTTP1.0定义了三种请求方式:<strong>GET</strong>,<strong>POST</strong>和<strong>HEAD</strong>方法.</p>
-</li>
-<li><p>HTTP1.1新增了五种请求方式:<strong>OPTIONS</strong>( /‘ɑpʃənz/选项 ),<strong>PUT</strong>,<strong>DELETE</strong>,<strong>TRACE</strong>( /tres/跟踪)和<strong>CONNECT</strong>(/kə’nɛkt/ 连接)方法.</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>GET</td>
-<td>请求指定的页面信息,并返回实体主类</td>
-</tr>
-<tr>
-<td>2</td>
-<td>HEAD</td>
-<td>类似于get请求,只不过返回的响应中没有具体的内容,用于获取报头.</td>
-</tr>
-<tr>
-<td>3</td>
-<td>POST</td>
-<td>向指定资源提交数据进行处理请求(例如提交表单或者上传文件),数据被包含在请求体中,post请求可能会导致新的资源的建立或已有资源的修改</td>
-</tr>
-<tr>
-<td>4</td>
-<td>PUT</td>
-<td>从客户端向服务器传送的数据取代指定的文档的内容</td>
-</tr>
-<tr>
-<td>5</td>
-<td>DELETE</td>
-<td>请求服务器删除指定的页面</td>
-</tr>
-<tr>
-<td>6</td>
-<td>CONNECT</td>
-<td>HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器</td>
-</tr>
-<tr>
-<td>7</td>
-<td>OPTIONS</td>
-<td>允许客户端查看服务器的性能</td>
-</tr>
-<tr>
-<td>8</td>
-<td>TRACE</td>
-<td>回显服务器收到的请求,主要用于测试或诊断</td>
-</tr>
-</tbody></table>
-<h3 id="HTTP响应头信息"><a href="#HTTP响应头信息" class="headerlink" title="HTTP响应头信息"></a>HTTP响应头信息</h3><ul>
-<li>HTTP请求头提供了关于请求,响应或者其他的发送实体类的信息.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="left">应答头</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">Allow</td>
-<td>服务器支持哪些请求方法(如:GET,POST等).</td>
-</tr>
-<tr>
-<td align="left">Content-Encoding</td>
-<td>文档的编码(Encode)方法,只有在解码之后才可以得到Content-Type头指定的内容类型,利用gzip压缩文档能够显著地减少HTML文档的下载时间,java的GZIPOutputStream可以很方便地进行gzip压缩,但只有Unix上的Netscape和windows上的IE 4,IE 5才支持它,因此,Servlet应该通过查看Accept-Encoding头(即request.getHeader(“Accept-Encoding”)检查浏览器是否支持gzip,为支持gzip的浏览器返回经gzip压缩的HTML页面,为其他浏览器返回普通页面.</td>
-</tr>
-<tr>
-<td align="left">Content-Length</td>
-<td>表示内容长度,只有当浏览器使用持久HTTP连接时才需要这个数据,如果你想要利用持久连接的优势,可以把输出文档写入ByteArrayOutputStream,完成后查看其大小,然后把该值放入Content-Length头,最后通过byteArrayStream.writeTo(response.getOutputStream())发送内容.</td>
-</tr>
-<tr>
-<td align="left">Content-Type</td>
-<td>表示后面的文档属于什么MIME类型,Servlet默认为text/plain,但通常需要显式的指定为text/html.由于经常要设置Content-Type,因此HttpServletResponse提供了一个专用的方法setContentType.</td>
-</tr>
-<tr>
-<td align="left">Date</td>
-<td>当前的GMT时间,你可以用setDateHeader来设置这个头以避免转换时间格式的麻烦</td>
-</tr>
-<tr>
-<td align="left">Expires</td>
-<td>应该在什么时候以为文档已经过期,从而不再缓存它.</td>
-</tr>
-<tr>
-<td align="left">Last-Modified</td>
-<td>文档的最后改动时间,客户可以通过if-Modified-Since请求头提供一个日期,该请求被视为一个条件GET,只有改动时间迟于指定时间的文档才会返回,否则返回一个304(Not Modified)状态.Last-Modified也可用setDateHeader方法来设置.</td>
-</tr>
-<tr>
-<td align="left">Location</td>
-<td>表示客户应当到哪里去提取文档,Location通常不是直接设置的,而是通过HttpServletResponse的sendRedirect方法,该方法同时设置状态码为302.</td>
-</tr>
-<tr>
-<td align="left">Refresh</td>
-<td>表示浏览器应当在多少时间之后刷新文档,以秒计,除了刷新当前文档之外,你还可以通过setHeader(“Refresh”,”5;URL=<a href="http://host/path&quot;)让浏览器读取指定的页面" target="_blank" rel="noopener">http://host/path&quot;)让浏览器读取指定的页面</a>.<br>这种功能通常是通过设置HTML页面HEAD区的&lt; META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=<a href="http://host/path&quot;" target="_blank" rel="noopener">http://host/path&quot;</a> &gt;实现,这是因为,自动刷新或重定向对于那些不能使用CGI或Servlet的HTML编写者十分重要1,但是,对于Servlet来说,直接设置Refresh头更加方便.<br><strong>注意</strong>:Refresh的意义是”N秒之后刷新本页面或访问指定页面”,而不是”每隔N秒刷新本页面或访问指定页面”.因此,连续刷新要求每次都发送一个Refresh头,而发送204状态码则可以阻止浏览器继续刷新,不管是使用Refresh头还是&lt; META HTTP-EQUIV=”Refresh”…&gt;.<br><strong>注意</strong>:Refresh头不属于HTTP1.1正式规范的一部分,而是一个扩展,但Netscape和IE都支持它.</td>
-</tr>
-<tr>
-<td align="left">Server</td>
-<td>服务器名字,Servlet一般不设置这个值,而是由web服务器自己设置</td>
-</tr>
-<tr>
-<td align="left">Set-Cookie</td>
-<td>设置和页面关联的Cookie，Servlet不应使用response.setHeader(“Set-Cookie”,…),而是应使用HttpServletResponse提供的专用方法addCookie.</td>
-</tr>
-<tr>
-<td align="left">WWW-Authenticate</td>
-<td>客户应该在Authorization头提供什么类型的授权信息?在包含401(Unauthorized)状态行的应答中这个头是必需的,如:response.setHeader(“WWW-Authenticate”,”BASIC realm= \ “executives \ “”).<br><strong>注意</strong>:Servlet一般不进行这方面的处理,而是让web服务器的专门机制来控制受密码保护页面的访问(如:htaccess).</td>
-</tr>
-</tbody></table>
-<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><ul>
-<li>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求，当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的消息头(server header)用以响应浏览器的请求。</li>
-</ul>
-<h3 id="HTTP状态码分类"><a href="#HTTP状态码分类" class="headerlink" title="HTTP状态码分类"></a>HTTP状态码分类</h3><table>
-<thead>
-<tr>
-<th>分类</th>
-<th>分类描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1**</td>
-<td>信息，服务器收到请求，需要请求者继续执行操作。</td>
-</tr>
-<tr>
-<td>2**</td>
-<td>成功，操作被成功接收并处理。</td>
-</tr>
-<tr>
-<td>3**</td>
-<td>重定向，需要进一步的操作以完成请求。</td>
-</tr>
-<tr>
-<td>4**</td>
-<td>客户端错误，请求包含语法错误或无法完成请求。</td>
-</tr>
-<tr>
-<td>5**</td>
-<td>服务器错误，服务器在处理请求的过程中发生了错误。</td>
-</tr>
-</tbody></table>
-<h3 id="状态码列表"><a href="#状态码列表" class="headerlink" title="状态码列表"></a>状态码列表</h3><table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>状态码英文名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>100</td>
-<td>Continue</td>
-<td>继续，客户端应继续其请求。</td>
-</tr>
-<tr>
-<td>101</td>
-<td>Switching Protocols</td>
-<td>切换协议，服务器根据客户端的请求切换协议，只能切换到更高级的协议，例如：切换到HTTP的新版本协议。</td>
-</tr>
-<tr>
-<td>200</td>
-<td>OK</td>
-<td>请求成功，一般用于GET和POST请求。</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Created</td>
-<td>已创建，成功请求并创建了新的资源。</td>
-</tr>
-<tr>
-<td>202</td>
-<td>Accepted</td>
-<td>已接受，已经接收请求，但未处理成功。</td>
-</tr>
-<tr>
-<td>203</td>
-<td>Not-Authoritative Information</td>
-<td>非授权信息，请求成功，但返回的meta信息不在原始的服务器，而是一个副本。</td>
-</tr>
-<tr>
-<td>204</td>
-<td>No Content</td>
-<td>无内容，服务器成功处理，但未返回内容，在未更新网页的情况下，可确保浏览器继续显示当前文档。</td>
-</tr>
-<tr>
-<td>205</td>
-<td>Reset Content</td>
-<td>重置内容，服务器处理成功，用户终端（如：浏览器）应重置文档视图，可以通过返回码清楚浏览器的表单域。</td>
-</tr>
-<tr>
-<td>206</td>
-<td>Partial Content</td>
-<td>部分内容，服务器成功处理了部分GET请求。</td>
-</tr>
-<tr>
-<td>300</td>
-<td>Multiple Choices</td>
-<td>多种选择，请求的资源可包括多个位置，相应可返回一个资源特性与地址列表用于用户终端(如：浏览器)选择。</td>
-</tr>
-<tr>
-<td>301</td>
-<td>Moved Permanently</td>
-<td>永久移动，请求的资源已被永久的移动到新URI，返回信息会包含新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替。</td>
-</tr>
-<tr>
-<td>302</td>
-<td>Found</td>
-<td>临时移动，与301类似，但资源只是临时被移动，客户端继续使用原有的URI。</td>
-</tr>
-<tr>
-<td>303</td>
-<td>See Other</td>
-<td>查看其它地址，与301类似，使用GET和POST请求查看。</td>
-</tr>
-<tr>
-<td>304</td>
-<td>Not Modified</td>
-<td>未修改，所请求的资源未修改，服务器返回此状态码时，不会返回任何资源，客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源。</td>
-</tr>
-<tr>
-<td>305</td>
-<td>Use Proxy</td>
-<td>使用代理，所请求的资源必须通过代理访问。</td>
-</tr>
-<tr>
-<td>306</td>
-<td>Unused</td>
-<td>已被废弃。</td>
-</tr>
-<tr>
-<td>307</td>
-<td>Temporary Redirect</td>
-<td>临时重定向，与302类似，使用GET请求重定向。</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad Request</td>
-<td>客户端请求的1语法错误，服务器无法理解。</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-<td>请求要求用户的身份认证。</td>
-</tr>
-<tr>
-<td>402</td>
-<td>Payment Required</td>
-<td>保留，将来使用。</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden</td>
-<td>服务器理解请求客户端的请求，但是拒绝执行此请求。</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found</td>
-<td>服务器无法根据客户端的请求找到资源（网页），通过此代码，开发者可设置“您所请求的资源无法找到”的个性页面。</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed</td>
-<td>客户端请求中的方法被禁用。</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable</td>
-<td>服务器无法根据客户端请求的内容完成请求。</td>
-</tr>
-<tr>
-<td>407</td>
-<td>Proxy Authentication Required</td>
-<td>请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权。</td>
-</tr>
-<tr>
-<td>408</td>
-<td>Request Time-out</td>
-<td>服务器等待客户端发送的请求时间过长，超时。</td>
-</tr>
-<tr>
-<td>409</td>
-<td>Conflict</td>
-<td>服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突。</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone</td>
-<td>客户端请求的资源不存在，410不同于404，如果资源以前有现在被永久删除了可使用410，开发者可通过301代码指定资源的新位置。</td>
-</tr>
-<tr>
-<td>411</td>
-<td>Length Required</td>
-<td>服务器无法处理客户端发送的不带Content-Length的请求信息。</td>
-</tr>
-<tr>
-<td>412</td>
-<td>Precondition Failed</td>
-<td>客户端请求信息的先决条件错误。</td>
-</tr>
-<tr>
-<td>413</td>
-<td>Request Entity Too Large</td>
-<td>由于请求的实体过大，服务器无法处理，因此拒绝请求，为防止客户端的连续请求，服务器可能会关闭连接，如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息。</td>
-</tr>
-<tr>
-<td>414</td>
-<td>Request-URI Too Large</td>
-<td>请求的URI过长，服务器无法处理。</td>
-</tr>
-<tr>
-<td>415</td>
-<td>Unsupported Media Type</td>
-<td>服务器无法处理请求附带的媒体格式。</td>
-</tr>
-<tr>
-<td>416</td>
-<td>Requseted range not satisfiable</td>
-<td>客户端请求的范围无效。</td>
-</tr>
-<tr>
-<td>417</td>
-<td>Expectation Failed</td>
-<td>服务器无法满足Expect的请求头信息。</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error</td>
-<td>服务器内部错误，无法完成请求。</td>
-</tr>
-<tr>
-<td>501</td>
-<td>Not Implemented</td>
-<td>服务器不支持请求的功能，无法完成请求。</td>
-</tr>
-<tr>
-<td>502</td>
-<td>Bad Gateway</td>
-<td>作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到一个无效的响应。</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable</td>
-<td>由于超载或系统维护，服务器暂时的无法处理客户端的请求，延时的长度可包含在服务器的Retry-After头信息中</td>
-</tr>
-<tr>
-<td>504</td>
-<td>Gateway Time-out</td>
-<td>充当网关或代理服务器，未及时从远程服务器获取请求。</td>
-</tr>
-<tr>
-<td>505</td>
-<td>HTTP Version not supported</td>
-<td>服务器不支持请求的HTTP协议的版本，无法完成处理。</td>
-</tr>
-</tbody></table>
-<h3 id="HTTP-content-type"><a href="#HTTP-content-type" class="headerlink" title="HTTP content-type"></a>HTTP content-type</h3><ul>
-<li>Content-Type，内容类型，一般是指网页中存在的Content-Type，用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件，这就是经常看到一些Asp网页点击的结果却是下载到的一个文件或一张图片的原因。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Http</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java-Web//" class="article-tag-list-link color4">Java Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/19/Http/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -3317,6 +3027,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
@@ -3325,7 +3039,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -3337,15 +3051,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 集合 | MrYan</title>
+  <title>JVM(三)GC算法-垃圾收集器 | MrYan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="MrYan">
-<meta property="og:url" content="http://yoursite.com/tags/集合/index.html">
+  <meta name="description" content="概述​    垃圾收集通常被称之为”GC“,在jvm内,程序计数器,虚拟机栈,本地地方法栈都是随线程的生成而生成,随线程的销毁而销毁,栈帧随着方法的进入和退出做入栈和出栈操作,实现了自动的内存清理,因此,内存垃圾回收主要集中在java堆和方法区中,在程序运行期间,这部分的内存的分配和使用1都是动态的. 对象存活的判断判断对象是否存活一般有两种方式.  引用计数:每个对象有一个计数属性,新增一个引用">
+<meta name="keywords" content="jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM(三)GC算法-垃圾收集器">
+<meta property="og:url" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/index.html">
 <meta property="og:site_name" content="MrYan">
+<meta property="og:description" content="概述​    垃圾收集通常被称之为”GC“,在jvm内,程序计数器,虚拟机栈,本地地方法栈都是随线程的生成而生成,随线程的销毁而销毁,栈帧随着方法的进入和退出做入栈和出栈操作,实现了自动的内存清理,因此,内存垃圾回收主要集中在java堆和方法区中,在程序运行期间,这部分的内存的分配和使用1都是动态的. 对象存活的判断判断对象是否存活一般有两种方式.  引用计数:每个对象有一个计数属性,新增一个引用">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A82.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/CMS.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/G1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%9B%BE2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%9B%BE3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%A4%8D%E5%88%B6%E6%B8%85%E9%99%A4.jpg">
+<meta property="og:updated_time" content="2019-07-12T14:17:35.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MrYan">
+<meta name="twitter:title" content="JVM(三)GC算法-垃圾收集器">
+<meta name="twitter:description" content="概述​    垃圾收集通常被称之为”GC“,在jvm内,程序计数器,虚拟机栈,本地地方法栈都是随线程的生成而生成,随线程的销毁而销毁,栈帧随着方法的进入和退出做入栈和出栈操作,实现了自动的内存清理,因此,内存垃圾回收主要集中在java堆和方法区中,在程序运行期间,这部分的内存的分配和使用1都是动态的. 对象存活的判断判断对象是否存活一般有两种方式.  引用计数:每个对象有一个计数属性,新增一个引用">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8.jpg">
   
     <link rel="alternative" href="/atom.xml" title="MrYan" type="application/atom+xml">
   
@@ -148,75 +161,338 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JVM-三-GC算法-垃圾收集器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/17/集合总结/" class="archive-article-date">
-  	<time datetime="2019-03-17T11:12:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/17/集合总结/">集合总结</a>
+    <h1 class="article-title" itemprop="name">
+      JVM(三)GC算法-垃圾收集器
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/07/12/JVM-三-GC算法-垃圾收集器/" class="archive-article-date">
+  	<time datetime="2019-07-12T12:02:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>​    垃圾收集通常被称之为”<strong>GC</strong>“,在jvm内,程序计数器,虚拟机栈,本地地方法栈都是随线程的生成而生成,随线程的销毁而销毁,栈帧随着方法的进入和退出做入栈和出栈操作,实现了自动的内存清理,因此,内存垃圾回收主要集中在java堆和方法区中,在程序运行期间,这部分的内存的分配和使用1都是动态的.</p>
+<h2 id="对象存活的判断"><a href="#对象存活的判断" class="headerlink" title="对象存活的判断"></a>对象存活的判断</h2><p>判断对象是否存活一般有两种方式.</p>
+<ul>
+<li><p><strong>引用计数</strong>:每个对象有一个计数属性,新增一个引用时计数加1,引用释放时计数减1,计数为0时可以回收,此方法简单,无法解决对象相互循环引用的问题.</p>
+</li>
+<li><p><strong>可达性分析</strong>:从GC Roots开始向下搜寻,搜寻所走过的路径称之为引用链,当一个对象到GC Roots没有任何引用链相连时,则证明对象是不可用的,不可达对象.</p>
+</li>
+<li><p>在Java中,GC Roots包括:</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中静态属性实体引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI引用的对象<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2></li>
+</ul>
+</li>
+</ul>
+<h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><p>​    <strong>标记-清除</strong>算法分为”标记”和”清除”两个阶段:首先标记出所有需要回收的对象,在标记完成后统一回收掉所有被标记的对象,之所以说它是最基础的收集算法,是因为后续的收集算法都是基于这种思路并对其缺点进行改善而得到的.</p>
+<p>​    它主要有两个缺点:<strong>一是效率问题</strong>,标记和清除过程的效率都不高,<strong>二是空间问题</strong>,标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致,当程序在以后的运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另外一次垃圾收集动作.</p>
+<h4 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h4><p>​    GC分代的基本假设：绝大部分对象的生命周期都非常短暂，存活时间短。</p>
+<p>​    “<strong>分代收集</strong>”算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。而老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记-清理”或“标记-整理”算法来进行回收。</p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p>​    如果说收集算法是内存回收的方法论,垃圾收集器就是内存回收的具体实现</p>
+<h4 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h4><p>​    串行收集器是最稳定,效率最高的收集器,可能会产生较长的停顿,只使用一个线程去回收,新生代,老年代使用串行回收;新生代复制算法,老年代标记-压缩;垃圾收集的过程中会服务暂停.</p>
+<p>参数控制:<code>-XX:+UseSerialGC</code>串行收集器</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8.jpg" alt="串行收集器"></p>
+<p>​    ParNew收集器ParNew收集器就是Serial收集器的多线程版本,新生代并行,老年代串行;新生代复制算法,老年代标记-压缩.</p>
+<p>参数控制:</p>
+<ul>
+<li><p><code>-XX:+UseParNewGC</code>ParNew收集器</p>
+</li>
+<li><p><code>-XX:ParallelGCThreads</code>限制线程数量</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A82.jpg" alt="串行收集器2"></p>
+</li>
+</ul>
+<h4 id="Paralle收集器"><a href="#Paralle收集器" class="headerlink" title="Paralle收集器"></a>Paralle收集器</h4><p>​    Parallel   Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。可以通过参数来打开自适应调节策略，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或最大的吞吐量；也可以通过参数控制GC的时间不大于多少毫秒或者比例；新生代复制算法、老年代标记-压缩</p>
+<p>参数控制： <code>-XX:+UseParallelGC</code> 使用Parallel收集器+ 老年代串行</p>
+<h4 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h4><p>​    Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法。这个收集器是在JDK 1.6中才开始提供</p>
+<p>参数控制： <code>-XX:+UseParallelOldGC</code> 使用Parallel收集器+ 老年代并行</p>
+<h4 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h4><p>​    CMS收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用都集中在互联网站或B/S系统的服务端上，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。</p>
+<p>​    从名字（包含“Mark Sweep”）上就可以看出CMS收集器是基于“标记-清除”算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为4个步骤，包括：</p>
+<ul>
+<li>初始标记（CMS initial mark）</li>
+<li>并发标记（CMS concurrent mark）</li>
+<li>重新标记（CMS remark）</li>
+<li>并发清除（CMS concurrent sweep）</li>
+</ul>
+<p>​        其中初始标记、重新标记这两个步骤仍然需要“Stop  The World”。初始标记仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots  Tracing的过程，而重新标记阶段则是为了修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记的时间短。</p>
+<p>​    由于整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，所以总体上来说，CMS收集器的内存回收过程是与用户线程一起并发地执行。老年代收集器（新生代使用ParNew）</p>
+<p>​    <strong>优点</strong>: 并发收集、低停顿<br>​    <strong>缺点</strong>: 产生大量空间碎片、并发阶段会降低吞吐量</p>
+<p>参数控制:</p>
+<p><code>-XX:+UseConcMarkSweepGC</code> 使用CMS收集器<br><code>-XX:+ UseCMSCompactAtFullCollection</code> Full GC后，进行一次碎片整理；整理过程是独占的，会引起停顿时间变长<br><code>-XX:+CMSFullGCsBeforeCompaction</code> 设置进行几次Full GC后，进行一次碎片整理<br><code>-XX:ParallelCMSThreads</code> 设定CMS的线程数量（一般情况约等于可用CPU数量）    </p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/CMS.jpg" alt="CMS"></p>
+<h4 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h4><p>​    G1是目前技术发展的最前沿成果之一,与CMS收集器相比G1收集器有以下特点：</p>
+<ul>
+<li><p><strong>空间整合</strong>，G1收集器采用标记整理算法，不会产生内存空间碎片。分配大对象时不会因为无法找到连续空间而提前触发下一次GC。</p>
+</li>
+<li><p><strong>可预测停顿</strong>，这是G1的另一大优势，降低停顿时间是G1和CMS的共同关注点，但G1除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为N毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。</p>
+</li>
+</ul>
+<p>​        上面提到的垃圾收集器，收集的范围都是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔阂了，它们都是一部分（可以不连续）Region的集合。<img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/G1.jpg" alt="G1"></p>
+<p>​    G1的新生代收集跟ParNew类似，当新生代占用达到一定比例的时候，开始出发收集。和CMS类似，G1收集器收集老年代对象会有短暂停顿。</p>
+<p>收集步骤：</p>
+<p>1、标记阶段，首先初始标记(Initial-Mark),这个阶段是停顿的(Stop the World Event)，并且会触发一次普通Mintor GC。对应GC log:GC pause (young) (inital-mark)</p>
+<p>2、Root Region Scanning，程序运行过程中会回收survivor区(存活到老年代)，这一过程必须在young GC之前完成。</p>
+<p>3、Concurrent  Marking，在整个堆中进行并发标记(和应用程序并发执行)，此过程可能被young  GC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那个这个区域会被立即回收(图中打X)。同时，并发标记过程中，会计算每个区域的对象活性(区域中存活对象的比例)。<img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%9B%BE2.png" alt="图2"></p>
+<p>4、Remark, 再标记，会有短暂停顿(STW)。再标记阶段是用来收集 并发标记阶段 产生新的垃圾(并发阶段和应用程序一同运行)；G1中采用了比CMS更快的初始快照算法:snapshot-at-the-beginning (SATB)。</p>
+<p>5、Copy/Clean up，多线程清除失活对象，会有STW。G1将回收区域的存活对象拷贝到新区域，清除Remember Sets，并发清空回收区域并把它返回到空闲区域链表中。</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%9B%BE3.png" alt="图3"></p>
+<p>6、复制/清除过程后。回收区域的活性对象已经被集中回收到深蓝色和深绿色区域。</p>
+<p><img src="/2019/07/12/JVM-三-GC算法-垃圾收集器/%E5%A4%8D%E5%88%B6%E6%B8%85%E9%99%A4.jpg" alt="复制清除"></p>
+<h4 id="常用的收集器组合"><a href="#常用的收集器组合" class="headerlink" title="常用的收集器组合"></a>常用的收集器组合</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>新生代GC策略</th>
+<th>老年代GC策略</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>组合1</td>
+<td>Serial</td>
+<td>Serial Old</td>
+<td align="left">Serial和Serial Old都是单线程进行GC，特点就是GC时暂停所有应用线程。</td>
+</tr>
+<tr>
+<td>组合2</td>
+<td>Serial</td>
+<td>CMS+Serial Old</td>
+<td align="left">CMS（Concurrent Mark Sweep）是并发GC，实现GC线程和应用线程并发工作，不需要暂停所有应用线程。另外，当CMS进行GC失败时，会自动使用Serial Old策略进行GC。</td>
+</tr>
+<tr>
+<td>组合3</td>
+<td>ParNew</td>
+<td>CMS</td>
+<td align="left">使用 <code>-XX:+UseParNewGC</code>选项来开启。ParNew是Serial的并行版本，可以指定GC线程数，默认GC线程数为CPU的数量。可以使用-XX:ParallelGCThreads选项指定GC的线程数。如果指定了选项 <code>-XX:+UseConcMarkSweepGC</code>选项，则新生代默认使用ParNew GC策略。</td>
+</tr>
+<tr>
+<td>组合4</td>
+<td>ParNew</td>
+<td>Serial Old</td>
+<td align="left">使用 <code>-XX:+UseParNewGC</code>选项来开启。新生代使用ParNew GC策略，年老代默认使用Serial Old GC策略。</td>
+</tr>
+<tr>
+<td>组合5</td>
+<td>Parallel Scavenge</td>
+<td>Serial Old</td>
+<td align="left">Parallel Scavenge策略主要是关注一个可控的吞吐量：应用程序运行时间 / (应用程序运行时间 + GC时间)，可见这会使得CPU的利用率尽可能的高，适用于后台持久运行的应用程序，而不适用于交互较多的应用程序。</td>
+</tr>
+<tr>
+<td>组合6</td>
+<td>Parallel Scavenge</td>
+<td>Parallel Old</td>
+<td align="left">Parallel Old是Serial Old的并行版本</td>
+</tr>
+<tr>
+<td>组合7</td>
+<td>G1GC</td>
+<td>G1GC</td>
+<td align="left"><code>-XX:+UnlockExperimentalVMOptions</code> <code>-XX:+UseG1GC</code> #开启； <code>-XX:MaxGCPauseMillis=50</code> #暂停时间目标； <code>-XX:GCPauseIntervalMillis=200</code> #暂停间隔目标； <code>-XX:+G1YoungGenSize=512m</code> #年轻代大小； <code>-XX:SurvivorRatio=6</code> #幸存区比例</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/medias/reward/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/medias/reward/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/07/11/JVM-二-java类的加载机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM(二)java类的加载机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JVM-三-GC算法-垃圾收集器" data-title="JVM(三)GC算法-垃圾收集器" data-url="http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2019/07/12/JVM-三-GC算法-垃圾收集器/", 
+    sourceId: "JVM-三-GC算法-垃圾收集器",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="JVM-三-GC算法-垃圾收集器" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -239,9 +515,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
