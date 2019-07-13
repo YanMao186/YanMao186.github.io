@@ -150,6 +150,266 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/19/多线程/">多线程(1)基础</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/19/多线程/" class="archive-article-date">
+  	<time datetime="2019-03-19T09:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="java多线程"><a href="#java多线程" class="headerlink" title="java多线程"></a>java多线程</h1><h2 id="相关概念讲解"><a href="#相关概念讲解" class="headerlink" title="相关概念讲解"></a>相关概念讲解</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><ul>
+<li>是指一个内存中运行的应用程序，每个进程都有独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位，系统运行一个程序即是一个进程从创建，运行到消亡的过程。</li>
+</ul>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><ul>
+<li><p>进程内部的一个独立执行单元；一个进程可以同时并发的运行多个线程，可以理解为进程便相当于一个单CPU操作系统，而线程便是这个系统中运行的多个任务。</p>
+</li>
+<li><p><code>windows系统中任务管理器，下图</code></p>
+</li>
+</ul>
+<p><img src="/2019/03/19/多线程/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
+<ul>
+<li><code>简单说如果进程是火车的话，那么线程就是火车的每一节车厢</code></li>
+<li><code>多线程优点</code><ul>
+<li>不会阻塞用户，因为线程是独立的，可以同时执行多个操作。</li>
+<li>可以一起执行许多操作，节省时间。</li>
+<li>线程是独立的，因此如果在单个线程中发生异常，他不会影响其他线程。</li>
+</ul>
+</li>
+</ul>
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><ul>
+<li>指两个或两个以上事件在同一时刻发生。</li>
+<li><code>简单说就是你在吃饭的时候，电话响了，你一边打电话，一边吃饭</code></li>
+</ul>
+<h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><ul>
+<li>指两个或多个事件在同一时间段内发生。</li>
+<li><code>简单说就是你在吃饭的时候，电话响了，然后你去接电话，电话打完又接着吃饭</code></li>
+</ul>
+<p><img src="/2019/03/19/多线程/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
+<h3 id="多任务处理"><a href="#多任务处理" class="headerlink" title="多任务处理"></a>多任务处理</h3><ul>
+<li>多任务处理是同时执行多个任务的过程，使用多任务来利用CPU，多任务处理可以通过两种方式实现：<ol>
+<li>基于进程的多任务处理（多进程）</li>
+<li>基于线程的多任务处理（多线程）</li>
+</ol>
+</li>
+<li><strong>基于进程的多任务处理</strong><ul>
+<li>每个进程在内存中都有一个地址，也就是说，每个进程分配一个单独的内存区域。</li>
+<li>进程是重量级的。</li>
+<li>进程之间通信的成本很高。</li>
+<li>从一个进程切换到另一个进程需要一些时间来保存和加载寄存器，内存映射，更新列表等。</li>
+</ul>
+</li>
+<li><strong>基于线程的多任务处理</strong><ul>
+<li>线程共享相同的地址空间。</li>
+<li>线程是轻量级的。</li>
+<li>线程之间通信成本很低。</li>
+<li>一次只能执行一个线程。</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程的生命周期（线程状态）"><a href="#线程的生命周期（线程状态）" class="headerlink" title="线程的生命周期（线程状态）"></a>线程的生命周期（线程状态）</h2><ul>
+<li>线程的生命周期，线程的生命周期由JVM控制。<ol>
+<li><strong>初始(New)：</strong>新创建一个线程对象，但还没有调用<strong>start()</strong>方法。</li>
+<li><strong>运行(Runnable)：</strong>java线程中将<strong>就绪(ready)</strong>和<strong>运行中(running)</strong>两种状态统称为“运行”。线程对象创建后，其他线程（如main线程）调用该对象的<strong>start()</strong>方法。该状态的线程位于可运行线程池中，等待被线程调度选中，获取CPU的使用权，此时处于<strong>就绪状态(ready)</strong>。就绪状态的线程在获得CPU时间后变为<strong>运行中状态(running)</strong>。</li>
+<li><strong>阻塞(Blocked):</strong>表示线程阻塞于锁。</li>
+<li><strong>等待(Waiting):</strong>进入该状态的线程需要等待其他线程做出一些特定动作(通知或中断)。</li>
+<li><strong>超时等待(Timed_Waiting):</strong>该状态不同于<strong>Waiting</strong>，它可以在指定的时间后自行返回。</li>
+<li><strong>终止(Terminated):</strong>表示该线程已经执行完毕。</li>
+</ol>
+</li>
+</ul>
+<p><img src="/2019/03/19/多线程/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
+<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><ol>
+<li><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</li>
+<li><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</li>
+<li><strong>运行(Running)：</strong>如果线程调度程序已选择它，则线程处于运行状态.</li>
+<li><strong>阻塞(Blocked):</strong>这时线程仍处于活动状态但当前没有资格运行的状态。</li>
+<li><strong>终止(Terminated):</strong>当<strong>run()</strong>方法退出时，线程处于终止或死亡状态。</li>
+</ol>
+<h3 id="线程创建方式"><a href="#线程创建方式" class="headerlink" title="线程创建方式"></a>线程创建方式</h3><ul>
+<li>创建线程的方式有<ul>
+<li>通过继承<strong>Thread</strong>类</li>
+<li>通过实现<strong>Runnable</strong>接口</li>
+</ul>
+</li>
+</ul>
+<h2 id="Thread类简单介绍"><a href="#Thread类简单介绍" class="headerlink" title="Thread类简单介绍"></a>Thread类简单介绍</h2><ul>
+<li><strong>Thread</strong>类提供了在线程上创建和执行操作的构造函数和方法，<strong>Thread</strong>类扩展了<strong>Object</strong>类并实现了<strong>Runnable</strong>接口。</li>
+</ul>
+<p><img src="/2019/03/19/多线程/Thread%E7%B1%BB.png" alt="1552993473274"></p>
+<h3 id="常用的Thread类构造函数"><a href="#常用的Thread类构造函数" class="headerlink" title="常用的Thread类构造函数"></a>常用的<strong>Thread</strong>类构造函数</h3><ul>
+<li><code>Thread()</code></li>
+<li><code>Thread(String name)</code></li>
+<li><code>Thread(Runnable r)</code></li>
+<li><code>Thread(Runnable r,String name)</code></li>
+</ul>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>概述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public void run()</td>
+<td>用于执行线程的操作</td>
+</tr>
+<tr>
+<td>public void start()</td>
+<td>开始执行线程，JVM调用线程上的run()方法</td>
+</tr>
+<tr>
+<td>public void sleep(long miliseconds)</td>
+<td>按指定的毫秒数等待线程死亡</td>
+</tr>
+<tr>
+<td>public void join()</td>
+<td>等待线程死亡</td>
+</tr>
+<tr>
+<td>public void join(long miliseconds)</td>
+<td>按指定的毫秒数等待线程死亡</td>
+</tr>
+<tr>
+<td>public void getPriority()</td>
+<td>返回线程的优先级</td>
+</tr>
+<tr>
+<td>public void setPriority(int priority)</td>
+<td>更改线程的优先级</td>
+</tr>
+<tr>
+<td>public void stop()</td>
+<td>用于停止线程(deprivated)</td>
+</tr>
+</tbody></table>
+<h3 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"线程启动"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread1 th = <span class="keyword">new</span> Thread1();</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(th);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>控制台输出</li>
+</ul>
+<p><img src="/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<ul>
+<li>join方法简单演示</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:join()无参方法测试</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-21 20:53</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemo1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.print(i + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JoinDemo1 dj1 = <span class="keyword">new</span> JoinDemo1();</span><br><span class="line">        JoinDemo1 dj2 = <span class="keyword">new</span> JoinDemo1();</span><br><span class="line">        JoinDemo1 dj3 = <span class="keyword">new</span> JoinDemo1();</span><br><span class="line">        dj1.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            dj1.join();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        dj2.start();</span><br><span class="line">        dj3.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>控制台输出</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">4</span> <span class="number">4</span> <span class="number">5</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">7</span> <span class="number">7</span> <span class="number">8</span> <span class="number">8</span> <span class="number">9</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>我们可以看到当dj1执行完毕之后，dj2和dj3才开始执行</li>
+<li>join(long miliseconds)方法简单演示</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemo2</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JoinDemo2 jd1 = <span class="keyword">new</span> JoinDemo2();</span><br><span class="line">        JoinDemo2 jd2 = <span class="keyword">new</span> JoinDemo2();</span><br><span class="line">        JoinDemo2 jd3 = <span class="keyword">new</span> JoinDemo2();</span><br><span class="line">        jd1.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jd1.join(<span class="number">2000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        jd2.start();</span><br><span class="line">        jd3.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看控制台发现，当jd1完成其任务2000毫秒后，jd2和jd3才开始执行</li>
+</ul>
+<h2 id="Runnable接口简单介绍"><a href="#Runnable接口简单介绍" class="headerlink" title="Runnable接口简单介绍"></a>Runnable接口简单介绍</h2><ul>
+<li><p><strong>Runnable</strong>接口由任何其实例由线程执行类实现，<strong>Runnable</strong>接口只有一个<strong>run()</strong>方法。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>; <span class="comment">//用于执行线程的操作</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="代码演示-1"><a href="#代码演示-1" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"线程启动"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread1 th = <span class="keyword">new</span> Thread1();</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(th);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>控制台输出</li>
+</ul>
+<p><img src="/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
+<h2 id="Thread-与-Runnable区别"><a href="#Thread-与-Runnable区别" class="headerlink" title="Thread 与 Runnable区别"></a>Thread 与 Runnable区别</h2><ul>
+<li>使用继承的话，不适合资源共享，实现接口，容易实现资源共享。</li>
+<li>java是单继承，多实现的。</li>
+</ul>
+<h2 id="Thread类中的start-与-run-方法的区别"><a href="#Thread类中的start-与-run-方法的区别" class="headerlink" title="Thread类中的start() 与 run() 方法的区别"></a>Thread类中的start() 与 run() 方法的区别</h2><ul>
+<li><strong>start()</strong>方法用来启动新创建的线程。</li>
+<li><strong>run()</strong>方法只会在原来线程中调用，没有新线程的启动。</li>
+</ul>
+<p><a href="https://github.com/YanMao186/Thread" target="_blank" rel="noopener">本案例代码均已放置到github，点击获取</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/19/多线程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Http" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

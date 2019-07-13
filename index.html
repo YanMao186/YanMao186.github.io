@@ -150,6 +150,170 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-四-JVM优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/13/JVM-四-JVM优化/">JVM(四)JVM优化</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/13/JVM-四-JVM优化/" class="archive-article-date">
+  	<time datetime="2019-07-13T03:28:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常用的JVM优化工具介绍"><a href="#常用的JVM优化工具介绍" class="headerlink" title="常用的JVM优化工具介绍"></a>常用的JVM优化工具介绍</h2><h4 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h4><p>​    JVM Process Status Tool,显式指定系统内所有的HotSpot虚拟机进程.</p>
+<ul>
+<li><p><strong>命令格式</strong></p>
+<p><code>jps [options] [hostid]</code></p>
+</li>
+<li><p><strong>option参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-l:输出主类全名或jar路径</span><br><span class="line">-q:只输出LVMID</span><br><span class="line">-m:输出JVM启动时传递给main()的参数</span><br><span class="line">-v:输出JVM启动时显示指定的JVM参数</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>演示</strong></p>
+</li>
+</ul>
+<p><img src="/2019/07/13/JVM-四-JVM优化/jps%E6%BC%94%E7%A4%BA.png" alt="jps演示"></p>
+<h4 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h4><p>​    jstat(JVM statisics Monitoring)是用于监视虚拟机运行时状态信息的命令,可以显示出虚拟机进程中的类装载,内存,垃圾收集,JIT编译等运行数据</p>
+<ul>
+<li><p><strong>命令格式</strong></p>
+<p><code>jstat [option] LVMID [interval] [count]</code></p>
+</li>
+<li><p><strong>参数</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[option]:操作参数</span><br><span class="line"><span class="function"> LVMID:本地虚拟机进程<span class="title">ID</span></span></span><br><span class="line"><span class="function">[<span class="title">interval</span>]:连续输出的时间间隔</span></span><br><span class="line"><span class="function">[<span class="title">count</span>]:连续输出的次数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>option参数讲解</strong></p>
+<ol>
+<li>class:监视类加载,卸载数量,总空间以及耗费的时间</li>
+</ol>
+</li>
+</ul>
+<p><img src="/2019/07/13/JVM-四-JVM优化/jstatclass.png" alt="jstatclass"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Loader:加载<span class="title">class</span>的数量</span></span><br><span class="line"><span class="function"><span class="title">Bytes:class</span>字节大小</span></span><br><span class="line"><span class="function"><span class="title">Unloaded</span>:未加载<span class="title">class</span>的数量</span></span><br><span class="line"><span class="function"><span class="title">Bytes</span>:未加载<span class="title">class</span>的字节大小</span></span><br><span class="line"><span class="function"><span class="title">Time</span>:加载时间</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>2. compiler:输出JIT编译过的方法数量耗时等</code></pre><p><img src="/2019/07/13/JVM-四-JVM优化/compiler.png" alt="compiler"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Compiled:编译数量</span></span><br><span class="line"><span class="function"><span class="title">Failed</span>:编译失败数量</span></span><br><span class="line"><span class="function"><span class="title">Invalid</span>:无效数量</span></span><br><span class="line"><span class="function"><span class="title">Time</span>:编译耗时</span></span><br><span class="line"><span class="function"><span class="title">FailedType</span>:失败类型</span></span><br><span class="line"><span class="function"><span class="title">FailedMethod</span>:失败方法的全限定名</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>gc:垃圾回收堆的行为统计</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gc.png" alt="gc"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">S0C : survivor0区的总容量</span><br><span class="line">S1C : survivor1区的总容量</span><br><span class="line">S0U : survivor0区已使用的容量</span><br><span class="line">S1C : survivor1区已使用的容量</span><br><span class="line">EC : Eden区的总容量</span><br><span class="line">EU : Eden区已使用的容量</span><br><span class="line">OC : Old区的总容量</span><br><span class="line">OU : Old区已使用的容量</span><br><span class="line">PC 当前perm的容量 (KB)</span><br><span class="line">PU perm的使用 (KB)</span><br><span class="line">YGC : 新生代垃圾回收次数</span><br><span class="line">YGCT : 新生代垃圾回收时间</span><br><span class="line">FGC : 老年代垃圾回收次数</span><br><span class="line">FGCT : 老年代垃圾回收时间</span><br><span class="line">GCT : 垃圾回收总消耗时间</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jstat -gc 11660 5000 100</span><br><span class="line"><span class="meta">#</span> 每隔5000ms输出11660的gc情况,一共输出100次</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>gccapacity:与gc相同,不过还会输出Java堆各区域使用到的最大,最小空间</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gccapacity.png" alt="gccapacity"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NGCMN : 新生代占用的最小空间</span><br><span class="line">NGCMX : 新生代占用的最大空间</span><br><span class="line">OGCMN : 老年代占用的最小空间</span><br><span class="line">OGCMX : 老年代占用的最大空间</span><br><span class="line">OGC：当前年老代的容量 (KB)</span><br><span class="line">OC：当前年老代的空间 (KB)</span><br><span class="line">PGCMN : perm占用的最小空间</span><br><span class="line">PGCMX : perm占用的最大空间</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>gcutil:同gc,不过输出的是已使用空间占总空间的百分比</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gcutil.png" alt="gcutil"></p>
+<ol start="6">
+<li>gccause:垃圾收集统计概述,附加最近两次垃圾回收事件到的原因</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gccause.png" alt="gccause"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LGCC:最近垃圾回收的原因</span></span><br><span class="line"><span class="function"><span class="title">GCC</span>:当前垃圾回收的原因</span></span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>gcnew:统计新生代1的行为</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gcnew.png" alt="gcnew"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TT：Tenuring threshold(提升阈值)</span><br><span class="line">MTT：最大的tenuring threshold</span><br><span class="line">DSS：survivor区域大小 (KB)</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>gcnewcapacity:新生代与其相应的内存空间的统计</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gcnewcapacity.png" alt="gcnewcapacity"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">NGC:当前年轻代的容量 (<span class="title">KB</span>)</span></span><br><span class="line"><span class="function"><span class="title">S0CMX</span>:最大的<span class="title">S0</span>空间 (<span class="title">KB</span>)</span></span><br><span class="line"><span class="function"><span class="title">S0C</span>:当前<span class="title">S0</span>空间 (<span class="title">KB</span>)</span></span><br><span class="line"><span class="function"><span class="title">ECMX</span>:最大<span class="title">eden</span>空间 (<span class="title">KB</span>)</span></span><br><span class="line"><span class="function"><span class="title">EC</span>:当前<span class="title">eden</span>空间 (<span class="title">KB</span>)</span></span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>gcold:统计旧生代的行为</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gcold.png" alt="gcold"></p>
+<ol start="10">
+<li>gcoldcapacity:统计旧生代的大小和空间</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/gcoldcapacity.png" alt="gcoldcapacity"></p>
+<ol start="11">
+<li>printcompilation:hotspot编译方法统计</li>
+</ol>
+<p><img src="/2019/07/13/JVM-四-JVM优化/Snipaste_2019-07-13_16-55-48.png" alt="Snipaste_2019-07-13_16-55-48"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Compiled：被执行的编译任务的数量</span><br><span class="line">Size：方法字节码的字节数</span><br><span class="line"><span class="built_in">Type</span>：编译类型</span><br><span class="line">Method：编译方法的类名和方法名。类名使用"/" 代替 "." 作为空间分隔符. 方法名是给出类的方法名. 格式是一致于HotSpot - XX:+PrintComplation 选项</span><br></pre></td></tr></table></figure>
+
+<h4 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h4><ul>
+<li><p>命令格式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmap [option] LVMID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>option参数</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dump : 生成堆转储快照</span><br><span class="line">finalizerinfo : 显示在F-Queue队列等待Finalizer线程执行finalizer方法的对象</span><br><span class="line">heap : 显示Java堆详细信息</span><br><span class="line">histo : 显示堆中对象的统计信息</span><br><span class="line">permstat : to <span class="built_in">print</span> permanent generation statistics</span><br><span class="line">F : 当-dump没有响应时，强制生成dump快照</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/13/JVM-四-JVM优化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JVM-三-GC算法-垃圾收集器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2649,266 +2813,6 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/03/19/多线程2并发/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/19/多线程/">多线程(1)基础</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/19/多线程/" class="archive-article-date">
-  	<time datetime="2019-03-19T09:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="java多线程"><a href="#java多线程" class="headerlink" title="java多线程"></a>java多线程</h1><h2 id="相关概念讲解"><a href="#相关概念讲解" class="headerlink" title="相关概念讲解"></a>相关概念讲解</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><ul>
-<li>是指一个内存中运行的应用程序，每个进程都有独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位，系统运行一个程序即是一个进程从创建，运行到消亡的过程。</li>
-</ul>
-<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><ul>
-<li><p>进程内部的一个独立执行单元；一个进程可以同时并发的运行多个线程，可以理解为进程便相当于一个单CPU操作系统，而线程便是这个系统中运行的多个任务。</p>
-</li>
-<li><p><code>windows系统中任务管理器，下图</code></p>
-</li>
-</ul>
-<p><img src="/2019/03/19/多线程/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="1552987356275"></p>
-<ul>
-<li><code>简单说如果进程是火车的话，那么线程就是火车的每一节车厢</code></li>
-<li><code>多线程优点</code><ul>
-<li>不会阻塞用户，因为线程是独立的，可以同时执行多个操作。</li>
-<li>可以一起执行许多操作，节省时间。</li>
-<li>线程是独立的，因此如果在单个线程中发生异常，他不会影响其他线程。</li>
-</ul>
-</li>
-</ul>
-<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><ul>
-<li>指两个或两个以上事件在同一时刻发生。</li>
-<li><code>简单说就是你在吃饭的时候，电话响了，你一边打电话，一边吃饭</code></li>
-</ul>
-<h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><ul>
-<li>指两个或多个事件在同一时间段内发生。</li>
-<li><code>简单说就是你在吃饭的时候，电话响了，然后你去接电话，电话打完又接着吃饭</code></li>
-</ul>
-<p><img src="/2019/03/19/多线程/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91.png" alt="1552987892866"></p>
-<h3 id="多任务处理"><a href="#多任务处理" class="headerlink" title="多任务处理"></a>多任务处理</h3><ul>
-<li>多任务处理是同时执行多个任务的过程，使用多任务来利用CPU，多任务处理可以通过两种方式实现：<ol>
-<li>基于进程的多任务处理（多进程）</li>
-<li>基于线程的多任务处理（多线程）</li>
-</ol>
-</li>
-<li><strong>基于进程的多任务处理</strong><ul>
-<li>每个进程在内存中都有一个地址，也就是说，每个进程分配一个单独的内存区域。</li>
-<li>进程是重量级的。</li>
-<li>进程之间通信的成本很高。</li>
-<li>从一个进程切换到另一个进程需要一些时间来保存和加载寄存器，内存映射，更新列表等。</li>
-</ul>
-</li>
-<li><strong>基于线程的多任务处理</strong><ul>
-<li>线程共享相同的地址空间。</li>
-<li>线程是轻量级的。</li>
-<li>线程之间通信成本很低。</li>
-<li>一次只能执行一个线程。</li>
-</ul>
-</li>
-</ul>
-<h2 id="线程的生命周期（线程状态）"><a href="#线程的生命周期（线程状态）" class="headerlink" title="线程的生命周期（线程状态）"></a>线程的生命周期（线程状态）</h2><ul>
-<li>线程的生命周期，线程的生命周期由JVM控制。<ol>
-<li><strong>初始(New)：</strong>新创建一个线程对象，但还没有调用<strong>start()</strong>方法。</li>
-<li><strong>运行(Runnable)：</strong>java线程中将<strong>就绪(ready)</strong>和<strong>运行中(running)</strong>两种状态统称为“运行”。线程对象创建后，其他线程（如main线程）调用该对象的<strong>start()</strong>方法。该状态的线程位于可运行线程池中，等待被线程调度选中，获取CPU的使用权，此时处于<strong>就绪状态(ready)</strong>。就绪状态的线程在获得CPU时间后变为<strong>运行中状态(running)</strong>。</li>
-<li><strong>阻塞(Blocked):</strong>表示线程阻塞于锁。</li>
-<li><strong>等待(Waiting):</strong>进入该状态的线程需要等待其他线程做出一些特定动作(通知或中断)。</li>
-<li><strong>超时等待(Timed_Waiting):</strong>该状态不同于<strong>Waiting</strong>，它可以在指定的时间后自行返回。</li>
-<li><strong>终止(Terminated):</strong>表示该线程已经执行完毕。</li>
-</ol>
-</li>
-</ul>
-<p><img src="/2019/03/19/多线程/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
-<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><ol>
-<li><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</li>
-<li><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</li>
-<li><strong>运行(Running)：</strong>如果线程调度程序已选择它，则线程处于运行状态.</li>
-<li><strong>阻塞(Blocked):</strong>这时线程仍处于活动状态但当前没有资格运行的状态。</li>
-<li><strong>终止(Terminated):</strong>当<strong>run()</strong>方法退出时，线程处于终止或死亡状态。</li>
-</ol>
-<h3 id="线程创建方式"><a href="#线程创建方式" class="headerlink" title="线程创建方式"></a>线程创建方式</h3><ul>
-<li>创建线程的方式有<ul>
-<li>通过继承<strong>Thread</strong>类</li>
-<li>通过实现<strong>Runnable</strong>接口</li>
-</ul>
-</li>
-</ul>
-<h2 id="Thread类简单介绍"><a href="#Thread类简单介绍" class="headerlink" title="Thread类简单介绍"></a>Thread类简单介绍</h2><ul>
-<li><strong>Thread</strong>类提供了在线程上创建和执行操作的构造函数和方法，<strong>Thread</strong>类扩展了<strong>Object</strong>类并实现了<strong>Runnable</strong>接口。</li>
-</ul>
-<p><img src="/2019/03/19/多线程/Thread%E7%B1%BB.png" alt="1552993473274"></p>
-<h3 id="常用的Thread类构造函数"><a href="#常用的Thread类构造函数" class="headerlink" title="常用的Thread类构造函数"></a>常用的<strong>Thread</strong>类构造函数</h3><ul>
-<li><code>Thread()</code></li>
-<li><code>Thread(String name)</code></li>
-<li><code>Thread(Runnable r)</code></li>
-<li><code>Thread(Runnable r,String name)</code></li>
-</ul>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>概述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public void run()</td>
-<td>用于执行线程的操作</td>
-</tr>
-<tr>
-<td>public void start()</td>
-<td>开始执行线程，JVM调用线程上的run()方法</td>
-</tr>
-<tr>
-<td>public void sleep(long miliseconds)</td>
-<td>按指定的毫秒数等待线程死亡</td>
-</tr>
-<tr>
-<td>public void join()</td>
-<td>等待线程死亡</td>
-</tr>
-<tr>
-<td>public void join(long miliseconds)</td>
-<td>按指定的毫秒数等待线程死亡</td>
-</tr>
-<tr>
-<td>public void getPriority()</td>
-<td>返回线程的优先级</td>
-</tr>
-<tr>
-<td>public void setPriority(int priority)</td>
-<td>更改线程的优先级</td>
-</tr>
-<tr>
-<td>public void stop()</td>
-<td>用于停止线程(deprivated)</td>
-</tr>
-</tbody></table>
-<h3 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"线程启动"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread1 th = <span class="keyword">new</span> Thread1();</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(th);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>控制台输出</li>
-</ul>
-<p><img src="/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
-<ul>
-<li>join方法简单演示</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: Bridge Pattern</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:join()无参方法测试</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Mr.Yan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-03-21 20:53</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemo1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.print(i + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JoinDemo1 dj1 = <span class="keyword">new</span> JoinDemo1();</span><br><span class="line">        JoinDemo1 dj2 = <span class="keyword">new</span> JoinDemo1();</span><br><span class="line">        JoinDemo1 dj3 = <span class="keyword">new</span> JoinDemo1();</span><br><span class="line">        dj1.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            dj1.join();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        dj2.start();</span><br><span class="line">        dj3.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>控制台输出</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">4</span> <span class="number">4</span> <span class="number">5</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">7</span> <span class="number">7</span> <span class="number">8</span> <span class="number">8</span> <span class="number">9</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>我们可以看到当dj1执行完毕之后，dj2和dj3才开始执行</li>
-<li>join(long miliseconds)方法简单演示</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemo2</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JoinDemo2 jd1 = <span class="keyword">new</span> JoinDemo2();</span><br><span class="line">        JoinDemo2 jd2 = <span class="keyword">new</span> JoinDemo2();</span><br><span class="line">        JoinDemo2 jd3 = <span class="keyword">new</span> JoinDemo2();</span><br><span class="line">        jd1.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jd1.join(<span class="number">2000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        jd2.start();</span><br><span class="line">        jd3.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看控制台发现，当jd1完成其任务2000毫秒后，jd2和jd3才开始执行</li>
-</ul>
-<h2 id="Runnable接口简单介绍"><a href="#Runnable接口简单介绍" class="headerlink" title="Runnable接口简单介绍"></a>Runnable接口简单介绍</h2><ul>
-<li><p><strong>Runnable</strong>接口由任何其实例由线程执行类实现，<strong>Runnable</strong>接口只有一个<strong>run()</strong>方法。</p>
-</li>
-<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>; <span class="comment">//用于执行线程的操作</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="代码演示-1"><a href="#代码演示-1" class="headerlink" title="代码演示"></a>代码演示</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"线程启动"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread1 th = <span class="keyword">new</span> Thread1();</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(th);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>控制台输出</li>
-</ul>
-<p><img src="/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt></p>
-<h2 id="Thread-与-Runnable区别"><a href="#Thread-与-Runnable区别" class="headerlink" title="Thread 与 Runnable区别"></a>Thread 与 Runnable区别</h2><ul>
-<li>使用继承的话，不适合资源共享，实现接口，容易实现资源共享。</li>
-<li>java是单继承，多实现的。</li>
-</ul>
-<h2 id="Thread类中的start-与-run-方法的区别"><a href="#Thread类中的start-与-run-方法的区别" class="headerlink" title="Thread类中的start() 与 run() 方法的区别"></a>Thread类中的start() 与 run() 方法的区别</h2><ul>
-<li><strong>start()</strong>方法用来启动新创建的线程。</li>
-<li><strong>run()</strong>方法只会在原来线程中调用，没有新线程的启动。</li>
-</ul>
-<p><a href="https://github.com/YanMao186/Thread" target="_blank" rel="noopener">本案例代码均已放置到github，点击获取</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/19/多线程/">展开全文 >></a>
         </p>
       
 
