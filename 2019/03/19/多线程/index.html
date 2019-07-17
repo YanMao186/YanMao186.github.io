@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/Thread%E7%B1%BB.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/19/多线程/%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
-<meta property="og:updated_time" content="2019-03-30T03:22:42.731Z">
+<meta property="og:updated_time" content="2019-07-17T07:58:20.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程(1)基础">
 <meta name="twitter:description" content="java多线程相关概念讲解进程 是指一个内存中运行的应用程序，每个进程都有独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位，系统运行一个程序即是一个进程从创建，运行到消亡的过程。  线程 进程内部的一个独立执行单元；一个进程可以同时并发的运行多个线程，可以理解为进程便相当于一个单CPU操作系统，而线程便是这个系统中运行的多个任务。  windo">
@@ -242,11 +242,26 @@
 </ul>
 <p><img src="/2019/03/19/多线程/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt></p>
 <h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><ol>
-<li><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</li>
-<li><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</li>
-<li><strong>运行(Running)：</strong>如果线程调度程序已选择它，则线程处于运行状态.</li>
-<li><strong>阻塞(Blocked):</strong>这时线程仍处于活动状态但当前没有资格运行的状态。</li>
-<li><strong>终止(Terminated):</strong>当<strong>run()</strong>方法退出时，线程处于终止或死亡状态。</li>
+<li><p><strong>新建(new):</strong>如果创建<strong>Thread</strong>类的实例但在调用<strong>start()</strong>方法前，线程处于新建(new)状态。</p>
+</li>
+<li><p><strong>就绪(Runnable)：</strong>调用<strong>start()</strong>方法后，线程处于<strong>runnable</strong>状态，但线程调度程序尚未选择它作为正在运行的线程。</p>
+</li>
+<li><p><strong>运行(Running)：</strong>如果线程调度程序已选择它，则线程处于运行状态.</p>
+</li>
+<li><p><strong>阻塞(Blocked):</strong>这时线程仍处于活动状态但当前没有资格运行的状态，阻塞分为三种：</p>
+<ul>
+<li><strong>等待阻塞(o.wait—&gt;等待队列):</strong>运行(running)中的线程执行o.wait()方法，JVM会把该线程放入等待队列(waitting queue)中。</li>
+<li><strong>同步阻塞(lock—&gt;锁池):</strong>运行(running)的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池(lock pool)中。</li>
+<li><strong>其他阻塞(sleep/join):</strong>运行(running)的线程执行Thread.sleep(long ms)或t.join()方法，或者发出I/O请求时，JVM会把该线程置为阻塞状态，当sleep()状态超时，join()等待线程终止或者超时，或者I/O处理完毕时，线程重新转入可运行(runnable)状态。</li>
+</ul>
+</li>
+<li><p><strong>终止(Terminated):</strong>线程处于终止或死亡状态,分为以下三种情况:</p>
+<ul>
+<li><strong>正常结束:</strong>run()或call()方法执行完毕，线程正常结束。</li>
+<li><strong>异常结束:</strong>线程抛出一个未捕获的Exception或Error。</li>
+<li><strong>调用stop:</strong>直接调用该线程的stop()方法来结束该线程，不推荐使用(易导致死锁)。</li>
+</ul>
+</li>
 </ol>
 <h3 id="线程创建方式"><a href="#线程创建方式" class="headerlink" title="线程创建方式"></a>线程创建方式</h3><ul>
 <li>创建线程的方式有<ul>
@@ -348,8 +363,18 @@
 <li>java是单继承，多实现的。</li>
 </ul>
 <h2 id="Thread类中的start-与-run-方法的区别"><a href="#Thread类中的start-与-run-方法的区别" class="headerlink" title="Thread类中的start() 与 run() 方法的区别"></a>Thread类中的start() 与 run() 方法的区别</h2><ul>
-<li><strong>start()</strong>方法用来启动新创建的线程。</li>
-<li><strong>run()</strong>方法只会在原来线程中调用，没有新线程的启动。</li>
+<li><strong>start()</strong>方法来启动线程，真正实现了多线程运行。这时无需等待 run 方法体代码执行完毕，可以直接继续执行下面的代码</li>
+<li>通过调用 Thread 类的 start()方法来启动一个线程， 这时此线程是处于就绪状态 ,并没有运行。</li>
+<li>方法 <strong>run()</strong>称为线程体，它包含了要执行的这个线程的内容，线程就进入了运行状态，开始运行 run 函数当中的代码。 Run 方法运行结束， 此线程终止。然后 CPU 再调度其它线程</li>
+</ul>
+<h2 id="Java后台线程"><a href="#Java后台线程" class="headerlink" title="Java后台线程"></a>Java后台线程</h2><ul>
+<li><strong>定义：</strong>守护线程也称为“服务线程”，他是后台线程，它具有一个特点，即为用户线程提供公共服务，在没有用户线程可服务时会自动离开。</li>
+<li><strong>优先级：</strong>守护线程的优先级比较低，用于为系统中的其他对象和线程提供服务。</li>
+<li><strong>设置：</strong>通过<code>setDaemon(true)</code>来设置线程为“守护线程”，将一个用户线程设置为守护线程的方式是在线程对象创建之前用线程对象的<code>setDaemon()</code>方法。</li>
+<li>在<code>Daemon</code>线程中产生的新线程也是<code>Daemon</code>的。</li>
+<li>线程是JVM级别的，以Tomcat为例，如果你在Web应用中启动一个线程，这个线程的生命周期并不会和Web应用程序保持同步，也就是说，即使你停止了Web应用，这个线程依旧是活跃的。</li>
+<li><strong>example:</strong>垃圾回收线程是一个经典的守护线程，当我们的程序中不再需要任何运行的Thread程序时，垃圾回收线程会自动离开，它始终在低级别的状态中运行，用于实时监控和管理系统中的可回收资源。</li>
+<li><strong>生命周期：</strong>守护进程(Daemon)是运行在后台的一种特殊进程，它独立于控制终端并且周期性地执行某种任务或等待处理某些发生的事件，也就是说守护进程不依赖于终端，但是依赖于系统，与系统“同生共死”。当JVM中所有的线程都是守护线程的时候，JVM就可以退出了，如果还有一个或以上的非守护线程则JVM不会退出。</li>
 </ul>
 <p><a href="https://github.com/YanMao186/Thread" target="_blank" rel="noopener">本案例代码均已放置到github，点击获取</a></p>
 
@@ -696,6 +721,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-java -并发</a>
               </li>
              
               <li class="article-tag-list-item">

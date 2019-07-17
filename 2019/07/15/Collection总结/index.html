@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/15/Collection总结/1563193744210.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/15/Collection总结/1563194323007.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/15/Collection总结/1563194333363.png">
-<meta property="og:updated_time" content="2019-07-16T02:05:59.984Z">
+<meta property="og:updated_time" content="2019-07-16T02:41:46.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Collection总结">
 <meta name="twitter:description" content="图中大体概述 Iterator:可以通过迭代器遍历集合中的数据 Collection:是集合list,set,Queue的最基本的接口 Map：是映射表的基础接口  List接口详解 List作为有序的Collection的代表，共有三个实现类，分别为ArrayList,LinkedList,Vector。  ArrayList  内部是通过数组实现的，它允许对元素进行快速随机访问，缺点是每个元">
@@ -403,6 +403,16 @@
 <td>不安全</td>
 </tr>
 </tbody></table>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><ul>
+<li><strong>Iterator和ListIterator的区别</strong><ul>
+<li>Iterator 可用来遍历 Set 和 List 集合，但是 ListIterator 只能用来遍历 List。Iterator 对集合只能是前向遍历，ListIterator 既可以前向也可以后向。<br>ListIterator 实现了 Iterator 接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</li>
+</ul>
+</li>
+<li><strong>快速失败(fail-fast)和安全失败(fail-safe)的区别</strong><ul>
+<li>Iterator的安全失败是基于对底层集合做拷贝，因此，不受原集合上修改的影响。java.util包下面的所有的集合类都是快速失败的，而java.util.concurrent包下的所有类都是安全失败的。快速失败的迭代器会抛出ConcurrentModificationException异常，而安全1失败的迭代器永远不会抛出这样的异常。</li>
+</ul>
+</li>
+</ul>
 
       
 
@@ -516,6 +526,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/07/16/Java并发补充/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java并发补充
+        
+      </div>
+    </a>
   
   
     <a href="/2019/07/14/JVM-五-GC分析/" id="article-nav-older" class="article-nav-link-wrap">
@@ -723,6 +742,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-java -并发</a>
               </li>
              
               <li class="article-tag-list-item">
