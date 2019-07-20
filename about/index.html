@@ -483,7 +483,7 @@
   <section class='widget category'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -520,7 +520,7 @@
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -599,19 +599,19 @@
   
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">None Bug</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -682,14 +682,14 @@ setInterval("createtime()",250);
       $(function(){
         if ('.cover') {
           $('.cover').backstretch(
-          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          ["http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E8%B6%85%E6%B8%85%E5%9B%BE%E7%89%87&step_word=&hs=2&pn=87&spn=0&di=113740&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=0&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=undefined&cs=2179738447%2C296099848&os=2815523550%2C3958700976&simid=3453002136%2C446587480&adpicid=0&lpn=0&ln=555&fr=&fmq=1563647116188_R&fm=&ic=undefined&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fb.zol-img.com.cn%2Fsoft%2F6%2F612%2FcexabothzEZHY.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fxtwzwt_z%26e3Bz5s_z%26e3Bv54_z%26e3BvgAzdH3Frtvp76j_tg1jx_m8AzdH3Ftg1jxmaam8d_z%26e3Bfip4s&gsm=1e&rpstart=0&rpnum=0&islist=&querylist=&force=undefined"],
           {
             duration: "6000",
             fade: "2500"
           });
         } else {
           $.backstretch(
-          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          ["http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E8%B6%85%E6%B8%85%E5%9B%BE%E7%89%87&step_word=&hs=2&pn=87&spn=0&di=113740&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=0&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=undefined&cs=2179738447%2C296099848&os=2815523550%2C3958700976&simid=3453002136%2C446587480&adpicid=0&lpn=0&ln=555&fr=&fmq=1563647116188_R&fm=&ic=undefined&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fb.zol-img.com.cn%2Fsoft%2F6%2F612%2FcexabothzEZHY.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fxtwzwt_z%26e3Bz5s_z%26e3Bv54_z%26e3BvgAzdH3Frtvp76j_tg1jx_m8AzdH3Ftg1jxmaam8d_z%26e3Bfip4s&gsm=1e&rpstart=0&rpnum=0&islist=&querylist=&force=undefined"],
           {
             duration: "6000",
             fade: "2500"
@@ -720,15 +720,15 @@ setInterval("createtime()",250);
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
