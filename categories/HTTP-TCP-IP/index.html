@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Category: HTTP/TCP/IP | MrYan</title>
+  
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="MrYan">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<style>
+#canvas {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  z-index: -1;
+}
+</style>
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover  half'>
+      
+        
+  <h1 class='title'>Yan</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="https://github.com/YanMao186"
+            
+            
+            id="https:github.comYanMao186">
+            <i class='fab fa-github fa-fw'></i>&nbsp;github
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          MrYan
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;示例
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="blogcategories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="blogtags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://github.com/YanMao186"
+                
+                
+                id="https:github.comYanMao186">
+								<i class='fab fa-github fa-fw'></i>&nbsp;github
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      
+<div class='l_main'>
+  
+    
+      
+  <section class="post-list">
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/07/19/网络/">
+      网络
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Yan Mao</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-19</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/HTTP-TCP-IP/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>HTTP/TCP/IP</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="网络7层协议"><a href="#网络7层协议" class="headerlink" title="网络7层协议"></a>网络7层协议</h2><ol>
+<li><strong>物理层</strong>：主要定义物理设备标准，如：网线，光纤接口类型，各种传输介质的传输速率等。它主要作用是传输比特流(就是由1.0转换为电流强弱来进行传输，到达目的地后在转换为1，0，也就是我们常说的<strong>模数转换与数据转换</strong>)。这一层的数据叫做比特。</li>
+<li><strong>数据链路层</strong>：主要将从物理层接受的数据进行<strong>MAC地址(网卡的地址)的封装与解封装</strong>。常把这一层的数据叫做帧。在这一层工作的设备是交换机，数据通过交换机来传输。</li>
+<li><strong>网络层</strong>：主要将从下一层接收到的数据<strong>进行IP地址的封装与解封装</strong>，在这一层工作的设备是<strong>路由器</strong>，常把这一层的数据叫做数据包。</li>
+<li><strong>传输层</strong>：定义了一些<strong>传输数据的协议和端口号</strong>(WWW端口80等)，如<strong>TCP</strong>(传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据)，<strong>UDP</strong>(用户数据报协议，与TCP特性相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的)。主要是将从下层接收的数据进行传输，到达目的地后再进行重组。常常把这一层数据叫做段。</li>
+<li><strong>会话层</strong>：通过传输层(端口号：传输端口与接收端口)<strong>建立数据传输的通路</strong>，主要在你的系统之间发起会话或者接收会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）。</li>
+<li><strong>表示层</strong>：主要是进行对接收的数据进行<strong>解释，加密与解密，压缩与解压缩等</strong>（也就是把计算机能够识别的东西转换成人能够识别的东西，如：图片，声音等）。</li>
+<li><strong>应用层</strong>：主要是一些终端的应用，比如FTP（各种文件下载），WEB（IE浏览），QQ之类的（简单说就是我们可以在电脑屏幕上看见的东西，就属于终端）。</li>
+</ol>
+<p><img src="/2019/07/19/网络/timg.jpg" alt="timg"></p>
+<h2 id="TCP-IP原理"><a href="#TCP-IP原理" class="headerlink" title="TCP/IP原理"></a>TCP/IP原理</h2><ul>
+<li><p><strong>TCP/IP协议不是TCP和IP这两个协议的合称</strong>，而是指因特网整个TCP/IP协议族，从协议分层模型方面讲，TCP/IP由四个层次组成：<strong>网络接口层</strong>，<strong>网络层</strong>，<strong>传输层</strong>，<strong>应用层</strong>。</p>
+<p><img src="/2019/07/19/网络/timg.jpg%E7%9A%84%E5%A4%A7%E8%8B%8F%E6%89%93.jpg" alt="timg.jpg的大苏打"></p>
+</li>
+</ul>
+<h4 id="网络访问层"><a href="#网络访问层" class="headerlink" title="网络访问层"></a>网络访问层</h4><ul>
+<li>有时也称作数据链路层或网络接口层，在TCP/IP参考模型中并没有详细描述，<strong>只是指出主机必须使用某种协议与网络相连</strong>。</li>
+</ul>
+<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><ul>
+<li>是整个体系结构中的关键部分，其功能是使主机可以把分组发往任何网络，并使分组独立的转向目标，这些分组可能经由不同的网络，到达的顺序和发送的顺序也可能不同，高层如果需要顺序收发，那么就必须自行处理对分组的排序。<strong>互联网层使用因特网协议（IP）</strong>。</li>
+</ul>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><ul>
+<li>传输层使源端和目的端机器上的对等实体可以进行会话，<strong>在这一层定义了两个端到端的协议</strong>：传输控制协议（TCP，UDP）<strong>TCP是面向连接的协议</strong>，它提供可靠的报文传输和对上层应用的连接服务，为此，除了基本的数据传输外，它还有可靠性保证，流量控制，多路复用，优先权和安全性控制等功能。<strong>UDP是面向无连接的不可靠传输的协议</strong>，主要用于步需要TCP的排序和流量控制等功能的应用程序。</li>
+</ul>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><ul>
+<li>应用层包含所有的高层协议，包括：<strong>虚拟终端协议（Telnet）,文件传输协议（FTP），电子邮件协议（SMTP）,域名服务（DNS），超文本传输协议（HTTP）等。</strong></li>
+</ul>
+<h2 id="TCP三次握手-四次挥手"><a href="#TCP三次握手-四次挥手" class="headerlink" title="TCP三次握手/四次挥手"></a>TCP三次握手/四次挥手</h2><ul>
+<li>TCP在传输之前会进行三次沟通，一般称之为“三次握手”，传输完数据断开的时候要进行四次沟通，一般称之为“四次挥手”。</li>
+</ul>
+<h4 id="数据包简要概述"><a href="#数据包简要概述" class="headerlink" title="数据包简要概述"></a>数据包简要概述</h4><ol>
+<li><strong>源端口号</strong>（16位）：它（连同源主机IP地址）标识源主机的一个应用进程。</li>
+<li><strong>目的端口号</strong>（16位）：它（连同目的主机IP地址）标识目的主机的一个应用进程，<strong>这两个值加上IP报头中的源主机IP地址和目的主机IP地址确定唯一一个TCP连接</strong>。</li>
+<li><strong>顺序号</strong>（32位）：<strong>用来标识从TCP源端向TCP目的端发送的数据字节流，他表示在这个报文段中的第一个数据字节的顺序号</strong>。如果将字节流看作在两个应用程序讲的单行流动，<strong>则TCP用顺序号对应每个字节进行计数</strong>。序号是32bit的无符号数，<strong>序号到达$$2^{32}-1$$后又从0开始，当建立一个新的连接时，SYN标志变1</strong>，顺序号字段包含由这个主板选择的该连接的初始顺序号ISN（Initial Sequence Number）。</li>
+<li><strong>确认号ack</strong>（32位）：<strong>包含发送确认的一端所期望收到的下一个顺序号</strong>，因此，确认序号应当是上次已成功收到数据字节顺序号加1，<strong>只有ACK标志为1时确认序号字段才有效</strong>。TCP为应用层提供全双工服务，这意味着能在两个方向上独立地进行传输。因此，连接的每一端必须保证每个方向上的传输数据顺序号。</li>
+<li><strong>TCP报头长度</strong>（4位）：给出报头中32bit字的数目，它实际上指明数据从哪里开始。需要这个值是因为任选字段的长度是可变的。这个字段占4bit，因此TCP最多有60字节的首部，然而，没有任选字段，正常的长度是20字节。</li>
+<li><strong>保留数</strong>（6位）：保留给将来使用，目前必须置为0。</li>
+<li><strong>控制位</strong>（6位）：在TCP报头中有6个标志比特，它们中有多个可同时被设置为1。依次为：<ol>
+<li>URG：为1标识紧急指针有效，为0则忽略紧急指针值。</li>
+<li>ACK：为1表示确认号有效，为0表示报文中不包含确认信息，忽略确认号字段。</li>
+<li>PSH：为1表示是带有PUSH标志的数据，<strong>指示接收方应该尽快将这个报文段交给应用层而不用等待缓冲区装满。</strong></li>
+<li>RST：<strong>用于复位由于主机崩溃或其他原因而出现错误的连接</strong>，它还可以用于拒绝非法的报文段和拒绝连接请求。一般情况下，如果收到一个RST为1的报文，那么一定发生了某些问题。</li>
+<li>SYN：同步序号，<strong>为1表示连接请求</strong>，用于建立连接和使顺序号同步。</li>
+<li>FIN：<strong>用于释放连接</strong>，为1表示发送方已经没有数据发送了，即关闭本方数据流。</li>
+</ol>
+</li>
+<li><strong>窗口大小</strong>（16位）：数据字节数，表示从确认号开始，本报文的源方可以接收的字节数，即源方接收窗口的大小。窗口大小是一个16bit字段，因而窗口大小最大为65535字节。</li>
+<li><strong>校验和</strong>（16位）：此校验和是对整个的TCP报文段，<strong>包括TCP头部和TCP数据，以16位字进行计算所得</strong>，这是一个强制性的字段，一定是由发送端计算和存储，<strong>并由接收端进行验证</strong>。</li>
+<li><strong>紧急指针</strong>（16位）：只有当URG标志置位1时紧急指针才有效。<strong>TCP的紧急方式是发送端向另一端发送紧急数据的一种方式。</strong></li>
+<li><strong>选项</strong>：最常见的可选字段是最长报文大小，又称为MSS（Maximum Segment Size）。每个连接方通常都在通信的第一个报文段（为建立连接而设置SYN标志的那个段）中指明这个选项，<strong>它指明本端所能接收的最大长度的报文段</strong>。选项长度不一定是32位字的整数倍，所以要加填充位，使得报头长度成为整字数。</li>
+<li><strong>数据</strong>：TCP报文段中的数据部分是可选的，在一个连接建立和一个连接终止时，双方交换的报文段仅有TCP首段，如果一方没有数据要发送，也使用没有任何数据的首段来确认收到的数据，在处理超时的许多情况中，也会发送不带任何数据的报文段。</li>
+</ol>
+<p><img src="/2019/07/19/网络/1563431855650.png" alt="1563431855650"></p>
+<h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><ul>
+<li>第一次握手：主机A发送位码为<code>syn=1</code>，随机产生<code>seq number=1234567</code>的数据包到服务器，主机B由SYN=1知道，A要求建立联机。</li>
+<li>第二次握手：主机B收到请求后要确认联机信息，向A发送ack number=<code>(主机A的seq+1)，syn=1，ack=1，随机产生seq=7654321的包</code>。</li>
+<li>第三次握手：<code>主机A收到后检查ack number是否正确</code>，即第一次发送的seq number+1，以及位码ack是否为1，若正确，<code>主机A会再发送ack number=(主机B的seq+1)，ack=1，主机B收到后确认seq值与ack=1则连接建立成功</code>。</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563432346818.png" alt="1563432346818"></p>
+<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><ul>
+<li>TCP建立连接要进行三次握手，而断开连接要进行四次，这是由于TCP的半关闭造成的。因为TCP连接是全双工的（即数据可在两个方向上同时传递）所以进行关闭时每个方向上都要单独进行关闭。这个单方向的关闭就叫做半关闭。当一方完成它的数据发送任务，就发送一个FIN来向另一方通告将要终止这个方向的连接。</li>
+<li>第一次挥手：关闭客户端到服务器的连接，首先客户端A发送一个FIN，用来关闭客户到服务器的数据传送，然后等待服务器的确认，其中终值标志位FIN=1，序列号seq=u。</li>
+<li>第二次挥手：服务器收到这个FIN，它发回一个ACK，确认号ack为收到的序号加1。</li>
+<li>第三次挥手：关闭服务器到客户端的连接：也是发送一个FIN给客户端。</li>
+<li>第四次挥手：客户端收到FIN后，并发回一个ACK报文确认，并将确认序号seq设置为收到序号加1，首先进行关闭的一方将执行主动关闭，而另一方执行被动关闭。</li>
+<li>主机A发送FIN后，进入终止等待状态，服务器B收到主机A连接释放报文段后，就立即给主机A发送确定，然后服务器B就进入<code>close-wait</code>状态，此时TCP服务器进程就通知高层应用进程，因而从A到B的连接就释放了。此时是“半关闭”状态。即A不可以发送给B，但是B可以发送给A。此时。若B没有数据报要发送给A了，其应用进程就通知TCP释放连接，然后发送给A连接释放报文段，并等待确认。A发送确认后，进入<code>time-wait</code>，注意，此时TCP连接还没有释放掉，然后经过时间等待计数器设置的2MSL后，A才进入到close状态。</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563435685702.png" alt="1563435685702"></p>
+<h2 id="TCP与UDP区别"><a href="#TCP与UDP区别" class="headerlink" title="TCP与UDP区别"></a>TCP与UDP区别</h2><p><img src="/2019/07/19/网络/1563454607638.png" alt="1563454607638"></p>
+<h4 id="对应的协议不同"><a href="#对应的协议不同" class="headerlink" title="对应的协议不同"></a>对应的协议不同</h4><h6 id="TCP对应的协议："><a href="#TCP对应的协议：" class="headerlink" title="TCP对应的协议："></a>TCP对应的协议：</h6><ol>
+<li><strong>FTP</strong>：定义了文件传输协议，使用<code>21端口</code>。常说某某计算机开了FTP服务便是启动了文件传输服务。下载文件，上传主页，都要用到FTP服务。</li>
+<li><strong>Telnet</strong>：它是一种用于远程登陆的端口，用户可以以自己的身份远程连接到计算机上，通过这种端口可以提供一种基于DOS模式下的通信服务。如以前的BBS是纯字符界面的，<code>支持BBS的服务器将23端口打开，对外提供服务</code>。</li>
+<li><strong>SMTP</strong>：定义了简单邮件传输协议，现在很多邮件服务器都用的是这个协议，用于邮件发送。如常见的免费邮件服务中用的就是这个邮件服务端口，所以在电子邮件设置中常看到有SMTP端口设置，<code>服务器开放的是25端口</code>。</li>
+<li><strong>POP3</strong>：和SMTP对应，POP3用于接收邮件。通常情况下，<code>POP3协议所用的是110端口</code>。也就是说，只要你有相应的使用POP3协议的程序，就可以不以Web方式登录进邮箱页面，直接用邮件程序就可以收到邮件。</li>
+<li><strong>HTTP协议</strong>：是从Web服务器传输超文本到本地浏览器的传输协议。</li>
+</ol>
+<h6 id="UDP对应的协议"><a href="#UDP对应的协议" class="headerlink" title="UDP对应的协议"></a>UDP对应的协议</h6><ol>
+<li><strong>DNS</strong>：用于域名解析服务，将域名地址转换为IP地址。<code>DNS用的是53端口</code>。</li>
+<li><strong>SNMP</strong>：简单的网络协议，<code>使用161端口</code>，是用来管理网络设备的。由于网络设备很多，无连接的服务就体现出其优势。</li>
+<li><strong>TFTP</strong>：简单文件传输协议，该协议在<code>端口69上使用UDP服务</code>。<h2 id="TCP如何保证可靠性传递"><a href="#TCP如何保证可靠性传递" class="headerlink" title="TCP如何保证可靠性传递"></a>TCP如何保证可靠性传递</h2></li>
+</ol>
+<ul>
+<li><strong>数据包校验</strong>：目的是检测数据在传输过程中的任何变化，若校验出包有错，则丢弃报文段并不给出响应，这是TCP发送数据端超时后会重发数据。</li>
+<li><strong>对失序数据包重排序</strong>：既然TCP报文段作为IP数据报来传输，而IP数据报的到达可能会失序，因此TCP报文段的到达也可能会失序。TCP将对失序数据进行重新排序，然后才交给应用层。</li>
+<li><strong>丢弃重复数据</strong>：对于重复数据，能够丢弃重复数据。</li>
+<li><strong>应答机制</strong>：当TCP收到发自TCP连接另一端的数据，它将发送一个确认，这个确认不是立即发送，通常将推迟几分之一秒。</li>
+<li><strong>超时重发</strong>：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。</li>
+<li><strong>流量控制</strong>：TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许一端发送接收端缓冲区所能接纳的数据，这可以防止较快主机致使较慢主机的缓冲区溢出，这就是流量控制。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
+</ul>
+<h2 id="TCP流量控制-拥塞控制"><a href="#TCP流量控制-拥塞控制" class="headerlink" title="TCP流量控制/拥塞控制"></a>TCP流量控制/拥塞控制</h2><h4 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h4><ul>
+<li><strong>原因</strong>：如果发送方把数据发送的过快，接收方可能来不及接收，这就会造成数据的丢失。</li>
+<li><strong>原理</strong>：是利用滑动窗口实现的，接收方告诉发送方自己的接收窗口大小，然后发送方发送窗口不能超过接收方给出的接收窗口值。</li>
+</ul>
+<h4 id="慢开始与拥塞避免"><a href="#慢开始与拥塞避免" class="headerlink" title="慢开始与拥塞避免"></a>慢开始与拥塞避免</h4><h6 id="慢开始"><a href="#慢开始" class="headerlink" title="慢开始"></a>慢开始</h6><ul>
+<li>发送方维持一个叫做拥塞窗口cwnd(congestion window)的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态的在变化。发送方让自己的发送窗口等于拥塞窗口，另外考虑到接收方的接收能力，发送窗口可能小于拥塞窗口。</li>
+<li>慢开始的算法的思路就是，不要一开始就发送大量的数据，先探测一下网络的拥塞程度，也就是说由小到大逐渐增加拥塞窗口的大小。</li>
+<li>这里用报文段的个数的拥塞窗口大小举例说明慢开始算法，实时拥塞窗口大小是以字节为单位的。如下：</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563459696361.png" alt="1563459696361"></p>
+<ul>
+<li>上图中，发送方每收到一个确认就cwnd+1，也就是说发送发发送2就收到2个，所以就是cwnd就是4，也就是翻倍成长的道理，每次都是翻倍，也就是指数增长。为了防止cwnd增长过大引起网络拥塞，还需要设置一个慢开始门限ssthresh状态变量。用法如下：<ul>
+<li>当cwnd &lt; ssthresh时，使用慢开始算法。</li>
+<li>当cwnd &gt; ssthresh时，改用拥塞避免算法。</li>
+<li>当cwnd = ssthresh时，慢开始与拥塞避免算法任意。</li>
+</ul>
+</li>
+</ul>
+<h6 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h6><ul>
+<li>拥塞避免算法让拥塞窗口缓慢增长，即每经过一个往返时间RTT就把发送方的拥塞窗口cwnd加1，而不是加倍。这样拥塞窗口按线性规律缓慢增长。</li>
+<li>无论是在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞(其根据就是没有收到1确认，虽然没有收到确认可能是其他原因的分组丢失，但是因为无法判断，所以都当作拥塞来处理)，就把慢开始门限设置为出现拥塞时的发送窗口大小的一半。然后把拥塞窗口设置为1，执行慢开始算法，如下：</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563463668758.png" alt="1563463668758"></p>
+<h4 id="快速重传快速恢复"><a href="#快速重传快速恢复" class="headerlink" title="快速重传快速恢复"></a>快速重传快速恢复</h4><ul>
+<li>快重传要求接收方在收到一个失序的报文段后就立即发出重复确认(为了使发送方及早知道有报文段没有到达对方)而不要等到自己发送数据时捎带确认。快重传算法规定，发送方只要一连收到三个重复确认应当立即重传对方尚未收到的报文段，而不必继续等待设置的重传计时器时间到期，如下</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563503812096.png" alt></p>
+<ul>
+<li><p>快重传配合使用的还有快速恢复算法，有两个特点：</p>
+<ul>
+<li><p>当发送方连续收到三个重复确认时，就执行“乘法减小”算法，把 <code>ssthresh</code>门限减半。但是接下去并不执行慢开始算法。</p>
+</li>
+<li><p>考虑到如果网络出现拥塞的话就不会收到好几个重复的确认，所以发送方现在认为网络可能没有出现拥塞。所以此时不执行慢开始算法，而是将<code>cwnd 设置为 ssthresh</code>的大小，然后执行拥塞避免算法。如下</p>
+<p><img src="/2019/07/19/网络/1563504121286.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="TCP状态转移"><a href="#TCP状态转移" class="headerlink" title="TCP状态转移"></a>TCP状态转移</h2><p><img src="/2019/07/19/网络/1563508119629.png" alt="1563508119629"></p>
+<ol>
+<li><p><strong>CLOSED</strong>：起始点，在超时或者连接关闭时进入此状态。</p>
+</li>
+<li><p><strong>LISTEN</strong>：svr端在等待连接过来时候的状态，svr端为此要调用<code>socket，bind，listen函数</code>，就能进入此状态。此称为应用程序被动打开(等待客户端来连接)。</p>
+</li>
+<li><p><strong>STN_SENT</strong>：客户端发起连接，发送SYN给服务器端。如果服务器端不能连接，则直接进入<code>CLOSED状态</code>。</p>
+</li>
+<li><p><strong>SYN_RCVD</strong>：跟3对应，服务器端接收客户端的<code>SYN请求</code>，服务器端由<code>LISTEN状态进入SYN_RCVD状态</code>。同时<code>服务器端要回应一个ACK</code>，<code>同时发送一个SYN给客户端</code>；另外一种情况，<code>客户端在发起SYN的同时接收到服务器端的SYN请求，客户端就会由SYN_SENT到SYN_RCVD状态</code>。</p>
+</li>
+<li><p><strong>ESTABLISHED</strong>：服务器和客户端在完成3次握手后进入状态，说明已经可以开始传输数据了。</p>
+</li>
+<li><p><strong>FIN_WAIT_1</strong>：主动关闭的一方，由状态5进入此状态，具体的动作时发送FIN给对方。</p>
+</li>
+<li><p><strong>FIN_WAIT_2</strong>：主动关闭的一方，接收到对方的<code>FIN ACK</code>，进入此状态。由此不能再接收对方的数据，但是能够向对方发送数据。</p>
+</li>
+<li><p><strong>CLOSE_WAIT</strong>：接收到<code>FIN</code>以后，被动关闭的一方进入此状态，具体动作时接收到<code>FIN</code>，同时发送<code>ACK</code>。</p>
+</li>
+<li><p><strong>LAST_ACK</strong>：被动关闭的一方，发起关闭请求，由状态8进入此状态。具体动作时发送FIN给对方，<code>同时在接收到ACK时进入CLOSED状态</code>。</p>
+</li>
+<li><p><strong>CLOSING</strong>：两边同时发起关闭请求时，会由<code>FIN_WAIT_1</code>进入此状态。<code>具体动作是，接收到FIN请求，同时响应一个ACK</code>。</p>
+</li>
+<li><p><strong>TIME_WAIT</strong>：从图中可以看到，有三个状态可以转化为此状态</p>
+<p>   a.<code>由FIN_WAIT_2进入此状态</code>：在双方不同时发起FIN的情况下，主动关闭的一方在完成自身发起的关闭请求后，接收到被动关闭一方的FIN后进入的状态。</p>
+<p>   b. <code>由CLOSING状态进入</code>：双方同时发起关闭，都做了发起FIN的请求1，同时接收到了FIN并做了ACK的情况下，由CLOSINT状态进入。</p>
+<p>   c. <code>由FIN_WAIT_1状态进入</code>：同时接收到FIN（对方发起），ACK（本身发起的FIN回应），与b的区别在于本身发起的FIN回应的ACK先于对方的FIN请求到达，而b是FIN先到达。这种国情况概率最小。</p>
+</li>
+</ol>
+<h4 id="当一个tcp监听了80端口后，udp还能否监听80端口"><a href="#当一个tcp监听了80端口后，udp还能否监听80端口" class="headerlink" title="当一个tcp监听了80端口后，udp还能否监听80端口"></a>当一个tcp监听了80端口后，udp还能否监听80端口</h4><ul>
+<li>：由于 TCP/IP 传输层的两个协议 TCP 和 UDP 是完全独立的两个软件模块，因此各自的端口号也相互独立，如 TCP 有一个 255 号端口，UDP 也可以有一个 255 号端口，二者并不冲突。</li>
+</ul>
+<h2 id="滑动窗口机制"><a href="#滑动窗口机制" class="headerlink" title="滑动窗口机制"></a>滑动窗口机制</h2><h4 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h4><ul>
+<li>在ARQ协议发送者每次只能发送一个分组，在应答到来前必须等待。而连续ARQ协议的发送者拥有一个发送窗口，发送者可以在没有得到应答的情况下连续发送窗口中的分组。这样降低了等待时间，提高了传输效率。</li>
+</ul>
+<h4 id="累计确认"><a href="#累计确认" class="headerlink" title="累计确认"></a>累计确认</h4><ul>
+<li>在连续ARQ协议中，接收者也有个接收窗口，接收者并不需要每收到一个分组就返回一个应答，可以连续收到分组之后统一返回一个应答。这样能节省流量。TCP头部的ack字段就是用来累计确认，它表示已经确认的字节序号+1，也表示期望发送者发送的下一个分组的起始字节号。</li>
+</ul>
+<h4 id="发送窗口"><a href="#发送窗口" class="headerlink" title="发送窗口"></a>发送窗口</h4><ul>
+<li><p>发送窗口的大小由接收窗口的剩余大小决定。接收者会把当前接收窗口的剩余大小写入应答TCP报文段的头部，发送者收到应答后根据该值和当前网络拥塞情况设置发送窗口的大小。发送窗口的大小是不断变化的。发送窗口由三个指针构成：发送者每收到一个应答，后沿就可以向前移动指定的字节。此时若窗口大小仍然没变，前沿也可以向前移动指定字节。当p2和前沿重合时，发送者必须等待确认应答。</p>
+<ul>
+<li>p1指向发送窗口的后沿，它后面的字节表示已经发送且已收到应答。</li>
+<li>p2指向尚未发送的第一个字节。p1-p2间的字节表示已经发送，但还没收到确认应答。这部分的字节仍需保留，因为可能还要超时重发。p2-p3间的字节表示可以发送，但还没有发送的字节。</li>
+<li>p3指向发送窗口的前沿，它前面的字节尚未发送，且不允许发送。</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563507810510.png" alt="1563507810510"></p>
+</li>
+</ul>
+<h4 id="接收窗口"><a href="#接收窗口" class="headerlink" title="接收窗口"></a>接收窗口</h4><ul>
+<li>接收者收到的字节会存入接收窗口，接收者会对已经正确接收的有序字节进行累计确认，发送完确认应答后，接收窗口就可以向前移动指定字节。</li>
+<li>如果某些字节并未按序收到，接收者只会确认最后一个有序的字节，从而乱序的字节就会被重新发送。</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563507862436.png" alt="1563507862436"></p>
+<h4 id="连续ARQ的注意事项"><a href="#连续ARQ的注意事项" class="headerlink" title="连续ARQ的注意事项"></a>连续ARQ的注意事项</h4><ul>
+<li>同一时刻发送窗口的大小并不一定和接收窗口一样大。虽然发送窗口的大小是根据接收窗口的大小来设定的，但应答在网络中传输是有时间的，有可能t1时间接收窗口大小为m，但当确认应答抵达发送者时，接收窗口的大小已经发生了变化。此外发送窗口的大小还随网络拥塞情况影响。当网络出现拥塞时，发送窗口将被调小。</li>
+<li>TCP标准并未规定未按序到达的字节的处理方式。但TCP一般都会缓存这些字节，等缺少的字节到达后再交给应用层处理。这比直接丢弃乱序的字节要节约带宽。</li>
+<li>TCP标准规定接收方必须要有累计确认功能。接收方可以对多个TCP报文段同时确认，但不能拖太长时间，一般是0.5S以内。此外，TCP允许接收者在有数据要发送的时候捎带上确认应答。但这种情况一般较少，因为一般很少有两个方向都要发送数据的情况。</li>
+</ul>
+<h2 id="网络攻击"><a href="#网络攻击" class="headerlink" title="网络攻击"></a>网络攻击</h2><h4 id="SYN-Flood攻击"><a href="#SYN-Flood攻击" class="headerlink" title="SYN Flood攻击"></a>SYN Flood攻击</h4><ul>
+<li>关于 SYN Flood 攻击。一些恶意的人就为此制造了 SYN Flood 攻击——给服务器发了一个 SYN 后，就下线了，于是服务器需要默认等 63s 才会断开连接，这样，攻击者就可以把服务器的 syn 连接的队列耗尽，让正常的连接请求不能处理。于是，Linux 下给了一个叫tcp_syncookies 的参数来应对这个事——当 SYN 队列满了后，TCP 会通过源地址端口、目标地址端口和时间戳打造出一个特别的 Sequence Number 发回去（又叫 cookie），如果是攻击者则不会有响应，如果是正常连接，则会把这个 SYN Cookie 发回来，然后服务端可以通过 cookie 建连接（即使你不在 SYN 队列中）。请注意，请先千万别用 tcp_syncookies来处理正常的大负载的连接的情况。因为，synccookies 是妥协版的 TCP 协议，并不严谨。对于正常的请求，你应该调整三个 TCP 参数可供你选择，第一个是：tcp_synack_retries 可以用他来减少重试次数；第二个是：tcp_max_syn_backlog，可以增大 SYN 连接数；第三个是：tcp_abort_on_overflow 处理不过来干脆就直接拒绝连接了。</li>
+</ul>
+<h4 id="DDOS攻击"><a href="#DDOS攻击" class="headerlink" title="DDOS攻击"></a>DDOS攻击</h4><ul>
+<li>DDoS 攻击是 Distributed Denial of Service 的缩写，即不法黑客组织通过控制服务器等资源，发动对包括国家骨干网络、重要网络设施、政企或个人网站在内的互联网上任一目标的攻击，致使目标服务器断网，最终停止提供服务。</li>
+<li>预防:1.高防服务器 主要是指能独立硬防御 50Gbps 以上的服务器，能够帮助网站拒绝服务攻击，定期扫描网络主节点等 2.DDoS 清洗会对用户请求数据进行实时监控，及时发现 DOS 攻击等异常流量，在不影响正常业务开展的情况下清洗掉这些异常流量。3.CDN加速 在现实中，CDN 服务将网站访问流量分配到了各个节点中，这样一方面隐藏网站的真实 IP，另一方面即使遭遇 DDoS 攻击，也可以将流量分散到各个节点中，防止源站崩溃。</li>
+</ul>
+<h4 id="DNS欺骗"><a href="#DNS欺骗" class="headerlink" title="DNS欺骗"></a>DNS欺骗</h4><ul>
+<li>DNS 欺骗就是攻击者冒充 域名服务器 的一种欺骗行为。</li>
+<li>预防：<ul>
+<li>1.使用入侵检测系统 </li>
+<li>2.使用 DNSSEC</li>
+</ul>
+</li>
+</ul>
+<h4 id="重放攻击"><a href="#重放攻击" class="headerlink" title="重放攻击"></a>重放攻击</h4><ul>
+<li>重放攻击又称重播攻击、回放攻击，是指攻击者发送一个目的主机已接收过的包，来达到欺骗系统的目的，主要用于身份认证过程，破坏认证的正确性。</li>
+<li>预防：<ul>
+<li>1.加随机数 </li>
+<li>2.加时间戳</li>
+</ul>
+</li>
+</ul>
+<h4 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h4><ul>
+<li><p>所谓 SQL 注入，就是通过把 SQL 命令插入到 Web 表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的 SQL 命令。</p>
+</li>
+<li><p>预防：</p>
+<ul>
+<li><p>1.加密处理 将用户登录名称、密码等数据加密保存。加密用户输入的数据，然后再将它与数据库中保存的数据比较，这相当于对用户输入的数据进行了“消毒”处理，用户输入的数据不再对数据库有任何特殊的意义，从而也就防止了攻击者注入 SQL 命令。</p>
+</li>
+<li><p>2.确保数据库安全 只给访问数据库的 web 应用功能所需的最低的权限，撤销不必要的公共许可 。</p>
+</li>
+<li><p>3.输入验证 检查用户输入的合法性，确信输入的内容只包含合法的数据。数据检查应当在客户端和服务器端都执行之所以要执行服务器端验证，是为了弥补客户端验证机制脆弱的安全性。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><ul>
+<li>HTTP是一个无状态协议。无状态是指客户端(Web浏览器)和服务器之间不需要建立持久的连接，这意味着当一个客户端向服务端发出请求，然后服务器返回响应（response），连接就被关闭了，再服务器端不保留连接的有关信息。HTTP遵循请求（Requset）/应答（Response）模型。客户机（浏览器）向服务器发送请求。服务器处理请求并返回适当的应答。所有HTTP连接都被构成一套请求和响应。</li>
+</ul>
+<h4 id="http请求报文与响应报文"><a href="#http请求报文与响应报文" class="headerlink" title="http请求报文与响应报文"></a>http请求报文与响应报文</h4><ul>
+<li><strong>http请求报文</strong><ul>
+<li>HTTP请求报文由请求行，请求头，空行和请求数据4部分组成。</li>
+<li>请求行：(get/post方法，url中的path路径，http版本)</li>
+<li>请求头（header）关键字/值对组成。</li>
+<li>请求数据（body）：http响应报文由状态行，响应头部，空行，响应数据组成。</li>
+</ul>
+</li>
+<li><strong>http响应报文</strong><ul>
+<li>HTTP响应由四个部分组成：<ul>
+<li>状态码（Status Code）：描述了响应的状态。可以用来检查是否成功的完成了请求。请求失败的情况下，状态码可用来找出失败的原因。如果Servlet没有返回状态码，默认会返回成功的状态码<code>HttpServletResponse.SC_OK</code>。</li>
+<li>HTTP头部（HTTP Header）：它们包含了更多的关于相应的信息。比如：头部可以指定认为响应过期的过期日期，或者是指定用来给用户安全的传输实体内容的编码格式。</li>
+<li>空行</li>
+<li>主体（Body）：包含了响应的内容。它可以包含HTML代码，图片，等等。主体是由传输在HTTP消息中紧跟在头部后面的数据字节组成的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="http请求过程"><a href="#http请求过程" class="headerlink" title="http请求过程"></a>http请求过程</h4><ol>
+<li><strong>地址解析</strong></li>
+</ol>
+<ul>
+<li>如用客户端请求页面:<code>http://localhost:8080/index.html</code>从中分解出协议名，主机名，端口，对象路径等部分。对于这个地址解析后如下：<ul>
+<li>协议名：<code>http</code></li>
+<li>主机名：<code>localhost</code></li>
+<li>端口：<code>8080</code></li>
+<li>对象路径：<code>/index.html</code></li>
+</ul>
+</li>
+<li>在这一步，需要域名系统DNS解析域名得到主机的IP地址。</li>
+</ul>
+<ol start="2">
+<li><strong>封装HTTP请求数据包</strong></li>
+</ol>
+<ul>
+<li>把上面的部分结合本机自己的信息，封装成一个HTTP请求数据包。</li>
+</ul>
+<ol start="3">
+<li><strong>封装成TCP包并建立连接</strong></li>
+</ol>
+<ul>
+<li>封装成TCP包，建立TCP连接(TCP的三次握手)</li>
+</ul>
+<ol start="4">
+<li><strong>客户机发送请求命令</strong></li>
+</ol>
+<ul>
+<li>客户机发送请求命令：建立连接后，客户机发送一个请求给服务器，请求方式的格式为：统一资源标识符(URL)，协议版本号，后面是MIME信息包括请求修饰符，客户机信息和内容。</li>
+</ul>
+<ol start="5">
+<li><strong>服务器响应</strong></li>
+</ol>
+<ul>
+<li>服务器接收到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号，一个成功或错误的代码，后面是MIME信息包括服务器信息，实体信息和可能的内容。</li>
+</ul>
+<ol start="6">
+<li><strong>服务器关闭TCP连接</strong></li>
+</ol>
+<ul>
+<li>服务器关闭TCP连接，一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码<code>Connection:keep-alive</code>,TCP连接在发送后任然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</li>
+</ul>
+<p><img src="/2019/07/19/网络/1563437731001.png" alt="1563437731001"></p>
+<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><ul>
+<li><p>HTTPS(Hypertext Transfer Protocol over Secure Socket Layer)，是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL。其所用的端口是443。过程大致如下：</p>
+<ol>
+<li><p><strong>建立连接获取证书</strong></p>
+<ol>
+<li>SSL客户端通过TCP和服务器建立连接之后（443端口），并且在一般的tcp连接协商（握手）过程中请求证书。即客户端发出一个消息给服务器，这个消息里面包含了自己可实现的算法列表和其他一些需要的消息，SSL的服务器端会回应一个数据包，这里面确定了这次通信所需要的算法，然后服务器向客户端返回证书。（证书里面包含了服务器信息：域名。申请证书的公司，公共密钥）。</li>
+</ol>
+</li>
+<li><p><strong>证书验证</strong></p>
+<ol>
+<li>Client在收到服务器返回的证书后，判断签发这个证书的公共签发机构，并使用这个机构的公共密钥确认签名是否有效，客户端还会确保证书中列出的域名就是它正在连接的域名。</li>
+</ol>
+</li>
+<li><p><strong>数据加密和传输</strong></p>
+<ol>
+<li>如果确认证书有效，那么生成对称密钥并使用服务器的公共秘钥进行加密。然后发送给服务器，服务器使用它的私钥对它进行解密，这样两台计算机可以开始进行对称加密进行通信。</li>
+</ol>
+<p><img src="/2019/07/19/网络/1563438724225.png" alt="1563438724225"></p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="SSL工作原理"><a href="#SSL工作原理" class="headerlink" title="SSL工作原理"></a>SSL工作原理</h4><ul>
+<li><p><strong>RSA握手协议</strong></p>
+<ul>
+<li>Client 给出协议版本号、一个客户端生成的随机数（Client random），<br>以及客户端支持的加密方法。</li>
+<li>Server 确认双方使用的加密方法，并给出数字证书、以及一个服务器<br>生成的随机数（Server random）。</li>
+<li>Client 确认数字证书有效，然后生成一个新的随机数（Premaster secr<br>et），并使用数字证书中的公钥，加密这个随机数，发给 Server。</li>
+<li>Server 使用自己的私钥，获取 Client 发来的随机数（即 Premaster se<br>cret）。</li>
+<li>Client 和 Server 根据约定的加密方法，使用前面的三个随机数，生成” 对话密钥”（session key），用来加密接下来的整个对话过程。</li>
+</ul>
+</li>
+<li><p><strong>记录协议</strong></p>
+<ul>
+<li>记录协议 对数据传输提供保密性和完整性。</li>
+<li>记录协议过程。</li>
+</ul>
+<p><img src="/2019/07/19/网络/InkedSnipaste_2019-07-19_13-45-11_LI.jpg" alt="InkedSnipaste_2019-07-19_13-45-11_LI"></p>
+</li>
+<li><p><strong>警报协议</strong></p>
+<ul>
+<li>如果是警告，则值为1，如果是致命错误，则值为2。</li>
+</ul>
+</li>
+</ul>
+<h4 id="http请求方法"><a href="#http请求方法" class="headerlink" title="http请求方法"></a>http请求方法</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>HTTP版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>请求指定的页面信息，并返回实体主体</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向指定资源提交数据进行处理请求（如：提交表单或上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有的资源的修改。</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>类似于GET请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>允许客户端查看服务器的性能</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>从客户端向服务器传送的数据取代指定的文档的内容</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>是对PUT方法的补充，用来对已知资源进行局部更新</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>请求服务器删除指定的信息</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>回显服务器收到的请求，主要用于测试或诊断</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>HTTP1.1协议中预留给能够将连接改为管道方式的代理服务器</td>
+<td>1.1</td>
+</tr>
+</tbody></table>
+<h4 id="Get和Post区别"><a href="#Get和Post区别" class="headerlink" title="Get和Post区别"></a>Get和Post区别</h4><ul>
+<li>GET被强制服务器支持</li>
+<li>浏览器对URL的长度有限制，所以GET请求不能代替POST请求发送大量数据</li>
+<li>GET请求发送的数据更小(IE2048/firefox65536/chrome8182/opera190000字符)</li>
+<li>GET请求是不安全的</li>
+<li>GET请求是幂等的</li>
+<li>POST请求不能被缓存</li>
+<li>POST请求相对于GET请求是安全的</li>
+<li>以下情况，请使用POST请求<ul>
+<li>无法使用缓存文件(更新服务器上的文件或数据库)</li>
+<li>向服务器发送大量数据(POST没有数据量限制)</li>
+<li>发送包含未知字符的用户输入时，POST比GET更稳定也更可靠</li>
+</ul>
+</li>
+<li>GET使用URL或Cookie传参。而POST将数据放在Body中。GET的URL会有长度上的限制，则POST的数据则可以非常大。POST比GET安全，因为数据在地址栏上不可见。</li>
+<li>幂等<ul>
+<li>从定义上看，HTTP方法的幂等性是指一次或多次请求某一个资源应该具有相同的副作用。</li>
+<li>POST并不是幂等的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Http长连接-短连接"><a href="#Http长连接-短连接" class="headerlink" title="Http长连接/短连接"></a>Http长连接/短连接</h4><ul>
+<li><strong>无状态</strong>：HTTP协议是无状态的，指的是协议对于事务处理没有记忆能力，服务器不知道客户端是什么状态。也就是说，打开一个服务器上的网页和上一次打开这个服务器上的网页之间没有任何联系。HTTP是一个无状态的面向连接的协议，无状态不代表HTTP不能保持TCP连接，更不能代表HTTP使用的是UDP协议(无连接)。</li>
+<li><strong>长连接</strong>：从HTTP1.1起，默认使用长连接，用以保持连接特性。使用长连接的HTTP协议，会在响应头加入这行代码<code>Connection:keep-alive</code>。在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，客户端再次访问这个服务器时，会继续使用这一条已经建立的连接。<code>Keep-Alive</code>不会永久保持连接，他有一个保持时间，可以在不同的服务器软件(如：Apache)中设定这个时间。实现长连接需要客户端和服务端都支持长连接。</li>
+<li><strong>短链接</strong>：在HTTP1.0中默认使用短连接。也就是说，客户端和服务器每进行一次HTTP操作，就建立一次连接，任务结束就中断连接。当客户端浏览器访问某个HTML或其他类型的web页中包含有其他的web资源(如:js，图像，css等)，每遇到这样一个web资源，浏览器就会重新建立一个HTTP会话。</li>
+<li>HTTP协议的长连接和短连接，实质上是TCP协议的长连接和短连接。</li>
+</ul>
+<h4 id="什么时候用长连接，短连接"><a href="#什么时候用长连接，短连接" class="headerlink" title="什么时候用长连接，短连接"></a>什么时候用长连接，短连接</h4><ul>
+<li><strong>长连接多用于操作频繁，点对点的通讯，而且连接数不能太多的情况下</strong>。每个TCP连接都需要三次握手，这需要时间，如果每个操作都是先连接，再操作的话那么速度会降低很多，所以每个操作完后都不断开，再次处理时直接发送数据包就OK了，不用建立TCP连接。如：数据库的连接用长连接，如果用短连接频繁的通信会造成socket错误，而且频繁的socket创建也是对资源的浪费。</li>
+<li>短连接一般用于web网站的http服务，因为长连接对于服务端来说会耗费一定的资源，而像WEB网站这么频繁的成千上万甚至上亿客户端的连接用短连接会更省一些资源，如果用长连接，而且同时有成千上万的用户，如果每个用户都占用一个连接的话，那可想而知吧。所以并发量大，但每个用户无需频繁操作情况下需用短连接好。</li>
+</ul>
+<h4 id="http1-1和1-0的区别"><a href="#http1-1和1-0的区别" class="headerlink" title="http1.1和1.0的区别"></a>http1.1和1.0的区别</h4><ul>
+<li>1.0需要<code>keep-alive</code>参数来告知服务器要建立一个长连接，而1.1默认支持长连接。</li>
+<li>1.1支持只发送header信息(不带任何body信息)，如果服务器认为客户端有权限请求服务器，则返回100，否则返回401。客户端如果接收到100，才开始把请求body发送到服务器。这样当服务器返回401时候，客户端就可以不用发送请求body了，节约了带宽。</li>
+<li>host域，1.0没有host域，1.1才开始支持</li>
+<li>带宽优化及网络连接的使用，1.0中，存在一些浪费带宽的现象，如客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能，1.1则在请求头引入<code>range头域</code>，它允许只请求资源的某个部分，即返回码是206，这样方便了开发者自由的选择以便充分利用带宽和连接。</li>
+</ul>
+<h4 id="http2-0和1-0的区别"><a href="#http2-0和1-0的区别" class="headerlink" title="http2.0和1.0的区别"></a>http2.0和1.0的区别</h4><ul>
+<li><strong>新的二进制</strong>(Binary Format):Http1.x的解析是基于文本的。基于文本协议的格式解析存在缺陷，文本的表现形式有多样性，要做到健壮性考虑的场景必然很多，二进制则不同，只认0和1的组合。基于这种考虑Http2.0的协议解析决定采用二进制形式，实现方便且健壮。</li>
+<li><strong>多路复用</strong>(MultiPlexing):即连接共享，建立起一个连接请求后，可以在这个链接上一直发送，不要等待上一次发送完并且收到回复后才能发送下一个(Http1.0是这样的)，是可以同时发送多个请求，互相并不干扰。</li>
+<li><strong>header压缩</strong>:Http1.x的header带有大量信息，而且每次都要重复发送，Http2.0利用了<code>Hpack</code>对消息进行压缩传输，客户端和服务器维护一个动态链表(当一个头部没有出现的时候，就插入，已经出现了就用表中的索引值进行代替)，避免了重复header的传输，又减少了需要传输的大小。</li>
+<li><strong>服务端推送</strong>(server push):就是客户端请求html的时候，服务器顺带把此html需要的css,js也一起发送给客户端，而不像1.0中需要请求一次html，然后再请求一次css，然后再请求一次js。</li>
+</ul>
+<h4 id="http与https区别"><a href="#http与https区别" class="headerlink" title="http与https区别"></a>http与https区别</h4><ul>
+<li>https 协议需要申请证书，一般免费证书较少，因而需要一定费用。</li>
+<li>http 是超文本传输协议，信息是明文传输，https 则是具有安全性的 ssl加密传输协议</li>
+<li>http 和 https 使用的是完全不同的连接方式，用的端口也不一样，前者是 80，后者是 443</li>
+<li>http 的连接很简单，是无状态的；HTTPS 协议是由 SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议，比 http 协议安全。<ul>
+<li>HTTP 的 URL 以 http:// 开头 ，而 HTTPS 的 URL 以 https://<br>开头</li>
+<li>HTTP 是不安全的，而 HTTPS 是安全的</li>
+<li>在 OSI 网络模型中，HTTP 工作于应用层，而 HTTPS 工作在传输层</li>
+<li>HTTP 无需加密，而 HTTPS 对传输的数据进行加密</li>
+<li>HTTP 无需证书，而 HTTPS 需要认证证书</li>
+</ul>
+</li>
+</ul>
+<h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><ul>
+<li>CDN一般包含<strong>分发服务系统，负载均衡系统和管理系统</strong>。</li>
+</ul>
+<p><img src="/2019/07/19/网络/CDN%E6%9E%B6%E6%9E%84.jpg" alt="CDN架构"></p>
+<h4 id="分发服务系统"><a href="#分发服务系统" class="headerlink" title="分发服务系统"></a>分发服务系统</h4><ul>
+<li>其基本工作单元就是各个<code>Cache</code>服务器。负责直接响应用户请求，将内容快速分发到用户；同时负责内容更新，保证和源站内容的同步。</li>
+<li>根据内容类型和服务种类的不同，分发服务系统分为多个子服务系统，如：网页加速服务，流媒体加速服务，应用加速服务等。每个子服务系统都是分布式的服务集群，由功能类似，地域接近的分布部署的<code>Cache</code>集群组成。</li>
+<li>在承担内容同步，更新和响应用户请求之外，分发服务系统还需要向上层的管理调度系统反馈各个<code>Cache</code>设备的健康状况，响应情况，内容缓存状况等，以便管理调度系统能够根据设定的策略决定由那个<code>Cache</code>设备来响应用户的请求。</li>
+</ul>
+<h4 id="负载均衡系统"><a href="#负载均衡系统" class="headerlink" title="负载均衡系统"></a>负载均衡系统</h4><ul>
+<li>负载均衡系统是整个CDN系统的中枢，负责对所有的用户请求进行调度，确定提供给用户的最终访问地址。</li>
+<li>使用分级实现，最基本的两级调度体系包括全局负载均衡(GSLB)和本地负载均衡(SLB)。</li>
+<li>GSLB根据用户地址和用户请求的内容，<strong>主要根据就近性原则，确定向用户服务的节点。一般通过DNS解析或者应用层重定向(HTTP 3XX重定向)的方式实现。</strong></li>
+<li>SLB主要负责节点内部的负载均衡。当用户请求从GSLB调度到SLB时，SLB会根据节点内各个Cache设备的工作状况和内容分布情况等对用户请求重定向。<strong>SLB的实现有四层调度（LVS），七层调度（Nginx）和链路负载调度等。</strong></li>
+</ul>
+<h4 id="管理系统"><a href="#管理系统" class="headerlink" title="管理系统"></a>管理系统</h4><ul>
+<li>分为运营管理和网络管理子系统。</li>
+<li>网络管理系统实现对CDN系统的设备管理，拓扑管理，链路监控和故障管理，为管理员提供对全网资源的可视化的集中管理，通常用web方式实现。</li>
+<li>运营管理是对CDN系统的业务管理，负责处理业务层面的与外界系统交互所必须的一些收集，整理，交付工作。<strong>包括用户管理，产品管理，计费管理，统计分析等。</strong></li>
+</ul>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Http/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>Http</a>
+        
+          <a href="/tags/tcp-ip/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>tcp/ip</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+    
+  </section>
+  
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
+
+  
+
+
+    
+  
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+          
+          
+            <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png'/>
+      </div>
+    
+    
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+
+          
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="https://github.com/YanMao186" href="https://github.com/YanMao186"
+          
+          
+          id="https:github.comYanMao186">
+          
+            <i class="fab fa-github fa-fw" aria-hidden="true"></i>
+          
+          github
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/blog/categories/"
+    title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/HTTP-TCP-IP/" href="/categories/HTTP-TCP-IP/"><div class='name'>HTTP/TCP/IP</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/MySQL/" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/blog/tags/"
+    title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/java-并发/" style="font-size: 14px; color: #999">-java -并发</a> <a href="/tags/Http/" style="font-size: 14px; color: #999">Http</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/MySQL/" style="font-size: 14px; color: #999">MySQL</a> <a href="/tags/ORM/" style="font-size: 14px; color: #999">ORM</a> <a href="/tags/Spring-Cloud/" style="font-size: 14px; color: #999">Spring Cloud</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 20.67px; color: #6c6c6c">jvm</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 17.33px; color: #828282">多线程</a> <a href="/tags/微服务/" style="font-size: 14px; color: #999">微服务</a> <a href="/tags/集合/" style="font-size: 14px; color: #999">集合</a> <a href="/tags/面向对象/" style="font-size: 14px; color: #999">面向对象</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class='widget music'>
+    
+<header class='pure'>
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn"
+    
+      rel="external nofollow noopener noreferrer"
+    
+    
+      target="_blank"
+    
+    href="http://music.163.com/playlist?id=2758693024&userid=76931878"
+    title="http://music.163.com/playlist?id=2758693024&userid=76931878">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme="#1BCDFC"
+    
+    
+    data-mode="circulation"
+    data-server="netease"
+    data-type="playlist"
+    data-id="2758693024"
+    data-volume="0.5">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+  <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Yan</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+ 
+
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!-- 数字雨 -->
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript">
+
+		
+		window.onload = function(){
+			//获取画布对象
+			var canvas = document.getElementById("canvas");
+			//获取画布的上下文
+			var context =canvas.getContext("2d");
+			  var s = window.screen;
+             var W = canvas.width = s.width;
+             var H = canvas.height;
+			//获取浏览器屏幕的宽度和高度
+			//var W = window.innerWidth;
+			//var H = window.innerHeight;
+			//设置canvas的宽度和高度
+			canvas.width = W;
+			canvas.height = H;
+			//每个文字的字体大小
+			var fontSize = 16;
+			//计算列
+			var colunms = Math.floor(W /fontSize);	
+			//记录每列文字的y轴坐标
+			var drops = [];
+			//给每一个文字初始化一个起始点的位置
+			for(var i=0;i<colunms;i++){
+				drops.push(0);
+			}
+
+			//运动的文字
+			var str ="javascript html5 canvas  严茂 www.mryanmao.top";
+			//4:fillText(str,x,y);原理就是去更改y的坐标位置
+			//绘画的函数
+			function draw(){
+				context.fillStyle = "rgba(0,0,0,.08)";//遮盖层
+				context.fillRect(0,0,W,H);
+				//给字体设置样式
+				context.font = "700 "+fontSize+"px  微软雅黑";
+				//给字体添加颜色
+				context.fillStyle = "green";//randColor();可以rgb,hsl, 标准色，十六进制颜色
+				//写入画布中
+				for(var i=0;i<colunms;i++){
+					var index = Math.floor(Math.random() * str.length);
+					var x = i*fontSize;
+					var y = drops[i] *fontSize;
+					context.fillText(str[index],x,y);
+					//如果要改变时间，肯定就是改变每次他的起点
+					if(y >= canvas.height && Math.random() > 0.99){
+						drops[i] = 0;
+					}
+					drops[i]++;
+				}
+			};
+
+			function randColor(){//随机颜色
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				return "rgb("+r+","+g+","+b+")";
+			}
+
+			draw();
+			setInterval(draw,30);
+		};
+
+	
+</script>
+
+</body>
+</html>
