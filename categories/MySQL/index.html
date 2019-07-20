@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: mysql | MrYan</title>
+  <title>Category: MySQL | MrYan</title>
   
   
 
@@ -298,6 +298,8 @@
   <section class="post-list">
     
       
+        
+          
         
           
         
@@ -710,6 +712,318 @@
           </div>
         
       
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/07/11/MySQL常用函数/">
+      MySQL常用函数
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Yan Mao</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-11</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/MySQL/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>MySQL</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="MySQL常用函数"><a href="#MySQL常用函数" class="headerlink" title="MySQL常用函数"></a>MySQL常用函数</h2><h3 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h3><pre><code>与大多数计算机语言一样,SQL支持利用函数来处理数据,函数一般是在数据上执行的,它给数据的转换和处理提供了方便.</code></pre><h3 id="2-函数的作用"><a href="#2-函数的作用" class="headerlink" title="2. 函数的作用"></a>2. 函数的作用</h3><p>​    用于处理文本串(如删除或填充值,转换值为大写或小写)的文本函数.</p>
+<p>​       用于在数值上进行算术操作(如返回绝对值,进行代数运算)的数值函数.</p>
+<p>​       用于处理日期和时间值并从这些值中提取特定成分(如,返回两个日期之差,检查日期有效性等)的日期和时间函数.</p>
+<p>​       返回DBMS正使用的特殊信息(如,返回用户登录信息,检查版本细节)的系统函数.</p>
+<h3 id="3-函数分类"><a href="#3-函数分类" class="headerlink" title="3. 函数分类"></a>3. 函数分类</h3><p>​     函数按照其用途功能可分为四大类,分别为:文本处理函数,日期和时间处理函数,数值处理函数和聚集函数.接下来详细讲解各函数.</p>
+<p><a href="https://github.com/YanMao186/sql" target="_blank" rel="noopener">数据库建表语句</a></p>
+<h4 id="文本函数"><a href="#文本函数" class="headerlink" title="文本函数"></a>文本函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Left()</td>
+<td>返回串左边的字符</td>
+</tr>
+<tr>
+<td>Length()</td>
+<td>返回串的长度</td>
+</tr>
+<tr>
+<td>Locate()</td>
+<td>找出串的一个子串</td>
+</tr>
+<tr>
+<td>Lower()</td>
+<td>将串转换为小写</td>
+</tr>
+<tr>
+<td>LTrim()</td>
+<td>去掉串左边的空格</td>
+</tr>
+<tr>
+<td>Right()</td>
+<td>返回串右边的字符</td>
+</tr>
+<tr>
+<td>Soundex()</td>
+<td>返回串的SOUNDEX值</td>
+</tr>
+<tr>
+<td>SubString()</td>
+<td>返回子串的字符</td>
+</tr>
+<tr>
+<td>Upper()</td>
+<td>将串转换为大写</td>
+</tr>
+<tr>
+<td>RTrim()</td>
+<td>返回串右边的空格</td>
+</tr>
+</tbody></table>
+<p>简单演示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将名称转为大写</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name,<span class="keyword">UPPER</span>(prod_name) 大写姓名 <span class="keyword">FROM</span> products;</span><br><span class="line"><span class="comment">-- 返回名字最左边的三个字符</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name,<span class="keyword">LEFT</span>(prod_name,<span class="number">3</span>)  <span class="keyword">FROM</span>  products;</span><br><span class="line"><span class="comment">-- 查询名称中含有'anvil'的产品,返回0表示不存在</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name,<span class="keyword">LOCATE</span>(<span class="string">'anvil'</span>,prod_name) <span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/11/MySQL常用函数/6400.webp" alt="6400"><img src="/2019/07/11/MySQL常用函数/6402.webp" alt="6402"><img src="/2019/07/11/MySQL常用函数/640.webp" alt="640"></p>
+<h4 id="日期和时间处理函数"><a href="#日期和时间处理函数" class="headerlink" title="日期和时间处理函数"></a>日期和时间处理函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addDate()</td>
+<td>增加一个日期(天,周等)</td>
+</tr>
+<tr>
+<td>AddTime()</td>
+<td>增加一个时间(时.分等)</td>
+</tr>
+<tr>
+<td>CurDate()</td>
+<td>返回当前日期</td>
+</tr>
+<tr>
+<td>CurTime()</td>
+<td>返回当前时间</td>
+</tr>
+<tr>
+<td>Date()</td>
+<td>返回日期时间的日期部分</td>
+</tr>
+<tr>
+<td>DateDiff()</td>
+<td>计算两个日期之差</td>
+</tr>
+<tr>
+<td>Date_Add()</td>
+<td>高度灵活的日期运算函数</td>
+</tr>
+<tr>
+<td>Date_Format()</td>
+<td>返回一个格式化的日期或者时间串</td>
+</tr>
+<tr>
+<td>Day()</td>
+<td>返回一个日期的天数部分</td>
+</tr>
+<tr>
+<td>DayofWeek()</td>
+<td>对于一个日期,返回对应的星期几</td>
+</tr>
+<tr>
+<td>Hour()</td>
+<td>返回一个时间的小时部分</td>
+</tr>
+<tr>
+<td>Month()</td>
+<td>返回一个日期的月份部分</td>
+</tr>
+<tr>
+<td>Now()</td>
+<td>返回当前日期和时间</td>
+</tr>
+<tr>
+<td>Second()</td>
+<td>返回一个时间的秒部分</td>
+</tr>
+<tr>
+<td>Time()</td>
+<td>返回一个日期时间的时间部分</td>
+</tr>
+<tr>
+<td>Year()</td>
+<td>返回一个日期的年份部分</td>
+</tr>
+<tr>
+<td>Minute()</td>
+<td>返回一个时间的分钟部分</td>
+</tr>
+</tbody></table>
+<p>==注:时间格式必须为yyyy-mm-dd==</p>
+<p>简单演示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询时间为05年9月1日的产品信息</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> <span class="built_in">DATE</span>(order_date) = <span class="string">'2005-09-01'</span>;</span><br><span class="line"><span class="comment">-- 查询两个日期之差</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DATEDIFF</span>(<span class="string">'2005-10-08'</span>,<span class="string">'2005-09-01'</span>) 日期差为;</span><br><span class="line"><span class="comment">-- 返回日期对应的星期,由于老外的计算方式与中国人不同,在星期上需要减1</span></span><br><span class="line"><span class="keyword">SELECT</span>  <span class="keyword">DAYOFWEEK</span>(<span class="string">'2019-7-10'</span>) 今天星期;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/11/MySQL常用函数/6404.webp" alt="6404"><img src="/2019/07/11/MySQL常用函数/6405.webp" alt="6405"><img src="/2019/07/11/MySQL常用函数/6403.webp" alt="6403"></p>
+<h4 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Abs()</td>
+<td>返回一个数的绝对值</td>
+</tr>
+<tr>
+<td>Cos()</td>
+<td>返回一个角度的余弦值</td>
+</tr>
+<tr>
+<td>Sin()</td>
+<td>返回一个角度的正弦值</td>
+</tr>
+<tr>
+<td>Tan()</td>
+<td>返回一个角度的正切值</td>
+</tr>
+<tr>
+<td>Exp()</td>
+<td>返回一个角度的指数值</td>
+</tr>
+<tr>
+<td>Mod()</td>
+<td>返回除操作的余数</td>
+</tr>
+<tr>
+<td>Pi()</td>
+<td>返回圆周率</td>
+</tr>
+<tr>
+<td>Rand()</td>
+<td>返回一个随机数</td>
+</tr>
+<tr>
+<td>Sqrt()</td>
+<td>返回一个数的平方根</td>
+</tr>
+</tbody></table>
+<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVG()</td>
+<td>返回平均值</td>
+</tr>
+<tr>
+<td>Count()</td>
+<td>返回行数</td>
+</tr>
+<tr>
+<td>Max()</td>
+<td>返回最大值</td>
+</tr>
+<tr>
+<td>Min()</td>
+<td>返回最小值</td>
+</tr>
+<tr>
+<td>Sum()</td>
+<td>返回某列之和</td>
+</tr>
+</tbody></table>
+<p>简单演示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 计算商品平均价格</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(prod_price) 商品均价 <span class="keyword">FROM</span> products;</span><br><span class="line"><span class="comment">-- 返回指定列值的和</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(quantity) <span class="keyword">AS</span> 和 <span class="keyword">FROM</span> orderitems <span class="keyword">WHERE</span> order_num = <span class="number">20005</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/11/MySQL常用函数/6407.webp" alt="6407"><img src="/2019/07/11/MySQL常用函数/6406.webp" alt="6406"></p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/MySQL/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>MySQL</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
     
   </section>
   
@@ -723,6 +1037,7 @@
 
     
   
+
 </div>
 <aside class='l_side'>
   
