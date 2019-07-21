@@ -333,7 +333,35 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="What-s"><a href="#What-s" class="headerlink" title="What`s"></a>What`s</h2>
+      <h2 id="什么是Spring-Cloud"><a href="#什么是Spring-Cloud" class="headerlink" title="什么是Spring Cloud"></a>什么是Spring Cloud</h2><ul>
+<li>Spring Cloud是一系列框架的有序集合。它利用<a href="https://baike.baidu.com/item/Spring%20Boot/20249767" target="_blank" rel="noopener">Spring Boot</a>的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。(<a href="https://baike.baidu.com/item/spring%20cloud/20269825?fr=aladdin" target="_blank" rel="noopener">引自百度百科</a>)</li>
+</ul>
+<h2 id="Spring-Cloud与单体架构"><a href="#Spring-Cloud与单体架构" class="headerlink" title="Spring Cloud与单体架构"></a>Spring Cloud与单体架构</h2><h4 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h4><ul>
+<li>在微服务的概念形成之前，绝大多数的Web的应用都是使用单体建构进行构建的，在单体架构中，应用程序作为单个可部署的软件制品交付，所有的UI，业务，数据库访问逻辑都被打包在一个应用程序制品中并部署在一个应用程序服务器上面。</li>
+</ul>
+<p><img src="/2019/07/20/Spring-Cloud快速入门/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190721112755.jpg" alt="微信图片_20190721112755"></p>
+<ul>
+<li><p>单体架构存在的问题：</p>
+<ul>
+<li>随着业务的发展，开发变得越来越复杂，</li>
+<li>每当各个团队修改代码的时候，整个应用程序都需要<code>重新构建，重新测试及重新部署等。</code></li>
+<li>一旦一个模块出现问题，整个系统就有可能…….</li>
+</ul>
+<p><img src="/2019/07/20/Spring-Cloud快速入门/20180522084756_mmmla.jpeg" alt="20180522084756_mmmla"></p>
+</li>
+</ul>
+<h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h4><ul>
+<li>微服务技术，是对技术上和组织上扩大大型单体应用程序所面临的诸多挑战的直接回应。</li>
+</ul>
+<p><img src="/2019/07/20/Spring-Cloud快速入门/%E4%BD%A0%E8%BF%87%E6%9D%A5%E5%91%80-1563680562356.webp" alt="你过来呀"></p>
+<ul>
+<li>微服务架构是一个小的，松耦合的分布式服务。</li>
+<li>微服务允许将一个大型的应用分解为具有严格职责定义的便于管理的组件。</li>
+<li>微服务通过将大型的代码分解为小型的精准定义的部分，已解决大型代码库中传统的复杂问题。</li>
+<li>微服务的一大核心就是：分解和分离应用程序的功能，使他们完全彼此独立。如下</li>
+</ul>
+<p><img src="/2019/07/20/Spring-Cloud快速入门/cloud.jpg" alt="cloud"></p>
+
       
     </div>
     
