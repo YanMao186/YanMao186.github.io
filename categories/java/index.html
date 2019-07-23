@@ -350,7 +350,8 @@
 <p><img src="/2019/07/20/Spring-Cloud快速入门/20180522084756_mmmla.jpeg" alt="20180522084756_mmmla"></p>
 </li>
 </ul>
-<h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h4><ul>
+<h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h4><p>![](Spring-Cloud快速入门/spring cloud架构图.png)</p>
+<ul>
 <li>微服务技术，是对技术上和组织上扩大大型单体应用程序所面临的诸多挑战的直接回应。</li>
 </ul>
 <p><img src="/2019/07/20/Spring-Cloud快速入门/%E4%BD%A0%E8%BF%87%E6%9D%A5%E5%91%80-1563680562356.webp" alt="你过来呀"></p>
@@ -361,7 +362,104 @@
 <li>微服务的一大核心就是：分解和分离应用程序的功能，使他们完全彼此独立。如下</li>
 </ul>
 <p><img src="/2019/07/20/Spring-Cloud快速入门/cloud.jpg" alt="cloud"></p>
-
+<h5 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h5><ul>
+<li>各个服务的开发，测试，部署等都相互独立，开发之间不需要依赖其他服务。</li>
+<li>构建在微服务之上的应用程序能够使用多种编程语言和技术进行构建。</li>
+<li>一个微服务可以跨多个应用程序复用。</li>
+<li>微服务利用其小，独立和分布式的性质，使组织拥有明确责任领域的小型开发团队。</li>
+</ul>
+<h5 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h5><ul>
+<li>微服务的拆分是基于业务的，不是我们想怎么拆就怎么拆，给团队协作，沟通带来了挑战。</li>
+<li>由于各个服务之间是互相独立的，数据也是独立的，当调用多个服务接口来进行操作时，如何保证各个服务之间的数据一致性。</li>
+</ul>
+<h2 id="主流微服务框架简单对比"><a href="#主流微服务框架简单对比" class="headerlink" title="主流微服务框架简单对比"></a>主流微服务框架简单对比</h2><table>
+<thead>
+<tr>
+<th>RPC框架</th>
+<th>dubbo</th>
+<th>motan</th>
+<th>thrift</th>
+<th>grpc</th>
+<th>spring cloud</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>支持语言</td>
+<td>java</td>
+<td>java</td>
+<td>跨语言</td>
+<td>跨语言</td>
+<td>java</td>
+</tr>
+<tr>
+<td>服务治理</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>多注册中心</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>序列化方式</td>
+<td>hessian2/lite/json/kryo</td>
+<td>hessian2/json</td>
+<td>thrift/json</td>
+<td>protobuf</td>
+<td>java/kryo</td>
+</tr>
+<tr>
+<td>跨语言通讯</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<h2 id="微服务首要考虑因素"><a href="#微服务首要考虑因素" class="headerlink" title="微服务首要考虑因素"></a>微服务首要考虑因素</h2><p><img src="/2019/07/20/Spring-Cloud快速入门/1563696525028.png" alt="1563696525028"></p>
+<h4 id="大小适当"><a href="#大小适当" class="headerlink" title="大小适当"></a>大小适当</h4><ul>
+<li>如何确保正确的划分微服务的大小，可以避免微服务承担太多的职责，适当的大小允许快速的更改应用程序，降低整个应用程序中断的总体风险。</li>
+</ul>
+<h4 id="位置透明"><a href="#位置透明" class="headerlink" title="位置透明"></a>位置透明</h4><ul>
+<li>在微服务应用中，多个服务实例可以快速的启动和关闭时，如何管理服务调用的物理细节。</li>
+</ul>
+<h4 id="有弹性"><a href="#有弹性" class="headerlink" title="有弹性"></a>有弹性</h4><ul>
+<li>如何通过绕过失败的服务，确保采取“快速失败”的方法来保护微服务消费者和应用程序的整体完整性。</li>
+</ul>
+<h4 id="可重复"><a href="#可重复" class="headerlink" title="可重复"></a>可重复</h4><ul>
+<li>如何确保提供的每个新服务实例与生产环境中的所有其他服务实例具有相同的配置和代码库。</li>
+</ul>
+<h4 id="可伸缩"><a href="#可伸缩" class="headerlink" title="可伸缩"></a>可伸缩</h4><ul>
+<li>如何使用异步处理和事件来最小化服务之间的直接依赖关系，并确保可以优雅地扩展代码库。</li>
+</ul>
+<h2 id="微服务模式"><a href="#微服务模式" class="headerlink" title="微服务模式"></a>微服务模式</h2><h4 id="核心微服务开发模式"><a href="#核心微服务开发模式" class="headerlink" title="核心微服务开发模式"></a>核心微服务开发模式</h4><ul>
+<li>核心微服务开发模式解决了构建微服务的基础问题。</li>
+</ul>
+<h4 id="微服务路由模式"><a href="#微服务路由模式" class="headerlink" title="微服务路由模式"></a>微服务路由模式</h4><ul>
+<li>路由模式负责处理处理希望微服务的客户端应用程序，使客户端应用程序发现服务的位置并路由到服务。</li>
+</ul>
+<h4 id="微服务客户端弹性模式"><a href="#微服务客户端弹性模式" class="headerlink" title="微服务客户端弹性模式"></a>微服务客户端弹性模式</h4><ul>
+<li>因为微服务架构是高度分布的，所以必须对如何防止单个服务中的问题级联暴露给服务的消费者十分敏感。常用的有4种客户端弹性模式：客户端负载均衡，断路器模式，后备模式和舱壁模式。</li>
+</ul>
+<h4 id="微服务安全模式"><a href="#微服务安全模式" class="headerlink" title="微服务安全模式"></a>微服务安全模式</h4><ul>
+<li>常用的3种基本的安全模式：验证，授权和凭据管理和传播</li>
+</ul>
+<h4 id="微服务日志记录和跟踪模式"><a href="#微服务日志记录和跟踪模式" class="headerlink" title="微服务日志记录和跟踪模式"></a>微服务日志记录和跟踪模式</h4><ul>
+<li>微服务的优点是单体应用程序被分解为可以彼此独立部署的小的功能部件，而它的缺点是调试和跟踪应用程序和服务中发生的事情要困难的多。</li>
+<li>常用的3种核心日志记录和跟踪模式：日志关联，日志聚合和微服务跟踪。</li>
+</ul>
+<h4 id="微服务构建和部署模式"><a href="#微服务构建和部署模式" class="headerlink" title="微服务构建和部署模式"></a>微服务构建和部署模式</h4><ul>
+<li>微服务架构的核心原则之一是，微服务的每个实例都应该和其他所有实例相同。</li>
+</ul>
+<h2 id="Spring-Cloud各模块入门"><a href="#Spring-Cloud各模块入门" class="headerlink" title="Spring Cloud各模块入门"></a>Spring Cloud各模块入门</h2><h4 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h4>
       
     </div>
     
@@ -3461,7 +3559,7 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
           
             <a class="next" rel="next" href="/categories/java/page/2/">
               <section class="post next">
-                &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
               </section>
             </a>
           
@@ -3566,7 +3664,7 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
   <section class='widget category'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -3603,7 +3701,7 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -3682,19 +3780,19 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
   
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="" target="_blank" class="codename">None Bug</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -3803,15 +3901,15 @@ setInterval("createtime()",250);
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
