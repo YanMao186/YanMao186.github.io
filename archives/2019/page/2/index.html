@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Archives: 2019 | None Bug</title>
+  <title>Archives: 2019 | 编程是一门艺术</title>
   
   
 
   
-  <link rel="alternate" href="/atom.xml" title="None Bug">
+  <link rel="alternate" href="/atom.xml" title="编程是一门艺术">
   
 
   <meta name="HandheldFriendly" content="True">
@@ -61,7 +61,7 @@
     <cover class='cover  half'>
       
         
-  <h1 class='title'>None Bug</h1>
+  <h1 class='title'>编程是一门艺术</h1>
 
 
 <div class='menu navgation'>
@@ -112,7 +112,7 @@
 		<div class="nav-main container container--flex">
       <a class="logo flat-box" href='/' >
         
-          None Bug
+          编程是一门艺术
         
       </a>
 			<div class='menu navgation'>
@@ -225,164 +225,6 @@
   <section class="post-list">
     
     
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/11/JVM-一-内存结构/">
-      JVM(一)内存结构
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>Yan Mao</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-11</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/java/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>java</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="1-JVM内存结构"><a href="#1-JVM内存结构" class="headerlink" title="1. JVM内存结构"></a>1. JVM内存结构</h3><p><img src="/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-1562826662961.jpg" alt="jvm内存结构"></p>
-<p>​    JVM内存结构主要有三大块:<strong>堆内存</strong>,<strong>方法区</strong>和<strong>栈</strong></p>
-<p>​    <strong>堆内存</strong>是JVM内存中最大的一块区域,由年轻代和老年代组成,而年轻代由可分为三部分,EdenSpace,FromSpace,ToSpace,默认情况下三者比例为8:1:1的比例.</p>
-<p>​    <strong>方法区</strong>存储类信息,常量,静态变量等数据,是线程共享的区域.</p>
-<p>​    <strong>栈</strong>又可以分为java虚拟机栈和本地方法栈主要用于方法的执行</p>
-<h3 id="2-JVM内存区域分配"><a href="#2-JVM内存区域分配" class="headerlink" title="2.JVM内存区域分配"></a>2.JVM内存区域分配</h3><p><img src="/2019/07/11/JVM-一-内存结构/jvm%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D-1562827418260.jpg" alt="jvm内存分配"></p>
-<ul>
-<li>图中控制参数说明<ul>
-<li>-Xmx:设置堆内存的最大值</li>
-<li>-Xms:设置堆内存的最小值</li>
-<li>-XX:MaxNewSize:设置新生代内存的最大值</li>
-<li>-XX:NewSize:设置新生代内存的最小值</li>
-<li>-XX:MaxPermSize:设置永久代内存的最大值</li>
-<li>-XX:PermSize:设置永久代内存的最小值</li>
-<li>-Xss:设置每个线程的堆栈大小</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-JVM与系统之间调用关系"><a href="#3-JVM与系统之间调用关系" class="headerlink" title="3. JVM与系统之间调用关系"></a>3. JVM与系统之间调用关系</h3><p><img src="/2019/07/11/JVM-一-内存结构/JVM%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1562828203417.jpg" alt="JVM与系统调用"></p>
-<ul>
-<li>方法区,堆属于所有线程间所共享的,而栈,程序计数器是属于线程私有的.</li>
-<li><strong>java堆</strong><ul>
-<li>对于大多数应用来说,java堆是java虚拟机所管理的内存中最大的一块,java堆是所有线程共享的一块内存区域,在虚拟机启动时创建,此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存.</li>
-<li>java堆时垃圾收集器管理的主要区域,因此很多时候也被称之为”<strong>GC堆</strong>“.</li>
-<li>java堆可以位于物理上不连续的内存空间中,只要逻辑上时连续的即可</li>
-<li>如果在堆中没有内存完成实例分配,并且堆也无法再扩展时,将会抛出<strong>OutOfMemoryError</strong>异常.</li>
-</ul>
-</li>
-<li><strong>方法区</strong><ul>
-<li>与java堆一样,是各个线程间共享的内存区域,它主要用于存储已被虚拟机加载的类信息,常量,静态变量,即时编译器编译后的代码等数据.</li>
-<li>方法区与java堆一样不需要连续的内存和可以选择固定大小或者可扩展外,还可以选择不实现垃圾回收.(垃圾回收在方法区出现的频率很小)</li>
-<li>当方法区无法满足内存分配需求时,将抛出<strong>OutOfMemoryError</strong>异常.</li>
-<li>方法区的执行都是随着线程的,原始类型的本地变量以及引用都存放在线程栈中,而引用关联的对象,都存在堆中.</li>
-</ul>
-</li>
-<li><strong>程序计数器</strong><ul>
-<li>程序计数器是一块较小的内存空间,它的作用可以看作是当前线程所执行的字节码的信号指示器,在虚拟机的概念模型中字节码解释器工作时就是通过改变这个计时器的值来选取下一条需要执行的字节码指令,分支,循环,跳转,异常处理,线程恢复等基础功能都需要依赖这个计数器来完成.</li>
-<li>由于java虚拟机的多线程是通过线程切换并分配处理器执行时间的方式来实现的,在任何一个确定的时刻,一个处理器只会执行一条独立的程序计数器,各条线程之间的1计数器互不影响,独立存储,我们称这种内存区域为”线程私有”的内存.</li>
-<li>如果线程正在执行的是一个java方法,这个计数器记录的是正在执行的虚拟机字节码指令的地址,如果正在执行的是Natvie方法,这个计数器值则为空.</li>
-</ul>
-</li>
-<li><strong>JVM栈</strong><ul>
-<li>同程序计数器,java虚拟机栈也是线程私有的,<strong>它的生命周期与线程一样,虚拟机描述的是java方法执行的内存模型</strong>,每个方法被执行的时候都会同时创建一个栈帧用于存储局部变量表,朝左栈,动态链接,方法出口等信息.<strong>每一个方法被调用直至执行完成的过程,就对应着一个栈帧在虚拟机中从入栈到出栈的过程.</strong></li>
-<li>局部变量表存放了编译器可知的各种基本类型数据类型,对象引用(reference类型,它不等同于对象本身,根据不同的虚拟机实现,它可能是一个指向对象起始地址的引用指针,也可能指向一个代表对象的句柄或其他与此对象相关的位置)和returnAddress类型(指向了一条字节码指令的地址)</li>
-<li>在java虚拟机规范中,对这个区域规定了两种异常状况,如果线程请求的栈深度大于虚拟机所允许的深度,将抛出<strong>StackOverFlowError</strong>异常,如果虚拟机可以动态的扩展,当扩展时无法申请到足够的内存时会抛出<strong>OutOfMemoryError</strong>异常.</li>
-</ul>
-</li>
-<li><strong>本地方法栈</strong><ul>
-<li>本地方法栈与虚拟机栈所发挥的作用时非常相似的,区别不过时虚拟机栈为虚拟机执行Java方法服务,而本地方法栈则是为虚拟机使用到的Native方法服务,虚拟机规范中对本地方法栈中的方法使用的语言,使用方式与数据结构并没有强制规定,因此具体的虚拟机可以自由的实现它.</li>
-<li>与虚拟机栈一样,本地方法栈区域也会抛出<strong>StackOverflowError</strong>和<strong>OutOfMemoryError</strong>异常</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-使用JConsole查看java的相关信息"><a href="#4-使用JConsole查看java的相关信息" class="headerlink" title="4. 使用JConsole查看java的相关信息."></a>4. 使用JConsole查看java的相关信息.</h3><ul>
-<li><p>找到%JAVA_HOME%\bin目录<img src="/2019/07/11/JVM-一-内存结构/javahome.png" alt="javahome"></p>
-</li>
-<li><p>执行cmd,输入jconsole命令,将会打开JConsole面板.<img src="/2019/07/11/JVM-一-内存结构/Jconsole.png" alt="Jconsole"></p>
-</li>
-<li><p>选择你要查看的进程点击连接,成功后如下.<img src="/2019/07/11/JVM-一-内存结构/%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF.png" alt="控制面板"></p>
-</li>
-</ul>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/jvm/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>jvm</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
       
         
           <div class='post-wrapper'>
@@ -3053,7 +2895,7 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
           
             <a class="prev" rel="prev" href="/archives/2019/">
               <section class="post prev" >
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
               </section>
             </a>
           
@@ -3160,7 +3002,7 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
   <section class='widget category'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn"
     
@@ -3197,7 +3039,7 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn"
     
@@ -3276,19 +3118,19 @@ Language的缩写，它是一种功能强大的表达式语言，通过它简单
   
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
-    <a href="" target="_blank" class="codename">None Bug</a>
-    作为主题
+    Use
+    <a href="" target="_blank" class="codename">编程是一门艺术</a>
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -3405,15 +3247,15 @@ setInterval("createtime()",250);
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
