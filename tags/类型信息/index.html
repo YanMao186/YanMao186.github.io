@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Tag: 类型信息 | 编程是一门艺术</title>
+  
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="编程是一门艺术">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<style>
+#canvas {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  z-index: -1;
+}
+</style>
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover  half'>
+      
+        
+  <h1 class='title'>Hello World</h1>
+
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="https://github.com/YanMao186"
+            
+            
+            id="https:github.comYanMao186">
+            <i class='fab fa-github fa-fw'></i>&nbsp;github
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          编程是一门艺术
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;示例
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="blogcategories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="blogtags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+			<ul class='switcher h-list'>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://github.com/YanMao186"
+                
+                
+                id="https:github.comYanMao186">
+								<i class='fab fa-github fa-fw'></i>&nbsp;github
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      
+<div class='l_main'>
+  
+    
+      
+  <section class="post-list">
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/11/17/java编程思想第十四章/">
+      java编程思想第十四章
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Yan Mao</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-17</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/java/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>java</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="第十四章-类型信息"><a href="#第十四章-类型信息" class="headerlink" title="第十四章 类型信息"></a>第十四章 类型信息</h2><ul>
+<li>运行时类型信息使得你可以在程序运行时发现和使用类型信息。</li>
+<li>Java是如何让我们在运行时识别对象和类的信息的，主要有两种方式。<ul>
+<li>一种是“传统的”RTTI，它假定我们在编译时已经知道了所有的类型。</li>
+<li>一种是“反射”机制，它允许我们在运行时发现和使用类的信息。</li>
+</ul>
+</li>
+</ul>
+<h3 id="为什么需要RTTI"><a href="#为什么需要RTTI" class="headerlink" title="为什么需要RTTI"></a>为什么需要RTTI</h3><ul>
+<li>下面看一个我们已经很熟悉的一个例子，它使用了多态的类层次结构。最通用的类型是(泛型)是基类<strong>Shape</strong>，而派生出的具体类有<strong>Circle</strong>，<strong>Square</strong>和<strong>Triangle</strong>。</li>
+</ul>
+<p><img src="/2019/11/17/java编程思想第十四章/1568909940991.png" alt="1568909940991"></p>
+<ul>
+<li>这是一个典型的类层次结构图，基类位于顶部，派生类向下拓展。面向对象编程中基本的目的是：<strong>让代码只操纵对基类的引用</strong>。这样，如果要添加一个新类来扩展程序，就不会影响到原来的代码。在这个例子的<strong>Shape</strong>接口中动态的绑定了<strong>draw()</strong>方法，目的就是让客户端程序员使用泛化的<strong>Shape</strong>引用来调用<strong>draw()</strong>。<strong>draw()</strong>在所有派生类里都会被覆盖，并且由于它是被<strong>动态绑定</strong>的，所以即使是通过泛化的<strong>Shape</strong>引用来调用，也能产生正确行为。这就是==多态==。</li>
+<li>因此，通常会创建一个具体的对象(Circle,Square,或者Triangle),把它向上转型成Shape(忽略对象的具体类型)，并在后面的程序中使用匿名的Shape引用。你可以像下面这样对Shape层次结构编码：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>+<span class="string">".draw()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">extends</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Circle"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">extends</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Square"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Triangle</span> <span class="keyword">extends</span> <span class="title">Shape</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Triangle"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shapes</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;Shape&gt; shapeList = Arrays.asList(</span><br><span class="line">        <span class="keyword">new</span> Circle(),<span class="keyword">new</span> Square(),<span class="keyword">new</span> Triangle());</span><br><span class="line">        <span class="keyword">for</span> (Shape shape : shapeList) &#123;</span><br><span class="line">            shape.draw();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Circle.draw()</span></span><br><span class="line"><span class="comment">Square.draw()</span></span><br><span class="line"><span class="comment">Triangle.draw()</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>基类包含<strong>draw()</strong>方法，它通过传递<strong>this</strong>参数给<strong>System.out.println()</strong>,间接的使用<strong>toString()</strong>打印类标识符(注意，<strong>toString()被声明为abstract，以此强制继承者覆写该方法，并可以防止对无格式的Shape的实例化</strong>)。如果某个对象出现在字符串表达式中(涉及“+”和字符串对象的表达式)，<strong>toString()</strong>方法就会被自动调用，以生成表示该对象的<strong>String</strong>。每个派生类都要覆盖(从<strong>Object</strong>继承来的)<strong>toString()</strong>方法，这样<strong>draw()</strong>在不同情况下就打印出不同的消息(多态)。</p>
+</li>
+<li><p>在这个例子中，当把<strong>Shape</strong>对象放入<strong>List<shape></shape></strong>的数组时会向上转型。但在向上转型为<strong>Shape</strong>的时候也丢失了<strong>Shape</strong>对象的具体类型。对于数组而言，它们只是<strong>Shape</strong>类的对象。</p>
+</li>
+<li><p>当从数组中取出元素时，这种容器—–实际上它将所有的事物都当作<strong>Object</strong>持有—–会自动将结果转型回<strong>Shape</strong>。这是<strong>RTTI</strong>最基本的使用形式，因为在Java中，<strong>所有的类型转换都是在运行时进行正确性检查的</strong>，这也是<strong>RTTI</strong>名字的含义：在运行时，识别一个对象的类型。</p>
+</li>
+<li><p>在这个例子中，<strong>RTTI</strong>类型转换并不彻底：<strong>Object</strong>被转型为<strong>Shape</strong>，而不是转型为<strong>Circle</strong>,<strong>Square</strong>或者<strong>Triangle</strong>。这是因为目前我们只知道这个<strong>List<shape></shape></strong>保存的都是<strong>Shape</strong>。在编译时，将由容器和Java的泛型系统来强制确保这一点；而在运行时，由类型转换操作来确保这一点。</p>
+</li>
+<li><p>接下来就是多态机制的事情了，<strong>Shape</strong>对象实际执行什么样的代码，是由引用所指向的具体对象<strong>Circle</strong>,<strong>Square</strong>或者<strong>Triangle</strong>而决定的。通常，也正是这样的要求；你希望大部分代码尽可能少地了解对象的具体类型，而是只与对象家族中的一个通用表示打交道(在这个例子中是Shape)。这样代码会更容易写，更容易读，且更便于维护；设计也更容易实现，理解和改变。所以“多态”是面向对象编程的基本目标。</p>
+</li>
+</ul>
+<h3 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h3><ul>
+<li>要理解RTTI在Java中的工作原理，首先必须知道类型信息在运行时是如何表示的。这项工作是由称为Class对象的特殊对象完成的，它包含了与类有关的信息。事实上，Class对象就是用来创建类的所有的“常规”对象的，Java使用Class对象来执行其RTTI，即使你正在执行的是类似转型这样的操作。Class对象还拥有大量的使用RTTI的其他方式。</li>
+<li>类是程序的一部分，每个类都有一个Class对象。换言之，每当编写并且编译了一个新类，就会产生一个Class对象(更恰当地说，是被保存在一个同名的.class文件中)。为了生成这个类的对象，运行这个程序的Java虚拟机(JVM)将使用被称为“类加载器”的子系统。</li>
+<li>类加载器子系统实际上可以包含一条类加载器链，但是只有一个原生的类加载器，它是JVM实现的一部分。原生类加载器加载的是所谓的可信类，包括Java API类，他们通常是从本地盘加载的。在这条链中，通常不需要添加额外的类加载器，但是如果你有特殊需求(如以某种特殊的方式加载类，以支持Web服务器应用，或者在网络中下载类)，那么你有一种方式可以挂接额外的类加载器。</li>
+<li>所有的类都是在对其第一次使用时，动态加载到JVM中的。当程序创建第一个对类的静态成员的引用时，就会加载这个类。这个证明构造器也是类的静态方法，即使在构造器之前并没有使用static关键字。因此，使用new操作符创建类的新对象也会被当作对类的静态成员的引用。</li>
+<li>因此，Java程序在它运行之前并非被完全加载，其各个部分是在必需时才加载的。这一点与许多传统语言都不同。</li>
+<li>类加载器首先检查这个类的Class对象是否已经加载。如果尚未加载，默认的类加载器就会根据类名查找.class文件。在这个类的字节码被加载时，它们会接受验证，以确保其没有被破坏，并且不包含不良Java代码。</li>
+<li>一旦某个类的Class对象被加载进内存，它就被用来创建这个类的所有对象。如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ym.ThinkingInJava;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Candy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Loading Candy"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Gum</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Loading Gum"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cookie</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Loading Cookie"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SweetShop</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"inside main"</span>);</span><br><span class="line">        <span class="keyword">new</span> Candy();</span><br><span class="line">        System.out.println(<span class="string">"After creating Candy"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">"Gum"</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Couldn`t find Gum"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"After Class.forName(\"Gum\")"</span>);</span><br><span class="line">        <span class="keyword">new</span> Cookie();</span><br><span class="line">        System.out.println(<span class="string">"After creating Cookie"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">inside main</span></span><br><span class="line"><span class="comment">Loading Candy</span></span><br><span class="line"><span class="comment">After creating Candy</span></span><br><span class="line"><span class="comment">Couldn`t find Gum</span></span><br><span class="line"><span class="comment">After Class.forName("Gum")</span></span><br><span class="line"><span class="comment">Loading Cookie</span></span><br><span class="line"><span class="comment">After creating Cookie</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里的每个类Candy,Gum和Cookie,都有一个static子句，该子句在类第一次被加载时执行。这时会有相应的信息打印出来，告诉我们这个类什么时候被加载了。在main()中，创建对象的代码被置于打印语句之间，以帮助我们判断加载的时间点。</li>
+<li>从输出中可以看到，Class对象仅在需要的时候才被加载，static初始化是在类加载时进行的。</li>
+<li>上面的<code>Class.forName(&quot;Gum&quot;);</code>这个方法是Class类的一个static成员。Class对象就和其他对象一样，我们可以获取并操作它的引用(这也是类加载器的工作)。forName()是取得Class对象的引用的一种方法。它是用一个包含目标类的文本名的String作输入参数，返回的是一个Class对象的引用，上面的代码忽略了返回值。对forName()的调用是为了它产生的“副作用”：如果类Gum还没有被加载就加载它。在加载的过程中。Gum的static子句被执行。</li>
+<li>无论何时，只要你想在运行时使用类型信息，就必须首先获得对恰当的<strong>Class</strong>对象的引用。<strong>Class.forName()</strong>就是实现此功能的便捷途径，因为你不需要为了获得<strong>Class</strong>引用而持有该类型的对象。但是，如果你已经拥有了一个感兴趣的类型的对象，那就可以通过调用<strong>getClass()</strong>方法来获取<strong>Class</strong>引用了，这个方法属于根类<strong>Object</strong>的一部分，它将返回表示该对象的实际类型的<strong>Class</strong>引用。</li>
+</ul>
+<h4 id="类字面常量"><a href="#类字面常量" class="headerlink" title="类字面常量"></a>类字面常量</h4><ul>
+<li><p>Java还提供了另一种方法来生成对Class对象的引用，及使用==类字面常量==。即使用==类字面常量(类名.class)==。这样做不仅更简单，而且更安全。因为他在编译的时候就会受到检查(因此不需要置于try语句块中)。并且它根除了对==forName()==方法的调用，所以也更高效。</p>
+</li>
+<li><p>类字面常量不仅可以应用于普通的类，也可以用于接口，数组以及基本数据类型。另外，对于基本数据类型的包装器类，还有一个标准字段TYPE。TYPE字段是一个引用，指向对应的基本数据类型的Class对象，如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">boolean.class</th>
+<th align="center">等价于</th>
+<th align="center">Boolean.TYPE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>char.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Character.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>byte.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Byte.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>short.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Short.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>int.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Integer.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>long.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Long.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>float.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Float.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>double.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Double.TYPE</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>void.class</strong></td>
+<td align="center"><strong>等价于</strong></td>
+<td align="center"><strong>Void.TYPE</strong></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>当使用“<strong>.class</strong>”来创建对<strong>Class</strong>对象的引用的时候，不会自动地初始化该<strong>Class</strong>对象。为了使用类而做的准备工作实际包含三个步骤：</p>
+<ul>
+<li><strong>加载</strong>，这是由类加载器执行的。该步骤将查找字节码，并从这些字节码中创建一个Class对象。</li>
+<li><strong>链接</strong>，在链接阶段将验证类中的字节码，为静态域分配存储空间，并且如果必须的话，将解析这个类创建的对其他类的所有引用。</li>
+<li><strong>初始化</strong>，如果该类具有超类，则对其初始化，执行静态初始化器和静态初始化块。初始化被延迟到了对静态方法或者非常数静态域进行首次引用时才执行。</li>
+</ul>
+</li>
+<li><p>初始化有效地实现了尽可能的“惰性”。仅使用<strong>.class</strong>语法来获得对类的引用不会引发初始化。但是，为了产生<strong>Class</strong>引用，<strong>Class.forName()</strong>立即就进行了初始化。</p>
+</li>
+<li><p>如果一个<strong>static</strong>域不是<strong>final</strong>的，那么在对他进行访问时，总是要求在它被读取之前，要先进行链接(为这个域分配存储空间)和初始化(初始化该存储空间)。</p>
+</li>
+</ul>
+<h4 id="泛化的Class引用"><a href="#泛化的Class引用" class="headerlink" title="泛化的Class引用"></a>泛化的Class引用</h4><ul>
+<li><strong>Class</strong>引用总是指向某个<strong>Class</strong>对象，它可以制造类的实例，并包含可作用于这些实例的所有方法代码。他还包含该类的静态成员，因此，<strong>Class</strong>引用表示的就是它所指向的对象的确切类型，而该对象便是<strong>Class</strong>类的一个对象。</li>
+<li>在Java se5中，将他的类型变得更具体了一些，而这是通过允许你对Class引用所指向的Class对象的类型进行限制而实现的，此处用到了泛型语法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericClassReferences</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class intClass = <span class="keyword">int</span>.class;</span><br><span class="line">        Class&lt;Integer&gt; genericIntClass = <span class="keyword">int</span>.class;</span><br><span class="line">        genericIntClass = Integer.class;</span><br><span class="line">        intClass = <span class="keyword">double</span>.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>普通的类不会产生警告信息，尽管泛型类引用只能赋值为指向声明的类型，但是普通的类引用可以被重新赋值为指向任何其他的Class对象。通过使用泛型语法。可以让编译器强制执行额外的类型检查。</li>
+<li>为了在使用泛化的Class引用时放松限制，使用通配符，它是java泛型的一部分。通配符就是“?”，表示“任何事物”。我们可以在上例的普通Class引用中添加通配符，并产生相同的结果：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WildcardClassReferenes</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; intClass = <span class="keyword">int</span>.class;</span><br><span class="line">        intClass = <span class="keyword">double</span>.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在Java se5中，Class<?>优于平凡的Class，即便他们是等价的，并且平凡的Class如你所见，不会产生编译器警告信息。Class<?>的好处是它表示你并非是碰巧或者由于疏忽，而使用了一个非具体的类引用，你就是选择了非具体的版本。</li>
+<li>为了创建一个Class引用，他被限定为某种类型，或该类型的任何子类型，你需要将通配符与extends关键字相结合，创建一个范围。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BoundedClassReferences</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;? extends Number&gt; bounded = <span class="keyword">int</span>.class;</span><br><span class="line">        bounded = <span class="keyword">double</span>.class;</span><br><span class="line">        bounded= Number.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>向Class引用添加泛型语法的原因仅仅是为了提供编译期类型检查，因此如果你操作有误，稍后立即就会发现这一点。</li>
+</ul>
+<h4 id="新的转型语法"><a href="#新的转型语法" class="headerlink" title="新的转型语法"></a>新的转型语法</h4><ul>
+<li><p>Java SE5中添加了用于Class引用的新的转型语法，即<strong>cast()</strong>方法:</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Building</span> </span>&#123;&#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">House</span> <span class="keyword">extends</span> <span class="title">Building</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassCasts</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Building b = <span class="keyword">new</span> House();</span><br><span class="line">        Class&lt;House&gt; houseType = House.class;</span><br><span class="line">        House h = houseType.cast(b);</span><br><span class="line">        h = (house)b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>cast()</strong>方法接受参数对象，并将其转型为<strong>Class</strong>引用的类型。</p>
+</li>
+</ul>
+<h3 id="类型转换前先做检查"><a href="#类型转换前先做检查" class="headerlink" title="类型转换前先做检查"></a>类型转换前先做检查</h3><ul>
+<li><p>目前为止，已知的RTTI形式包括。</p>
+<ul>
+<li><p>传统的类型转换，由RTTI确保类型转换的正确性，如果执行了一个错误的类型转换，就会抛出一个<strong>ClassCastException</strong>异常。</p>
+</li>
+<li><p>代表对象的类型的Class对象。通过查询Class对象可以获取运行时所需的信息。</p>
+</li>
+<li><p>RTTI在Java中还有第三种形式，就是关键字<strong>instanceof</strong>。他返回一个布尔值，告诉我们对象是不是某个特定类型的实例。可以用提问的方式使用它，就像这样:</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(x <span class="keyword">instanceof</span> Dog) </span><br><span class="line">	((Dog)x).bark();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在将<strong>x</strong>转型为一个<strong>Dog</strong>前，上面的<strong>if</strong>语句会检查对象<strong>x</strong>是否从属于<strong>Dog</strong>类。进行向下兼容前，如果没有其他信息可以告诉你这个对象是什么类型，那么使用<strong>instanceof</strong>是非常重要的，否则会得到一个<strong>ClassCastException</strong>异常。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="注册工厂"><a href="#注册工厂" class="headerlink" title="注册工厂"></a>注册工厂</h3><ul>
+<li>你可能会考虑在每个子类中添加静态初始化器，以使得该初始化器可以将它的类添加到某个List中，遗憾的是，静态初始化器只有在类首先被加载的情况下才能被调用，因此你就要面临”先有鸡还是先有蛋”的问题，生成器在其列表中不包含这个类，因此它永远不能创建这个类的对象，而这个类也就不能被强制加载并置于这个列表中。</li>
+<li>这主要是因为，你被强制要求自己去手工创建这个列表(除非你想编写一个工具，它可以全面搜索和分析源代码，然后创建和编译这个列表)。因此，最佳的做法是，将这个列表置于一个位于中心的，位置明显的地方，而我们感兴趣的继承结构的基类可能就是这个最佳位置。</li>
+<li>这里我们需要做的其他修改就是使用工厂方法设计模式，将对象的创建工作交给类自己去完成，工厂方法可以被多态的调用，从而为你创建恰当类型的对象。下面这个例子中，工厂方法就是<strong>Factory</strong>接口中的<strong>create()</strong>方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Factory</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">create</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>泛型参数T使得create()可以在每种Factory实现中返回不同的类型。这也充分利用了协变返回类型。</li>
+</ul>
+<h3 id="反射：运行时的类信息"><a href="#反射：运行时的类信息" class="headerlink" title="反射：运行时的类信息"></a>反射：运行时的类信息</h3><ul>
+<li>如果不知道某个对象的确切类型，RTTI可以告诉你。但是有一个限制：这个类型在编译时必须已知，这样才能使用RTTI识别他，并利用这些信息做一些有用的事。</li>
+<li>人们想要在运行时获取类的信息的另外一个动机，便是希望提供在跨网络的远程平台上创建和运行对象的能力。这被称为<strong>远程方法调用(RMI)</strong>，它允许一个Java程序将对象分布到多台机器上。</li>
+<li>Class类与java.lang.reflect类库一起对反射的概念进行了支持，该类库包含了Field,Method以及Constructor类(每个类都实现了Method接口)。这些类型的对象是由JVM在运行时创建的，用以表示未知类里对应的成员。</li>
+<li>当通过反射与一个未知类型的对象打交道时，JVM只是简单得检查这个对象，看他属于哪个特定的类。在用它做其他事情之前必须先加载那个类的Class对象。因此，那个类的<strong>.class</strong>文件对于JVM来说必须是可获取的：要么在本地机器上，要么可以通过网络取得。所以<strong>RTTI</strong>和反射之间真正的区别只在于，对<strong>RTTI</strong>来说，编译器在编译时打开和检查<strong>.class</strong>文件。而对于反射来说<strong>.class</strong>文件在编译时是不可获取的，所以是在运行时打开和检查<strong>.class</strong>文件。</li>
+</ul>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/java/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>java</a>
+        
+          <a href="/tags/java编程思想/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>java编程思想</a>
+        
+          <a href="/tags/类型信息/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>类型信息</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+    
+  </section>
+  
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
+
+  
+
+
+    
+  
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+          
+          
+            <section class='widget author'>
+  <div class='content pure'>
+    
+    
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+
+          
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="https://github.com/YanMao186" href="https://github.com/YanMao186"
+          
+          
+          id="https:github.comYanMao186">
+          
+            <i class="fab fa-github fa-fw" aria-hidden="true"></i>
+          
+          github
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/blog/categories/"
+    title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/HTTP-TCP-IP/" href="/categories/HTTP-TCP-IP/"><div class='name'>HTTP/TCP/IP</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/MySQL/" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(25)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/blog/tags/"
+    title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/java-并发/" style="font-size: 14px; color: #999">-java -并发</a> <a href="/tags/Http/" style="font-size: 14px; color: #999">Http</a> <a href="/tags/I-O/" style="font-size: 14px; color: #999">I/O</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/MySQL/" style="font-size: 14px; color: #999">MySQL</a> <a href="/tags/ORM/" style="font-size: 14px; color: #999">ORM</a> <a href="/tags/Spring-Cloud/" style="font-size: 14px; color: #999">Spring Cloud</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/java编程思想/" style="font-size: 22px; color: #636363">java编程思想</a> <a href="/tags/jvm/" style="font-size: 20px; color: #707070">jvm</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 18px; color: #7e7e7e">多线程</a> <a href="/tags/字符串/" style="font-size: 14px; color: #999">字符串</a> <a href="/tags/容器/" style="font-size: 14px; color: #999">容器</a> <a href="/tags/异常/" style="font-size: 14px; color: #999">异常</a> <a href="/tags/微服务/" style="font-size: 14px; color: #999">微服务</a> <a href="/tags/数组/" style="font-size: 14px; color: #999">数组</a> <a href="/tags/枚举/" style="font-size: 14px; color: #999">枚举</a> <a href="/tags/泛型/" style="font-size: 14px; color: #999">泛型</a> <a href="/tags/注解/" style="font-size: 14px; color: #999">注解</a> <a href="/tags/类型信息/" style="font-size: 14px; color: #999">类型信息</a> <a href="/tags/读书笔记/" style="font-size: 14px; color: #999">读书笔记</a> <a href="/tags/集合/" style="font-size: 14px; color: #999">集合</a> <a href="/tags/面向对象/" style="font-size: 16px; color: #8b8b8b">面向对象</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class='widget music'>
+    
+<header class='pure'>
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn"
+    
+      rel="external nofollow noopener noreferrer"
+    
+    
+      target="_blank"
+    
+    href="http://music.163.com/playlist?id=2758693024&userid=76931878"
+    title="http://music.163.com/playlist?id=2758693024&userid=76931878">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme="#1BCDFC"
+    
+    
+    data-mode="circulation"
+    data-server="netease"
+    data-type="playlist"
+    data-id="2758693024"
+    data-volume="0.5">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+  <div>
+    Use
+    <a href="" target="_blank" class="codename">Hello World</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/16/2019 23:30:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          [""],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          [""],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+ 
+
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!-- 数字雨 -->
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript">
+
+		
+		window.onload = function(){
+			//获取画布对象
+			var canvas = document.getElementById("canvas");
+			//获取画布的上下文
+			var context =canvas.getContext("2d");
+			  var s = window.screen;
+             var W = canvas.width = s.width;
+             var H = canvas.height;
+			//获取浏览器屏幕的宽度和高度
+			//var W = window.innerWidth;
+			//var H = window.innerHeight;
+			//设置canvas的宽度和高度
+			canvas.width = W;
+			canvas.height = H;
+			//每个文字的字体大小
+			var fontSize = 16;
+			//计算列
+			var colunms = Math.floor(W /fontSize);	
+			//记录每列文字的y轴坐标
+			var drops = [];
+			//给每一个文字初始化一个起始点的位置
+			for(var i=0;i<colunms;i++){
+				drops.push(0);
+			}
+
+			//运动的文字
+			var str ="javascript html5 canvas  严茂 www.mryanmao.top";
+			//4:fillText(str,x,y);原理就是去更改y的坐标位置
+			//绘画的函数
+			function draw(){
+				context.fillStyle = "rgba(0,0,0,.08)";//遮盖层
+				context.fillRect(0,0,W,H);
+				//给字体设置样式
+				context.font = "700 "+fontSize+"px  微软雅黑";
+				//给字体添加颜色
+				context.fillStyle = "green";//randColor();可以rgb,hsl, 标准色，十六进制颜色
+				//写入画布中
+				for(var i=0;i<colunms;i++){
+					var index = Math.floor(Math.random() * str.length);
+					var x = i*fontSize;
+					var y = drops[i] *fontSize;
+					context.fillText(str[index],x,y);
+					//如果要改变时间，肯定就是改变每次他的起点
+					if(y >= canvas.height && Math.random() > 0.99){
+						drops[i] = 0;
+					}
+					drops[i]++;
+				}
+			};
+
+			function randColor(){//随机颜色
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				return "rgb("+r+","+g+","+b+")";
+			}
+
+			draw();
+			setInterval(draw,30);
+		};
+
+	
+</script>
+</body>
+</html>

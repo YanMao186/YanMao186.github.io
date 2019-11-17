@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>java编程思想第十九章 | 编程是一门艺术</title>
+  
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="编程是一门艺术">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<style>
+#canvas {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  z-index: -1;
+}
+</style>
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>Hello World</h1>
+
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="https://github.com/YanMao186"
+            
+            
+            id="https:github.comYanMao186">
+            <i class='fab fa-github fa-fw'></i>&nbsp;github
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          编程是一门艺术
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;示例
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="blogcategories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="blogtags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+			<ul class='switcher h-list'>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://github.com/YanMao186"
+                
+                
+                id="https:github.comYanMao186">
+								<i class='fab fa-github fa-fw'></i>&nbsp;github
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/11/17/java编程思想第十九章/">
+        java编程思想第十九章
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Yan Mao</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-17</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/java/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>java</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <h2 id="第十九章-枚举类型"><a href="#第十九章-枚举类型" class="headerlink" title="第十九章 枚举类型"></a>第十九章 枚举类型</h2><p>关键字<strong>enum</strong>可以将一组具名的值的有限集合创建为一种新的类型，而这些具名的值可以作为常规的程序组件使用，这是一种非常有用的功能。</p>
+<h3 id="基本enum特性"><a href="#基本enum特性" class="headerlink" title="基本enum特性"></a>基本enum特性</h3><ul>
+<li><p>创建enum时，编译器会为你生成一个相关的类，这个类继承自<strong>java.lang.Enum</strong>。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Shrubbery &#123;</span><br><span class="line">    GROUND,CRAWLING,HANGING</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Shrubbery s : Shrubbery.values()) &#123;</span><br><span class="line">            System.out.println(s + <span class="string">"ordinal:"</span> + s.ordinal());</span><br><span class="line">            System.out.println(s.compareTo(Shrubbery.CRAWLING) + <span class="string">" "</span>);</span><br><span class="line">            System.out.println(s.equals(Shrubbery.CRAWLING) + <span class="string">" "</span>);</span><br><span class="line">            System.out.println(s == Shrubbery.CRAWLING);</span><br><span class="line">            System.out.println(s.getDeclaringClass());</span><br><span class="line">            System.out.println(s.name());</span><br><span class="line">            System.out.println(<span class="string">"========"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">for</span> (String s : <span class="string">"HANGING CRAWLING GROUND"</span>.split(<span class="string">" "</span>)) &#123;</span><br><span class="line">                Shrubbery shrubbery = Enum.valueOf(Shrubbery.class, s);</span><br><span class="line">                System.out.println(shrubbery);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">GROUNDordinal:0</span></span><br><span class="line"><span class="comment">-1 </span></span><br><span class="line"><span class="comment">false </span></span><br><span class="line"><span class="comment">false</span></span><br><span class="line"><span class="comment">class com.ym.ThinkingInJava.com.ym.ThinkInJava15.Shrubbery</span></span><br><span class="line"><span class="comment">GROUND</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">CRAWLINGordinal:1</span></span><br><span class="line"><span class="comment">0 </span></span><br><span class="line"><span class="comment">true </span></span><br><span class="line"><span class="comment">true</span></span><br><span class="line"><span class="comment">class com.ym.ThinkingInJava.com.ym.ThinkInJava15.Shrubbery</span></span><br><span class="line"><span class="comment">CRAWLING</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">HANGINGordinal:2</span></span><br><span class="line"><span class="comment">1 </span></span><br><span class="line"><span class="comment">false </span></span><br><span class="line"><span class="comment">false</span></span><br><span class="line"><span class="comment">class com.ym.ThinkingInJava.com.ym.ThinkInJava15.Shrubbery</span></span><br><span class="line"><span class="comment">HANGING</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">HANGING</span></span><br><span class="line"><span class="comment">CRAWLING</span></span><br><span class="line"><span class="comment">GROUND</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>ordinal()</strong>方法返回一个<strong>int</strong>值，这是每个<strong>enum</strong>实例在声明时的次序，从<strong>0</strong>开始。可以使用<strong>==</strong>来比较<strong>enum</strong>实例，编译器会自动为你提供<strong>equals()</strong>和<strong>hashCode()</strong>方法。</p>
+</li>
+<li><p><strong>Enum</strong>类实现了<strong>Comparable</strong>接口，所以它具有<strong>compareTo()</strong>方法。同时，它还实现了<strong>Serializable</strong>接口。</p>
+</li>
+<li><p>如果在<strong>enum</strong>实例上调用<strong>getDeclaringClass()</strong>方法，我们就能知道其所属的<strong>enum</strong>类。</p>
+</li>
+<li><p><strong>name()</strong>方法返回<strong>enum</strong>实例声明时的名字，这与使用<strong>toString()</strong>方法效果相同。<strong>valueOf()</strong>是在<strong>Enum</strong>中定义的<strong>static</strong>方法，它根据给定名字返回相应的<strong>enum</strong>实例，如果不存在给定名字的实例，将会抛出异常。</p>
+</li>
+</ul>
+<h4 id="将静态导入用于enum"><a href="#将静态导入用于enum" class="headerlink" title="将静态导入用于enum"></a>将静态导入用于enum</h4><ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span>  Spiciness &#123;</span><br><span class="line">    NOT,MILD,MEDIUM,HOT,FLAMING</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Burrito</span> </span>&#123;</span><br><span class="line">    Spiciness degree;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Burrito</span><span class="params">(Spiciness degree)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.degree = degree;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Burrito&#123;"</span> +</span><br><span class="line">                <span class="string">"degree="</span> + degree +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Burrito(NOT));</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Burrito(MEDIUM));</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Burrito(HOT));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Burrito&#123;degree=NOT&#125;</span></span><br><span class="line"><span class="comment">Burrito&#123;degree=MEDIUM&#125;</span></span><br><span class="line"><span class="comment">Burrito&#123;degree=HOT&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<strong>static import</strong>能够将<strong>enum</strong>实例的标识符带入当前的命名空间，所以无需再用<strong>enum</strong>类型来修饰<strong>enum</strong>实例。</p>
+</li>
+</ul>
+<h3 id="向enum中添加新方法"><a href="#向enum中添加新方法" class="headerlink" title="向enum中添加新方法"></a>向enum中添加新方法</h3><ul>
+<li><p>除了不能继承自一个<strong>enum</strong>之外，我们基本上可以将<strong>enum</strong>看作一个常规的类。也就是说我们可以向<strong>enum</strong>中添加方法。<strong>enum</strong>甚至可以有<strong>main()</strong>方法。</p>
+</li>
+<li><p>一般来说，我们希望每个枚举实例都能够返回对自身的描述，而不仅仅只是默认的toString()实现，这只能够返回枚举实例的名字。为此，你可以创建一个构造器，专门负责处理这个额外的信息，然后添加一个方法，返回这个描述信息。如下</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> OzWitch &#123;</span><br><span class="line">    WEST(<span class="string">"Miss Gulch,aka the Wicked Witch of the West"</span>),</span><br><span class="line">    NORTH(<span class="string">"Glinda, the good witch of the north"</span>),</span><br><span class="line">    EAST(<span class="string">"Wicked Witch of the East.wearer of the Ruby"</span>+<span class="string">"Slippers,crushed by Dorothy`s house"</span>),</span><br><span class="line">    SOUTH(<span class="string">"Good by inference,but missing"</span>);</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    OzWitch(String description) &#123;</span><br><span class="line">        <span class="comment">//必须添加有参构造否则会报错</span></span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (OzWitch witch : OzWitch.values()) &#123;</span><br><span class="line">            System.out.println(witch+<span class="string">": "</span>+witch.getDescription());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">WEST: Miss Gulch,aka the Wicked Witch of the West</span></span><br><span class="line"><span class="comment">NORTH: Glinda, the good witch of the north</span></span><br><span class="line"><span class="comment">EAST: Wicked Witch of the East.wearer of the RubySlippers,crushed by Dorothy`s house</span></span><br><span class="line"><span class="comment">SOUTH: Good by inference,but missing</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果你打算定义自己的方法，那么必须在<strong>enum</strong>实例序列的最后添加一个分号。同时<strong>Java</strong>要求你必须定义一个<strong>enum</strong>实例。如果在定义<strong>enum</strong>实例之前定义了任何方法或属性，那么在编译时就会得到错误信息。</p>
+</li>
+<li><p><strong>enum</strong>中的构造器与方法和普通的类没有什么区别，因为除了有少许限制外，<strong>enum</strong>就是一个普通的类。</p>
+</li>
+<li><p>上面我们将<strong>enum</strong>中的构造器声明为<strong>private</strong>，但对于它的可访问性而言，其实并没有什么变化，因为(即使不声明为<strong>private</strong>)我们只能在<strong>enum</strong>定义的内部使用其构造器创建<strong>enum</strong>实例。一旦<strong>enum</strong>地定义失败，编译器就不允许我们再使用其构造器来创建任何实例。</p>
+</li>
+</ul>
+<h4 id="覆盖enum的方法"><a href="#覆盖enum的方法" class="headerlink" title="覆盖enum的方法"></a>覆盖enum的方法</h4><ul>
+<li><p>覆盖<strong>toString()</strong>方法，给我们提供了另一种方式来为枚举实例生成不同的字符串描述信息，下面，我们使用的就是实例的名字，不过我们希望改变其格式。覆盖<strong>enum</strong>的<strong>toString()</strong>方法与覆盖一般类的方法没有什么区别。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> SpaceShip &#123;</span><br><span class="line">    SCOUT,CARGO,TRANSPORT,CRUISER,BATTLESHIP,MOTHERSHIP;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String id = name();</span><br><span class="line">        String lower = id.substring(<span class="number">1</span>).toLowerCase();</span><br><span class="line">        <span class="keyword">return</span> id.charAt(<span class="number">0</span>)+lower;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (SpaceShip name : values()) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Scout</span></span><br><span class="line"><span class="comment">Cargo</span></span><br><span class="line"><span class="comment">Transport</span></span><br><span class="line"><span class="comment">Cruiser</span></span><br><span class="line"><span class="comment">Battleship</span></span><br><span class="line"><span class="comment">Mothership</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>toString()</strong>方法通过调用<strong>name()</strong>方法取得<strong>SpaceShip</strong>的名字，然后将其修改为只有首字母大写的格式。</p>
+</li>
+</ul>
+<h3 id="values-的神秘之处"><a href="#values-的神秘之处" class="headerlink" title="values()的神秘之处"></a>values()的神秘之处</h3><ul>
+<li><p>编译器为你创建的enum类都继承自Enum类，但是Enum类并没有values()方法，但是我们却使用过该方法，难道存在某种“隐藏的方法吗？？？”，我们可以通过反射机制编写一个简单的程序，一探究竟。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Explore &#123;</span><br><span class="line">    HERE,THERE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reflection</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Set&lt;String&gt; <span class="title">analyze</span><span class="params">(Class&lt;?&gt; enumClass)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Interfaces: "</span>);</span><br><span class="line">        <span class="keyword">for</span> (Type type : enumClass.getGenericInterfaces())</span><br><span class="line">            System.out.println(type);</span><br><span class="line">        System.out.println(<span class="string">"Base: "</span> + enumClass.getSuperclass());</span><br><span class="line">        System.out.println(<span class="string">"Method: "</span>);</span><br><span class="line">        Set&lt;String&gt; methods = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Method m : enumClass.getMethods())</span><br><span class="line">            methods.add(m.getName());</span><br><span class="line">        System.out.println(methods);</span><br><span class="line">        <span class="keyword">return</span> methods;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Set&lt;String&gt; exploreMethods = analyze(Explore.class);</span><br><span class="line">        Set&lt;String&gt; enumMethods = analyze(Enum.class);</span><br><span class="line">        System.out.println(<span class="string">"Explore.containsAll(Enum)? "</span>+enumMethods.containsAll(enumMethods));</span><br><span class="line">        System.out.println(<span class="string">"Explore.removeAll(Enum): "</span>);</span><br><span class="line">        exploreMethods.removeAll(enumMethods);</span><br><span class="line">        System.out.println(exploreMethods);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Interfaces: </span></span><br><span class="line"><span class="comment">Base: class java.lang.Enum</span></span><br><span class="line"><span class="comment">Method: </span></span><br><span class="line"><span class="comment">[compareTo, equals, getClass, getDeclaringClass, hashCode, name, notify, notifyAll, ordinal, toString, valueOf, values, wait]</span></span><br><span class="line"><span class="comment">Interfaces: </span></span><br><span class="line"><span class="comment">java.lang.Comparable&lt;E&gt;</span></span><br><span class="line"><span class="comment">interface java.io.Serializable</span></span><br><span class="line"><span class="comment">Base: class java.lang.Object</span></span><br><span class="line"><span class="comment">Method: </span></span><br><span class="line"><span class="comment">[compareTo, equals, getClass, getDeclaringClass, hashCode, name, notify, notifyAll, ordinal, toString, valueOf, wait]</span></span><br><span class="line"><span class="comment">Explore.containsAll(Enum)? true</span></span><br><span class="line"><span class="comment">Explore.removeAll(Enum): </span></span><br><span class="line"><span class="comment">[values]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结论是，values()方法是由编译器添加的static方法。</p>
+</li>
+</ul>
+<h3 id="实现，而非继承"><a href="#实现，而非继承" class="headerlink" title="实现，而非继承"></a>实现，而非继承</h3><ul>
+<li><h5 id="所有的enum都继承自java-lang-Enum类，由于Java不支持多重继承，所以你的-enum不能再继承其他类-。"><a href="#所有的enum都继承自java-lang-Enum类，由于Java不支持多重继承，所以你的-enum不能再继承其他类-。" class="headerlink" title="所有的enum都继承自java.lang.Enum类，由于Java不支持多重继承，所以你的==enum不能再继承其他类==。"></a>所有的<strong>enum</strong>都继承自<strong>java.lang.Enum</strong>类，由于Java不支持多重继承，所以你的==enum不能再继承其他类==。</h5></li>
+<li><p>但是，在我们创建一个新的<strong>enum</strong>时，可以同时实现一个或多个接口。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> CartoonCharacter implements Generator&lt;CartoonCharacter&gt; &#123;</span><br><span class="line">    SLAPPY,SPANKY,PUNCHY,SILLY,BOUNCY,NUTTY,BOB;</span><br><span class="line">    <span class="keyword">private</span> Random rand = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CartoonCharacter <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> values()[rand.nextInt(values().length)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumImplementation</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">printNext</span><span class="params">(Generator&lt;T&gt; rg)</span> </span>&#123;</span><br><span class="line">        System.out.println(rg.next()+<span class="string">","</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        CartoonCharacter cc = CartoonCharacter.BOB;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            printNext(cc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">BOB,</span></span><br><span class="line"><span class="comment">PUNCHY,</span></span><br><span class="line"><span class="comment">BOB,</span></span><br><span class="line"><span class="comment">SPANKY,</span></span><br><span class="line"><span class="comment">NUTTY,</span></span><br><span class="line"><span class="comment">PUNCHY,</span></span><br><span class="line"><span class="comment">SLAPPY,</span></span><br><span class="line"><span class="comment">NUTTY,</span></span><br><span class="line"><span class="comment">NUTTY,</span></span><br><span class="line"><span class="comment">SLAPPY,</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果有点奇怪，不过你必须要有一个<strong>enum</strong>实例才能调用其上的方法，现在，在任何接受<strong>Generator</strong>参数的方法中，如<strong>printNext()</strong>,都可以使用<strong>CartoonCharacter</strong>。</p>
+</li>
+</ul>
+<h3 id="使用接口组织枚举"><a href="#使用接口组织枚举" class="headerlink" title="使用接口组织枚举"></a>使用接口组织枚举</h3><ul>
+<li><p>无法从<strong>enum</strong>继承子类有时很令人沮丧，这种需求有时源自我们希望扩展原<strong>enum</strong>中的元素，有时是因为我们希望使用将一个<strong>enum</strong>中的元素进行分类。</p>
+</li>
+<li><p>在一个接口内部，创建实现该接口的枚举，以此将元素进行分组，可以达到将枚举元素分类的目的。</p>
+</li>
+<li><p>下面假设你想要用<strong>enum</strong>来表示不同类别的食物，同时还希望每个<strong>enum</strong>元素仍然保持<strong>Food</strong>类型，可以这样实现。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Food</span> </span>&#123;</span><br><span class="line">    <span class="keyword">enum</span> Appetizer implements Food &#123;</span><br><span class="line">        SALAD,SOUP,SPRONG_ROLLS;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">enum</span> MainCourse implements Food &#123;</span><br><span class="line">        LASAGNE,BURRITO,PAD_THAI,</span><br><span class="line">        LENTILS,HUMMOUS,VINDALOO;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">enum</span> Dessert implements Food &#123;</span><br><span class="line">        TIRAMISU,GELATO,BLACK_FOREST_CAKE,</span><br><span class="line">        FRUIT,CREME_CARAMEL;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">enum</span> Coffee implements Food &#123;</span><br><span class="line">        BLACK_COFFEE,DECAF_COFFEE,ESPRESSO,</span><br><span class="line">        LATTE,CAPPUCCINO,TEA,HERB_TEA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于<strong>enum</strong>而言，实现接口是使其子类化的唯一方法，所以嵌入在<strong>Food</strong>中的每个<strong>enum</strong>都实现了<strong>Food</strong>接口。下面，我们可以说“==所有的东西都是某种类型的<strong>Food</strong>==”。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeFood</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Food food = Food.Appetizer.SALAD;</span><br><span class="line">        food = Food.MainCourse.LASAGNE;</span><br><span class="line">        food = Food.Dessert.GELATO;</span><br><span class="line">        food = Food.Coffee.CAPPUCCINO;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果<strong>enum</strong>类型实现了<strong>Food</strong>接口，那么就可以将其实例向上转型为<strong>Food</strong>，所以上面中的所有东西都是<strong>Food</strong>。</p>
+</li>
+<li><p>当我们需要与一大堆类型打交道时，接口就不如<strong>enum</strong>好了，如你想创建一个“枚举的枚举”，那么可以创建一个新的<strong>enum</strong>，然后用其实例包装<strong>Food</strong>中的每一个<strong>enum</strong>类。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Enums</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Random random = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Enum&lt;T&gt;&gt; <span class="function">T <span class="title">random</span><span class="params">(Class&lt;T&gt; ec)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> random(ec.getEnumConstants());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">random</span><span class="params">(T[] values)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> values[random.nextInt(values.length)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Course &#123;</span><br><span class="line">    APPETIZER(Food.Appetizer.class),</span><br><span class="line">    MAINCOURSE(Food.MainCourse.class),</span><br><span class="line">    DESSERT(Food.Dessert.class),</span><br><span class="line">    COFFEE(Food.Coffee.class);</span><br><span class="line">    <span class="keyword">private</span> Food[] values;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Course</span><span class="params">(Class&lt;? extends Food&gt; kind)</span> </span>&#123;</span><br><span class="line">        values = kind.getEnumConstants();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Food <span class="title">randomSelection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Enums.random(values);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面中，每一个Course的实例都将其对应的Class对象作为构造器的参数。通过getEnumConstants()方法，乐意从该Class对象中取得某个Food子类的所有enum实例。这些实例在randomSelection()中被用到，因此，通过从每个Course实例中随机地选择一个Food，我们便能够生成一份菜单。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Meal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Course course : Course.values()) &#123;</span><br><span class="line">                Food food = course.randomSelection();</span><br><span class="line">                System.out.println(food);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"========"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">SPRONG_ROLLS</span></span><br><span class="line"><span class="comment">VINDALOO</span></span><br><span class="line"><span class="comment">FRUIT</span></span><br><span class="line"><span class="comment">DECAF_COFFEE</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">SOUP</span></span><br><span class="line"><span class="comment">VINDALOO</span></span><br><span class="line"><span class="comment">FRUIT</span></span><br><span class="line"><span class="comment">TEA</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">SALAD</span></span><br><span class="line"><span class="comment">BURRITO</span></span><br><span class="line"><span class="comment">FRUIT</span></span><br><span class="line"><span class="comment">TEA</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">SALAD</span></span><br><span class="line"><span class="comment">BURRITO</span></span><br><span class="line"><span class="comment">CREME_CARAMEL</span></span><br><span class="line"><span class="comment">LATTE</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">SOUP</span></span><br><span class="line"><span class="comment">BURRITO</span></span><br><span class="line"><span class="comment">TIRAMISU</span></span><br><span class="line"><span class="comment">ESPRESSO</span></span><br><span class="line"><span class="comment">========</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面中，我们通过遍历每一个<strong>Course</strong>实例来获得“枚举的枚举”。</p>
+</li>
+<li><p>除此之外，还有一种更简洁的管理枚举的方法，就是将一个<strong>enum</strong>嵌套在另一个<strong>enum</strong>内，如下：</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> SecurityCategory &#123;</span><br><span class="line">    STOCK(Security.Stock.class),</span><br><span class="line">    BOND(Security.Bond.class);</span><br><span class="line">    Security[] values;</span><br><span class="line">    SecurityCategory(Class&lt;? extends Security&gt; kind) &#123;</span><br><span class="line">        values = kind.getEnumConstants();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Security</span> </span>&#123;</span><br><span class="line">    <span class="keyword">enum</span> Stock implements Security &#123;</span><br><span class="line">        SHORT,LONG,MARGIN</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">enum</span> Bond implements Security &#123;</span><br><span class="line">        MUNICIPAL,JUNK</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Security <span class="title">randomSelecttion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Enums.random(values);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            SecurityCategory category = Enums.random(SecurityCategory.class);</span><br><span class="line">            System.out.println(category+<span class="string">":"</span>+category.randomSelecttion());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">BOND:MUNICIPAL</span></span><br><span class="line"><span class="comment">BOND:MUNICIPAL</span></span><br><span class="line"><span class="comment">STOCK:MARGIN</span></span><br><span class="line"><span class="comment">STOCK:MARGIN</span></span><br><span class="line"><span class="comment">BOND:JUNK</span></span><br><span class="line"><span class="comment">STOCK:SHORT</span></span><br><span class="line"><span class="comment">STOCK:LONG</span></span><br><span class="line"><span class="comment">STOCK:LONG</span></span><br><span class="line"><span class="comment">BOND:MUNICIPAL</span></span><br><span class="line"><span class="comment">BOND:JUNK</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Security</strong>接口的作用是将其所包含的<strong>enum</strong>组合成一个公共类型，这一点是有必要的。然后，<strong>SecurityCategorg</strong>才能将<strong>Security</strong>中的<strong>enum</strong>作为其构造器的参数，以起到组织的效果。</p>
+</li>
+</ul>
+<h3 id="使用EnumSet替代标志"><a href="#使用EnumSet替代标志" class="headerlink" title="使用EnumSet替代标志"></a>使用EnumSet替代标志</h3><ul>
+<li><p><strong>Set</strong>是一种集合，只能向其中添加不重复的对象，<strong>enum</strong>也要求其成员都是唯一的，所以<strong>enum</strong>看起来也具有集合的行为。不过，由于不能从<strong>enum</strong>中删除或添加元素，所以他只能算是不太有用的集合。</p>
+</li>
+<li><p>Java SE5引入EnumSet，是为了通过enum创建一种替代品，以替代传统的基于int的“位标识”。这种标识可以用来表示某种“开/关”信息，不过，使用这种标识，我们最终操作的只是一些bit，而不是这些bit想要表达的概念。</p>
+</li>
+<li><p>EnumSet的设计充分考虑到速度因素，因为他必须与非常高效的bit标识相竞争(其操作与HashSet相比，非常地快)。就其内部而言，它（可能）就是一个long值作为比特向量，所以EnumSet非常快读高效。使用EnumSet的优点是，他在说明一个二进制位是否存在时，具有更好的表达能力，并且无需担心性能。</p>
+</li>
+<li><p>EnumSet中的元素必须来自一个enum。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> AlarmPoits &#123;</span><br><span class="line">    STAIR1,STAIR2,LOBBY,OFFICE1,OFFICE2,</span><br><span class="line">    OFFICE3,OFFICE4,BATHROOM,UTILITY,KITCHEN</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumSets</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        EnumSet&lt;AlarmPoits&gt; poits = EnumSet.noneOf(AlarmPoits.class);</span><br><span class="line">        poits.add(AlarmPoits.BATHROOM);</span><br><span class="line">        System.out.println(poits);</span><br><span class="line">        poits.addAll(EnumSet.of(AlarmPoits.STAIR1,AlarmPoits.STAIR2,AlarmPoits.KITCHEN));</span><br><span class="line">        System.out.println(poits);</span><br><span class="line">        poits = EnumSet.allOf(AlarmPoits.class);</span><br><span class="line">        poits.removeAll(EnumSet.of(AlarmPoits.STAIR1,AlarmPoits.STAIR2,AlarmPoits.KITCHEN));</span><br><span class="line">        System.out.println(poits);</span><br><span class="line">        poits.removeAll(EnumSet.range(AlarmPoits.OFFICE1,AlarmPoits.OFFICE2));</span><br><span class="line">        System.out.println(poits);</span><br><span class="line">        poits = EnumSet.complementOf(poits);</span><br><span class="line">        System.out.println(poits);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">[BATHROOM]</span></span><br><span class="line"><span class="comment">[STAIR1, STAIR2, BATHROOM, KITCHEN]</span></span><br><span class="line"><span class="comment">[LOBBY, OFFICE1, OFFICE2, OFFICE3, OFFICE4, BATHROOM, UTILITY]</span></span><br><span class="line"><span class="comment">[LOBBY, OFFICE3, OFFICE4, BATHROOM, UTILITY]</span></span><br><span class="line"><span class="comment">[STAIR1, STAIR2, OFFICE1, OFFICE2, KITCHEN]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>EnumSet</strong>的基础是<strong>long</strong>，一个<strong>long</strong>值有<strong>64</strong>位而一个<strong>enum</strong>实例只需一位<strong>bit</strong>表示其是否存在。也就是说，在不超过一个<strong>long</strong>的表达能力的情况下，你的<strong>EnumSet</strong>可以应用于最多不超过<strong>64</strong>个元素的<strong>enum</strong>。如果<strong>enum</strong>超过了<strong>64</strong>个元素会发生什么呢？</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BigEnumSet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">enum</span> Big &#123;</span><br><span class="line">        A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,</span><br><span class="line">        A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,</span><br><span class="line">        A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,</span><br><span class="line">        A31,A32,A33,A34,A35,A36,A37,A38,A39,A40,</span><br><span class="line">        A41,A42,A43,A44,A45,A46,A47,A48,A49,A50,</span><br><span class="line">        A51,A52,A53,A54,A55,A56,A57,A58,A59,A60 ,</span><br><span class="line">        A61,A62,A63,A64,A65,A66,A67,A68,A69,A70,</span><br><span class="line">        A71,A72,A73,A74,A75,A76,A77,A78,A79,A80</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        EnumSet&lt;Big&gt; bigEnumSet = EnumSet.allOf(Big.class);</span><br><span class="line">        System.out.println(bigEnumSet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">[A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, </span></span><br><span class="line"><span class="comment">A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, </span></span><br><span class="line"><span class="comment">A21, A22, A23, A24, A25, A26, A27, A28, A29, A30, </span></span><br><span class="line"><span class="comment">A31, A32, A33, A34, A35, A36, A37, A38, A39, A40, </span></span><br><span class="line"><span class="comment">A41, A42, A43, A44, A45, A46, A47, A48, A49, A50, </span></span><br><span class="line"><span class="comment">A51, A52, A53, A54, A55, A56, A57, A58, A59, A60, </span></span><br><span class="line"><span class="comment">A61, A62, A63, A64, A65, A66, A67, A68, A69, A70, </span></span><br><span class="line"><span class="comment">A71, A72, A73, A74, A75, A76, A77, A78, A79, A80]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>EnumSet</strong>可以应用于多过<strong>64</strong>个元素的<strong>enum</strong>，所以，<strong>Enum</strong>会在必要的时候增加一个<strong>long</strong>。</p>
+</li>
+</ul>
+<h3 id="使用EnumMap"><a href="#使用EnumMap" class="headerlink" title="使用EnumMap"></a>使用EnumMap</h3><ul>
+<li><p>EnumMap是一种特殊的Map，他要求其中的键(key)必须来自一个enum，由于enum本身的限制，所以EnumMap在内部可由数组实现。因此EnumMap的速度很快，我们可以放心的使用enum实例在EnumMap中进行查找操作。</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">action</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumMaps</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        EnumMap&lt;AlarmPoits,Command&gt; em = <span class="keyword">new</span> EnumMap&lt;AlarmPoits, Command&gt;(AlarmPoits.class);</span><br><span class="line">        em.put(AlarmPoits.KITCHEN,<span class="keyword">new</span> Command()&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"Kitchen fire"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        em.put(AlarmPoits.BATHROOM,<span class="keyword">new</span> Command()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"Bathroom alert"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;AlarmPoits, Command&gt; e : em.entrySet()) &#123;</span><br><span class="line">            System.out.println(e.getKey()+<span class="string">": "</span>);</span><br><span class="line">            e.getValue().action();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        em.get(AlarmPoits.UTILITY).action();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">BATHROOM: </span></span><br><span class="line"><span class="comment">Bathroom alert</span></span><br><span class="line"><span class="comment">KITCHEN: </span></span><br><span class="line"><span class="comment">Kitchen fire</span></span><br><span class="line"><span class="comment">java.lang.NullPointerException</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>与<strong>EnumSet</strong>一样，<strong>enum</strong>实例定义时的次序决定了其在<strong>EnumMap</strong>中的顺序。</p>
+</li>
+<li><p><strong>EnumMap</strong>有一个优点，那<strong>EnumMap</strong>允许程序员改变值对象，而常量相关的方法在编译期就被固定了。</p>
+</li>
+<li><p>在你有多种类型的<strong>enum</strong>，而且它们之间存在互操作的情况下，我们可以用<strong>EnumMap</strong>实现多路分发。</p>
+</li>
+</ul>
+<h3 id="多路分发"><a href="#多路分发" class="headerlink" title="多路分发"></a>多路分发</h3><ul>
+<li><p>当你要处理多种交互类型时，程序可能会变得相当复杂。如：如果一个系统要分析和执行数学表达式。我们可能会声明Number.plus(Number),Number.plus(Number)等等，其中Number是各种数学对象的超类。当你声明a.plus(b)时，你并不知道a或b的确切类型，那你如何能让它们正确的交互呢？？？？？</p>
+</li>
+<li><p>Java只支持单路分发。也就是说，如果要执行的操作包含了不止一个类型未知的对象时，那么Java的动态绑定机制只能处理其中一个的类型。这样就无法解决我们上面提到的问题，所以，你必须自己来绑定其他的类型，从而实现自己的动态绑定行为。</p>
+</li>
+<li><p>解决上面问题的方法就是多路分发，多态只能发生在方法调用时，所以，如果你想使用多路分发，那么就必须有两个方法调用：第一个方法调用决定第一个未知类型，第二个方法调用决定第二个未知类型。</p>
+</li>
+<li><p>要利用多路分发，我们必须为每一个类型提供一个实际的方法调用，如果你要处理两个不同的类型体系，就需要为每个类型体系执行一个方法调用。</p>
+</li>
+<li><p>一般而言，需要有设定好的某种配置，以便一个方法调用能够引出更多的方法调用，从而能够在这个过程中处理多种类型。为了达到这种效果，我们需要与多个方法一同工作：因为每个分发都需要一个方法调用。</p>
+</li>
+<li><p>下面例子中(实现了”石头”，”剪刀”，”布”游戏)对应的方法是compete()和eval()，两者都是同一个类型的成员，它们可以产生三种Outcome实例中的一个作为结果：</p>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Outcome &#123;</span><br><span class="line">    WIN,LOSE,DRAW</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function">Outcome <span class="title">compete</span><span class="params">(Item it)</span></span>;</span><br><span class="line"><span class="function">Outcome <span class="title">eval</span><span class="params">(Paper p)</span></span>;</span><br><span class="line"><span class="function">Outcome <span class="title">eval</span><span class="params">(Scissors s)</span></span>;</span><br><span class="line"><span class="function">Outcome <span class="title">eval</span><span class="params">(Rock r)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Paper</span> <span class="keyword">implements</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(Item it)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> it.eval(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Paper p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.DRAW;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Scissors s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.WIN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Rock r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.LOSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Paper"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Scissors</span> <span class="keyword">implements</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(Item it)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> it.eval(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Paper p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.LOSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Scissors s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.DRAW;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Rock r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.WIN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Scissors"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rock</span> <span class="keyword">implements</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(Item it)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> it.eval(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Paper p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.WIN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Scissors s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.LOSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Rock r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Outcome.WIN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Rock"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoShamBo1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SIZE = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Random rand = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Item <span class="title">newItem</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (rand.nextInt(<span class="number">3</span>)) &#123;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:<span class="keyword">return</span> <span class="keyword">new</span> Scissors();</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:<span class="keyword">return</span> <span class="keyword">new</span> Paper();</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:<span class="keyword">return</span> <span class="keyword">new</span> Rock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">match</span><span class="params">(Item a,Item b)</span> </span>&#123;</span><br><span class="line">        System.out.println(a+<span class="string">"vs. "</span>+b+<span class="string">":"</span>+a.compete(b));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIZE; i++) &#123;</span><br><span class="line">            match(newItem(),newItem());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Rockvs. Rock:WIN</span></span><br><span class="line"><span class="comment">Papervs. Rock:WIN</span></span><br><span class="line"><span class="comment">Papervs. Rock:WIN</span></span><br><span class="line"><span class="comment">Papervs. Rock:WIN</span></span><br><span class="line"><span class="comment">Scissorsvs. Paper:WIN</span></span><br><span class="line"><span class="comment">Scissorsvs. Scissors:DRAW</span></span><br><span class="line"><span class="comment">Scissorsvs. Paper:WIN</span></span><br><span class="line"><span class="comment">Rockvs. Paper:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Paper:DRAW</span></span><br><span class="line"><span class="comment">Rockvs. Paper:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Scissors:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Scissors:LOSE</span></span><br><span class="line"><span class="comment">Rockvs. Scissors:WIN</span></span><br><span class="line"><span class="comment">Rockvs. Paper:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Rock:WIN</span></span><br><span class="line"><span class="comment">Scissorsvs. Paper:WIN</span></span><br><span class="line"><span class="comment">Papervs. Scissors:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Scissors:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Scissors:LOSE</span></span><br><span class="line"><span class="comment">Papervs. Scissors:LOSE</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Item是这几种类型的接口，将会被用作多路分发，RoShamBo1.match()有两个Item参数，通过调用Item.compete()方法开始两路分发。</p>
+</li>
+<li><p>要判断a的类型，分发机制会在a的实际类型的compete()内部起到分发的作用。compete()方法通过调用eval()来为另一个类型实现第二次分发。将自身(this)作为参数调用eval()，能够调用重载过的eval()方法,这能够保留第一次分发的类型信息。</p>
+</li>
+<li><p>要配置好多路分发需要很多工序，不过，他的好处在于方法调用时的优雅的语法</p>
+</li>
+</ul>
+
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-17T21:18:57+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Nov 17, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/java/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>java</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/java编程思想/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>java编程思想</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/枚举/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>枚举</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/17/java编程思想第十九章/&title=java编程思想第十九章 | 编程是一门艺术&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/11/17/java编程思想第十九章/&title=java编程思想第十九章 | 编程是一门艺术&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/17/java编程思想第十九章/&title=java编程思想第十九章 | 编程是一门艺术&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2019/11/17/java编程思想第二十章/" rel="prev" title="java编程思想第二十章">
+                                  
+                                      java编程思想第二十章
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/java/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>java</a> <a class="tag" href="/tags/java编程思想/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>java编程思想</a> <a class="tag" href="/tags/注解/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>注解</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/11/17/java编程思想第十六章/" rel="prev" title="java编程思想第十六章">
+                                    
+                                        java编程思想第十六章
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/java/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>java</a> <a class="tag" href="/tags/java编程思想/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>java编程思想</a> <a class="tag" href="/tags/数组/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>数组</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'java编程思想第十九章',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+          
+          
+            <section class='widget author'>
+  <div class='content pure'>
+    
+    
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第十九章-枚举类型"><span class="toc-text">第十九章 枚举类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本enum特性"><span class="toc-text">基本enum特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#将静态导入用于enum"><span class="toc-text">将静态导入用于enum</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向enum中添加新方法"><span class="toc-text">向enum中添加新方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#覆盖enum的方法"><span class="toc-text">覆盖enum的方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values-的神秘之处"><span class="toc-text">values()的神秘之处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现，而非继承"><span class="toc-text">实现，而非继承</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#所有的enum都继承自java-lang-Enum类，由于Java不支持多重继承，所以你的-enum不能再继承其他类-。"><span class="toc-text">所有的enum都继承自java.lang.Enum类，由于Java不支持多重继承，所以你的==enum不能再继承其他类==。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用接口组织枚举"><span class="toc-text">使用接口组织枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用EnumSet替代标志"><span class="toc-text">使用EnumSet替代标志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用EnumMap"><span class="toc-text">使用EnumMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多路分发"><span class="toc-text">多路分发</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="https://github.com/YanMao186" href="https://github.com/YanMao186"
+          
+          
+          id="https:github.comYanMao186">
+          
+            <i class="fab fa-github fa-fw" aria-hidden="true"></i>
+          
+          github
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/blog/categories/"
+    title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/HTTP-TCP-IP/" href="/categories/HTTP-TCP-IP/"><div class='name'>HTTP/TCP/IP</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/MySQL/" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(25)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/blog/tags/"
+    title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/java-并发/" style="font-size: 14px; color: #999">-java -并发</a> <a href="/tags/Http/" style="font-size: 14px; color: #999">Http</a> <a href="/tags/I-O/" style="font-size: 14px; color: #999">I/O</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/MySQL/" style="font-size: 14px; color: #999">MySQL</a> <a href="/tags/ORM/" style="font-size: 14px; color: #999">ORM</a> <a href="/tags/Spring-Cloud/" style="font-size: 14px; color: #999">Spring Cloud</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/java编程思想/" style="font-size: 22px; color: #636363">java编程思想</a> <a href="/tags/jvm/" style="font-size: 20px; color: #707070">jvm</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 18px; color: #7e7e7e">多线程</a> <a href="/tags/字符串/" style="font-size: 14px; color: #999">字符串</a> <a href="/tags/容器/" style="font-size: 14px; color: #999">容器</a> <a href="/tags/异常/" style="font-size: 14px; color: #999">异常</a> <a href="/tags/微服务/" style="font-size: 14px; color: #999">微服务</a> <a href="/tags/数组/" style="font-size: 14px; color: #999">数组</a> <a href="/tags/枚举/" style="font-size: 14px; color: #999">枚举</a> <a href="/tags/泛型/" style="font-size: 14px; color: #999">泛型</a> <a href="/tags/注解/" style="font-size: 14px; color: #999">注解</a> <a href="/tags/类型信息/" style="font-size: 14px; color: #999">类型信息</a> <a href="/tags/读书笔记/" style="font-size: 14px; color: #999">读书笔记</a> <a href="/tags/集合/" style="font-size: 14px; color: #999">集合</a> <a href="/tags/面向对象/" style="font-size: 16px; color: #8b8b8b">面向对象</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class='widget music'>
+    
+<header class='pure'>
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn"
+    
+      rel="external nofollow noopener noreferrer"
+    
+    
+      target="_blank"
+    
+    href="http://music.163.com/playlist?id=2758693024&userid=76931878"
+    title="http://music.163.com/playlist?id=2758693024&userid=76931878">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme="#1BCDFC"
+    
+    
+    data-mode="circulation"
+    data-server="netease"
+    data-type="playlist"
+    data-id="2758693024"
+    data-volume="0.5">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+  <div>
+    Use
+    <a href="" target="_blank" class="codename">Hello World</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/16/2019 23:30:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          [""],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          [""],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+ 
+
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!-- 数字雨 -->
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript">
+
+		
+		window.onload = function(){
+			//获取画布对象
+			var canvas = document.getElementById("canvas");
+			//获取画布的上下文
+			var context =canvas.getContext("2d");
+			  var s = window.screen;
+             var W = canvas.width = s.width;
+             var H = canvas.height;
+			//获取浏览器屏幕的宽度和高度
+			//var W = window.innerWidth;
+			//var H = window.innerHeight;
+			//设置canvas的宽度和高度
+			canvas.width = W;
+			canvas.height = H;
+			//每个文字的字体大小
+			var fontSize = 16;
+			//计算列
+			var colunms = Math.floor(W /fontSize);	
+			//记录每列文字的y轴坐标
+			var drops = [];
+			//给每一个文字初始化一个起始点的位置
+			for(var i=0;i<colunms;i++){
+				drops.push(0);
+			}
+
+			//运动的文字
+			var str ="javascript html5 canvas  严茂 www.mryanmao.top";
+			//4:fillText(str,x,y);原理就是去更改y的坐标位置
+			//绘画的函数
+			function draw(){
+				context.fillStyle = "rgba(0,0,0,.08)";//遮盖层
+				context.fillRect(0,0,W,H);
+				//给字体设置样式
+				context.font = "700 "+fontSize+"px  微软雅黑";
+				//给字体添加颜色
+				context.fillStyle = "green";//randColor();可以rgb,hsl, 标准色，十六进制颜色
+				//写入画布中
+				for(var i=0;i<colunms;i++){
+					var index = Math.floor(Math.random() * str.length);
+					var x = i*fontSize;
+					var y = drops[i] *fontSize;
+					context.fillText(str[index],x,y);
+					//如果要改变时间，肯定就是改变每次他的起点
+					if(y >= canvas.height && Math.random() > 0.99){
+						drops[i] = 0;
+					}
+					drops[i]++;
+				}
+			};
+
+			function randColor(){//随机颜色
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				return "rgb("+r+","+g+","+b+")";
+			}
+
+			draw();
+			setInterval(draw,30);
+		};
+
+	
+</script>
+</body>
+</html>
