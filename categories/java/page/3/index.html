@@ -241,6 +241,167 @@
       
         
   <h2 class="title">
+    <a href="/2019/03/22/多线程3线程池/">
+      多线程3线程池
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Yan Mao</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-03-22</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/java/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>java</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="等待唤醒机制"><a href="#等待唤醒机制" class="headerlink" title="等待唤醒机制"></a>等待唤醒机制</h2><h3 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h3><ul>
+<li>多个线程在处理同一个资源,但是处理的动作(线程的任务)却不相同.</li>
+</ul>
+<h3 id="为什么要处理线程间通信"><a href="#为什么要处理线程间通信" class="headerlink" title="为什么要处理线程间通信"></a>为什么要处理线程间通信</h3><ul>
+<li>多个线程并发执行时,在默认情况下cpu是随机切换线程的,当我们需要多个线程来共同完成一件任务,并且我们希望他们有规律的执行,那么多线程之间需要一些协调通信,以此来帮我们达到多线程共同操作一份数据.</li>
+</ul>
+<h3 id="如何保证线程之间通信有效利用资源"><a href="#如何保证线程之间通信有效利用资源" class="headerlink" title="如何保证线程之间通信有效利用资源"></a>如何保证线程之间通信有效利用资源</h3><ul>
+<li>多个线程在处理同一个资源,并且任务不同时,需要线程通信来帮忙解决线程之间对同一个变量的使用或操作,就是多个线程在操作同一份数据时,避免对同一变量的争夺,也就是我们需要通过一定的手段使各个线程能够有效的利用资源,而这种手段即是——-<strong>等待唤醒机制</strong></li>
+</ul>
+<h3 id="等待唤醒机制-1"><a href="#等待唤醒机制-1" class="headerlink" title="等待唤醒机制"></a>等待唤醒机制</h3><ul>
+<li>多个线程间的一种协作机制,谈到线程我们经常想到的是线程间的<strong>竞争</strong>,比如去争夺锁,但这并不是故事的全部,线程间也会有协作机制,就是在一个线程进行了规定的操作后,就进入等待机制<strong>wait()</strong>,等待其他现成代码执行完他们的指定代码后,再将其唤醒<strong>notify()</strong>;在多个线程进行等待时,如果需要,可以使用<strong>notifyAll()</strong>来唤醒所有等待线程.</li>
+</ul>
+<p><code>wait/notify就是线程间的一种协作机制</code></p>
+<h4 id="等待唤醒的方法"><a href="#等待唤醒的方法" class="headerlink" title="等待唤醒的方法"></a>等待唤醒的方法</h4><ol>
+<li><strong>wait</strong>:线程不再活动,不再参与调度,进入<strong>wait set</strong>中,因此不会浪费cpu资源,也不会去竞争锁,这时的线程状态即是<strong>WAITING</strong>.它还要等着别的线程执行一个特别的动作,即<strong>通知(notify)</strong>在这个对象上等待的线程从<strong>wait set</strong>中释放出来,重新进入到<strong>调度队列(ready queue)</strong>中</li>
+<li><strong>notify</strong>:则选取所通知的<strong>wait set</strong>中的一个线程释放;如:餐馆有空位之后,等待最久的顾客最先入座.</li>
+<li><strong>notifyAll</strong>:则释放所通知对象的<strong>wait set</strong>上的全部线程.</li>
+</ol>
+<h4 id="wait和notify方法注意事项"><a href="#wait和notify方法注意事项" class="headerlink" title="wait和notify方法注意事项"></a>wait和notify方法注意事项</h4><ol>
+<li><strong>wait()</strong>方法与<strong>notify()</strong>方法必须要由同一个锁对象调用,因为:对应的锁对象可以通过<strong>notify</strong>唤醒使用同一个锁对象调用的<strong>wait()</strong>方法后的线程.</li>
+<li><strong>wait()</strong>方法与<strong>notify()</strong>方法是<strong>Object</strong>的方法,因为:锁对象是任意类型对象,而任意对象的所属类都是继承了<strong>Object</strong>类的.</li>
+<li><strong>wait()</strong>方法与<strong>notify()</strong>方法必须要在同步代码块或者是同步函数中使用,因为:必须要通过锁对象调用这2个方法.</li>
+</ol>
+<h4 id="生产者与消费者"><a href="#生产者与消费者" class="headerlink" title="生产者与消费者"></a>生产者与消费者</h4><ul>
+<li>以生产包子与消费包子为例</li>
+<li>包子铺线程生产包子，吃货线程消费包子。当包子没有时（包子状态为false），吃货线程等待，包子铺线程生产包子 （即包子状态为true），并通知吃货线程（解除吃货的等待状态）,因为已经有包子了，那么包子铺线程进入等待状态。 接下来，吃货线程能否进一步执行则取决于锁的获取情况。如果吃货获取到锁，那么就执行吃包子动作，包子吃完（包 子状态为false），并通知包子铺线程（解除包子铺的等待状态）,吃货线程进入等待。包子铺线程能否进一步执行则取 决于锁的获取情况。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaoZi</span> </span>&#123;</span><br><span class="line">    String pier;</span><br><span class="line">    String xianer;</span><br><span class="line">    <span class="comment">//包子资源是否存在.</span></span><br><span class="line">    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChiHuo</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BaoZi bz;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ChiHuo</span><span class="params">(String name, BaoZi bz)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.bz = bz;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (bz) &#123;</span><br><span class="line">                <span class="keyword">if</span> (bz.flag == <span class="keyword">false</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        bz.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"吃货正在吃"</span>+bz.pier+bz.xianer+<span class="string">"包子"</span>);</span><br><span class="line">                bz.flag = <span class="keyword">false</span>;</span><br><span class="line">                bz.notify();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaoZiPu</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BaoZi bz;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaoZiPu</span><span class="params">(String name, BaoZi bz)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.bz = bz;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (bz) &#123;</span><br><span class="line">                <span class="keyword">if</span> (bz.flag == <span class="keyword">true</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        bz.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"包包子"</span>);</span><br><span class="line">                <span class="keyword">if</span> (count % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                    bz.pier = <span class="string">"牛肉"</span>;</span><br><span class="line">                    bz.xianer = <span class="string">"粉条"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    bz.pier = <span class="string">"猪肉"</span>;</span><br><span class="line">                    bz.xianer = <span class="string">"大葱"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                count++;</span><br><span class="line">                bz.flag = <span class="keyword">false</span>;</span><br><span class="line">                System.out.println(<span class="string">"包子包好了"</span> + bz.pier + bz.xianer);</span><br><span class="line">                bz.notify();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BaoZi bz = <span class="keyword">new</span> BaoZi();</span><br><span class="line">        ChiHuo ch = <span class="keyword">new</span> ChiHuo(<span class="string">"吃货"</span>,bz);</span><br><span class="line">        BaoZiPu bzp = <span class="keyword">new</span> BaoZiPu(<span class="string">"包子铺"</span>,bz);</span><br><span class="line">        ch.start();</span><br><span class="line">        bzp.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>控制台输出</li>
+</ul>
+<p><img src="/2019/03/22/多线程3线程池/%E5%8C%85%E5%8C%85%E5%AD%90.png" alt></p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="传统创建线程缺点"><a href="#传统创建线程缺点" class="headerlink" title="传统创建线程缺点"></a>传统创建线程缺点</h3><ul>
+<li>如果并发的线程数量很多,并且每一个线程都是执行一个时间很短的任务就结束,这样频繁的创建线程就会降低系统的效率,因为频繁的创建线程和销毁线程都需要时间.</li>
+</ul>
+<h3 id="线程池介绍"><a href="#线程池介绍" class="headerlink" title="线程池介绍"></a>线程池介绍</h3><ul>
+<li>线程池就是一个容纳多个线程的容器,其中的线程可以反复使用,省去了频繁创建线程对象的操作,无需反复创建线程而消耗过多资源.</li>
+</ul>
+<p><img src="/2019/03/22/多线程3线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0.png" alt></p>
+<h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ol>
+<li>降低资源消耗,减少了创建和销毁线程的次数,每个线程都可以被反复利用,可执行多个任务.</li>
+<li>提高响应速度,当任务到达时,任务可以不需要等到线程创建就能立即执行.</li>
+<li>提高线程的可管理性,可以根据系统的承受能力,调整线程池中工作线程的数目,防止因为消耗过多的内存,而把服务器搞挂(每个线程大约1MB内存)</li>
+</ol>
+<h4 id="线程池使用"><a href="#线程池使用" class="headerlink" title="线程池使用"></a>线程池使用</h4><ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Future&lt;?&gt; submit(Runnable task); <span class="comment">//获取线程池中的某一个线程对象,并运行.</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/03/22/多线程3线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0api.png" alt></p>
+</li>
+</ul>
+<p><img src="/2019/03/22/多线程3线程池/submitAPI.png" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我需要一个教练"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"教练来了"</span>);</span><br><span class="line">        System.out.println(<span class="string">"教我游泳,交完后,教练回到泳池"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        MyRunnable mr = <span class="keyword">new</span> MyRunnable();</span><br><span class="line">        service.submit(mr);</span><br><span class="line">        service.submit(mr);</span><br><span class="line">        service.shutdown();    <span class="comment">//关闭线程池</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/java/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>java</a>
+        
+          <a href="/tags/多线程/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>多线程</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/03/19/多线程2并发/">
       多线程(2)并发
     </a>
@@ -1446,9 +1607,13 @@
         
           <li><a class="flat-box" title="/categories/MySQL/" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badge'>(2)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/java-java编程思想-读书笔记/" href="/categories/java-java编程思想-读书笔记/"><div class='name'>java - java编程思想 - 读书笔记</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/java-java编程思想-读书笔记/" href="/categories/java-java编程思想-读书笔记/"><div class='name'>java - java编程思想 - 读书笔记</div><div class='badge'>(0)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(24)</div></a></li>
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(25)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/java/java编程思想/" href="/categories/java/java编程思想/"><div class='name'>java编程思想</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/java/java编程思想/读书笔记/" href="/categories/java/java编程思想/读书笔记/"><div class='name'>读书笔记</div><div class='badge'>(1)</div></a></li>
         
       </ul>
     </div>
